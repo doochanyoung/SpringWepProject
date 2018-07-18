@@ -5,11 +5,16 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-<p>20131916 lee hwa sub</p>
+	<header>
+	</header>
+	<div id="content">
+		<section>
+		<p>
+		Testing create Wep page!
+		</p>
+		</section>
+		<aside></aside>
+	</div>
+	<footer></footer>
 </body>
 </html>
