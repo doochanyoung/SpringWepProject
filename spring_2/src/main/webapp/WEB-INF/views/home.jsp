@@ -86,15 +86,37 @@
       <a href="#about" class="btn-get-started">Get Started</a>
     </div>
   </section><!-- #hero -->
-  <footer>
-  	<section id="footer">
-    <div class="footer">
-      <h5>주소 : 부산외국어대학교 I412 알고리즘 연구/개발실</h5>
-      <h5>두찬영  Doodoo 010-2436-xxxx dcy93@naver.com</h5>
-      <h5>김태훈  Gaetang 010-2436-xxxx dcy93@naver.com</h5>
-      <h5>이화섭  Chungma 010-2436-xxxx dcy93@naver.com</h5>
-    </div>
-  </section>
-  </footer>
+  <footer id="footer">
+		<div class="footer-top">
+			<div class="container"></div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<div class="copyright">
+						&copy; Copyright <strong>Regna</strong>. All Rights Reserved
+					</div>
+					<div class="credits">
+						<!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Regna
+        -->
+						Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="credits">
+						<div class="row">부산외국어대학교 I412 알고리즘 연구/개발실</div>
+						<div class="row">두찬영 Doodoo 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
+						<div class="row">김태훈 Gaetang 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
+						<div class="row">이화섭 Chungma 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

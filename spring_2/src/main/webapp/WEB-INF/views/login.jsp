@@ -97,14 +97,15 @@
 										<form class="form" role="form" autocomplete="off"
 											id="formLogin" method="POST">
 											<div class="form-group">
-												<label for="uname1" class="login-text">ID</label> <input type="text"
-													class="form-control form-control-lg" name="userId"
-													id="userId" placeholder="Enter ID">
+												<label for="uname1" class="login-text">ID</label> <input
+													type="text" class="form-control form-control-lg"
+													name="userId" id="userId" placeholder="Enter ID">
 											</div>
 											<div class="form-group">
-												<label class="login-text">Password</label> <input type="password"
-													class="form-control form-control-lg" name="userPassword"
-													id="userPassword" placeholder="Enter Password">
+												<label class="login-text">Password</label> <input
+													type="password" class="form-control form-control-lg"
+													name="userPassword" id="userPassword"
+													placeholder="Enter Password">
 												<div class="invalid-feedback">Enter your password too!</div>
 											</div>
 											<div class="form-group form-check">
@@ -113,12 +114,17 @@
 													for="exampleCheck1">Remember me</label>
 											</div>
 											<div class="text-center">
-												<button type="submit">Log In</button>
+												<button class="btn btn-default btn-sm btn-block"
+													type="submit">Log In</button>
 											</div>
 											<hr>
 											<div class="form-group social-icons">
-												<a href='#' class="btn btn-default facebook"> <i class="fa fa-facebook modal-icons"></i> Sign In with Facebook </a>
-												<a href='#' class="btn btn-default twitter"> <i class="fa fa-twitter modal-icons"></i> Sign In with Twitter </a>
+												<a href='#' class="btn btn-default facebook"> <i
+													class="fa fa-facebook modal-icons"></i> Sign In with
+													Facebook
+												</a> <a href='#' class="btn btn-default twitter"> <i
+													class="fa fa-twitter modal-icons"></i> Sign In with Twitter
+												</a>
 											</div>
 										</form>
 									</div>
@@ -138,7 +144,6 @@
 	</section>
 	<!-- #login -->
 
-
 	<!--==========================
     Footer
   ============================-->
@@ -148,17 +153,29 @@
 		</div>
 
 		<div class="container">
-			<div class="copyright">
-				&copy; Copyright <strong>Regna</strong>. All Rights Reserved
-			</div>
-			<div class="credits">
-				<!--
+			<div class="row">
+				<div class="col-6">
+					<div class="copyright">
+						&copy; Copyright <strong>Regna</strong>. All Rights Reserved
+					</div>
+					<div class="credits">
+						<!--
           All the links in the footer should remain intact.
           You can delete the links only if you purchased the pro version.
           Licensing information: https://bootstrapmade.com/license/
           Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Regna
         -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+						Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="credits">
+						<div class="row">부산외국어대학교 I412 알고리즘 연구/개발실</div>
+						<div class="row">두찬영 Doodoo 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
+						<div class="row">김태훈 Gaetang 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
+						<div class="row">이화섭 Chungma 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</footer>
