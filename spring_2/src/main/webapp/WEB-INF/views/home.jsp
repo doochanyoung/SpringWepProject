@@ -53,7 +53,7 @@
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#services">Studies</a></li>
           <li><a href="#team">Comuunity</a></li>
-          <li class="menu-has-children"><a href="">예비드롭다운</a>
+          <li class="menu-has-children"><a href="">드롭다운</a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="menu-has-children"><a href="#">Drop Down 2</a>
@@ -70,7 +70,7 @@
               <li><a href="#">Drop Down 5</a></li>
             </ul>
           </li>
-          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#contact">로그인버튼생성</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
