@@ -204,7 +204,7 @@
 				<p class="section-description">D & G & C의 개발자 소개</p>
 			</div>
 			<div class="row" align="center">
-				<div class="col-lg-3 col-md-6">
+				<div class="col-lg-4 col-md-6">
 					<div class="member">
 						<div class="pic">
 							<img src="img/doo.jpg" alt="">
@@ -220,7 +220,7 @@
 					</div>
 				</div>
 
-				<div class="col-lg-3 col-md-6">
+				<div class="col-lg-4 col-md-6">
 					<div class="member">
 						<div class="pic">
 							<img src="img/team-2.jpg" alt="">
@@ -236,7 +236,7 @@
 					</div>
 				</div>
 
-				<div class="col-lg-3 col-md-6">
+				<div class="col-lg-4 col-md-6">
 					<div class="member">
 						<div class="pic">
 							<img src="img/team-3.jpg" alt="">
@@ -252,6 +252,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 
 	<section id="services">
