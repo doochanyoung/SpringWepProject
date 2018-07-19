@@ -357,7 +357,7 @@
 							<img src="img/doo.jpg" alt="">
 						</div>
 						<h4>두찬영</h4>
-						<span>Programming Wep Developer</span>
+						<span>Programming Web Developer</span>
 						<div class="social">
 							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
 								class="fab fa-facebook"></i></a> <a href=""><i
@@ -373,7 +373,7 @@
 							<img src="img/gaetang.jpg" alt="">
 						</div>
 						<h4>김태훈</h4>
-						<span>Programming Wep Developer</span>
+						<span>Programming Web Developer</span>
 						<div class="social">
 							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
 								class="fab fa-facebook"></i></a> <a href=""><i
@@ -389,7 +389,7 @@
 							<img src="img/chungma.jpg" alt="">
 						</div>
 						<h4>이화섭</h4>
-						<span>Programming Wep Developer</span>
+						<span>Programming Web Developer</span>
 						<div class="social">
 							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
 								class="fab fa-facebook"></i></a> <a href=""><i
