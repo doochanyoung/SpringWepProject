@@ -42,7 +42,7 @@
   <header id="header">
     <div class="container">
       <div id="logo" class="pull-left">
-        <a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>
+        <a href="<c:url value='/home'/>"><img src="img/logo.png" alt="" title="" /></img></a>
         <!-- Uncomment below if you prefer to use a text logo -->
         <!--<h1><a href="#hero">Regna</a></h1>-->
       </div>
@@ -186,7 +186,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="member">
-              <div class="pic"><img src="img/team-2.jpg" alt=""></div>
+              <div class="pic"><img src="img/gaetang.jpg" alt=""></div>
               <h4>김태훈</h4>
               <span>Programming Wep Developer</span>
               <div class="social">
@@ -200,7 +200,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="member">
-              <div class="pic"><img src="img/team-3.jpg" alt=""></div>
+              <div class="pic"><img src="img/chungma.jpg" alt=""></div>
               <h4>이화섭</h4>
               <span>Programming Wep Developer</span>
               <div class="social">
@@ -239,8 +239,8 @@
 					<div class="copyright">
 						<div class="row">부산외국어대학교 I412 알고리즘 연구/개발실</div>
 						<div class="row">두찬영 Doodoo 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
-						<div class="row">김태훈 Gaetang 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
-						<div class="row">이화섭 Chungma 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
+						<div class="row">김태훈 Gaetang 010-7576-xxxx&nbsp;<a href="">nuckly60@gmail.com</a></div>
+						<div class="row">이화섭 Chungma 010-5650-xxxx&nbsp;<a href="">hwasub1115@naver.com</a></div>
 					</div>
 				</div>
 			</div>
