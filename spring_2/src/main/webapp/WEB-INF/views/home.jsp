@@ -51,7 +51,7 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="#hero">Home</a></li>
           <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Studies</a></li>
+          <li><a href="#studies">Study</a></li>
           <li><a href="#communities">Comuunity</a></li>
           <li class="menu-has-children"><a href="">로그인을 하세요</a>
             <ul>
@@ -125,6 +125,143 @@
     </section><!-- #about -->
     
     <!--==========================
+      Studies Section
+    ============================-->
+    
+    <section id="studies">
+		<div class="container wow fadeIn">
+			<div class="section-header">
+				<h3 class="section-title">Study</h3>
+				<p class="section-description"></p>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fa fa-comments"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">Free</a>
+						</h4>
+						<p class="description">Voluptatum deleniti atque corrupti quos
+							dolores et quas molestias excepturi sint occaecati cupiditate non
+							provident</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fab fa-chrome"></i>
+						</div>
+						<h4 class="title">
+							<a href="">WEB</a>
+						</h4>
+						<p class="description">Minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat tarad
+							limino ata</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fab fa-cuttlefish"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">C</a>
+						</h4>
+						<p class="description">Duis aute irure dolor in reprehenderit
+							in voluptate velit esse cillum dolore eu fugiat nulla pariatur
+						</p>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fab fa-android"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">Android</a>
+						</h4>
+						<p class="description">Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est
+							laborum</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fab fa-java"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">JAVA</a>
+						</h4>
+						<p class="description">At vero eos et accusamus et iusto odio
+							dignissimos ducimus qui blanditiis praesentium voluptatum
+							deleniti atque</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fab fa-python"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">Python</a>
+						</h4>
+						<p class="description">Et harum quidem rerum facilis est et
+							expedita distinctio. Nam libero tempore, cum soluta nobis est
+							eligendi</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fa fa-database"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">Database</a>
+						</h4>
+						<p class="description">Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est
+							laborum</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fas fa-server"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">server</a>
+						</h4>
+						<p class="description">At vero eos et accusamus et iusto odio
+							dignissimos ducimus qui blanditiis praesentium voluptatum
+							deleniti atque</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+					<div class="box">
+						<div class="icon">
+							<a href=""><i class="fas fa-lock"></i></a>
+						</div>
+						<h4 class="title">
+							<a href="">security</a>
+						</h4>
+						<p class="description">Et harum quidem rerum facilis est et
+							expedita distinctio. Nam libero tempore, cum soluta nobis est
+							eligendi</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    
+    
+    <!--==========================
       Services Section
     ============================-->
     
@@ -132,7 +269,7 @@
       <div class="container wow fadeIn">
         <div class="section-header">
           <h3 class="section-title">Community</h3>
-          <p class="section-description">각 분야별 게시판을 활용하여 정보를 찾아보세요.</p>
+          <p class="section-description">각 분야별 게시판을 활용하여 소통해보세요.</p>
         </div>
         <div class="row">
           <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
@@ -159,11 +296,18 @@
       </div>
     </section>
   
-  <!--==========================
+  
+  
+  
+    
+    
+	
+	
+	<!--==========================
       Team Section
     ============================-->
-  
-  <section id="team">
+    
+	<section id="team">
       <div class="container wow fadeInUp">
         <div class="section-header">
           <h3 class="section-title">Team</h3>

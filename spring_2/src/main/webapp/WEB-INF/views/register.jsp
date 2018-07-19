@@ -38,10 +38,10 @@
 
 <body>
 
-	<!--==========================
+	  <!--==========================
   Header
   ============================-->
-	<header id="header">
+  <header id="header">
     <div class="container">
       <div id="logo" class="pull-left">
         <a href="<c:url value='/home'/>"><img src="img/logo.png" alt="" title="" /></img></a>
@@ -53,7 +53,7 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="#hero">Home</a></li>
           <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Studies</a></li>
+          <li><a href="#">Study</a></li>
           <li><a href="#communities">Comuunity</a></li>
           <li class="menu-has-children"><a href="">로그인을 하세요</a>
             <ul>
@@ -74,8 +74,7 @@
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
-  </header>
-	<!-- #header -->
+  </header><!-- #header -->
 
 	<!--==========================
     Hero Section
