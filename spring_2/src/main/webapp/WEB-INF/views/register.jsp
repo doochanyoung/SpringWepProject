@@ -91,15 +91,16 @@
 								<!-- form card login -->
 								<div class="card">
 									<div class="card-header">
-										<h3 class="login-title">Login</h3>
+										<h3 class="login-title">Register</h3>
 									</div>
 									<div class="card-body">
-										<form class="form" role="" autocomplete="off"
-											id="formLogin" method="post">
+										<form class="form" role="form" autocomplete="off"
+											id="formLogin" method="POST">
 											<div class="form-group">
-												<label for="uname1" class="login-text">ID</label> <input
+												<label for="ID" class="login-text">ID</label> <input
 													type="text" class="form-control form-control-lg"
 													name="userId" id="userId" placeholder="Write ID">
+												<div class="validation"></div>
 											</div>
 											<div class="form-group">
 												<label class="login-text">Password</label> <input
@@ -107,27 +108,39 @@
 													name="userPassword" id="userPassword"
 													placeholder="Write Password">
 												<div class="invalid-feedback">Enter your password too!</div>
+												<div class="validation"></div>
 											</div>
-											<div class="form-group form-check">
-												<input type="checkbox" class="form-check-input"
-													id="exampleCheck1"> <label class="form-check-label"
-													for="exampleCheck1">Remember me</label>
+											<div class="form-group">
+												<label for="Nickname" class="login-text">Nickname</label> <input
+													type="text" class="form-control form-control-lg"
+													name="userNickname" id="userNickname"
+													placeholder="Write Nickname">
+												<div class="validation"></div>
+											</div>
+											<div class="form-group">
+												<label for="Email" class="login-text">Email</label> <input
+													type="email" class="form-control form-control-lg"
+													name="userEmail" id="userEmail" placeholder="Write Email">
+												<div class="validation"></div>
+											</div>
+											<div class="form-group">
+												<label for="Email" class="login-text">Phone Number</label> <input
+													type="text" class="form-control form-control-lg"
+													name="userPhone" id="userPhone"
+													placeholder="Write Phone Number">
+												<div class="validation"></div>
+											</div>
+											<div class="form-group">
+												<label for="Email" class="login-text">Introduction</label>
+												<textarea class="form-control" name="userIntro" rows="5"
+													data-rule="required"
+													data-msg="Please write something for us"
+													placeholder="introduce yourself...."></textarea>
+												<div class="validation"></div>
 											</div>
 											<div class="text-center">
 												<button class="btn btn-default btn-sm btn-block"
-													type="submit">Log In</button>
-											</div>
-											<div class="form-group m-2">
-												<label class="login-text"><a href="./register">Register</a> - <a href="">Forget Password</a></label>
-											</div>
-											<hr>
-											<div class="form-group social-icons">
-												<a href='#' class="btn btn-default facebook"> <i
-													class="fa fa-facebook modal-icons"></i> Sign In with
-													Facebook
-												</a> <a href='#' class="btn btn-default twitter"> <i
-													class="fa fa-twitter modal-icons"></i> Sign In with Twitter
-												</a>
+													type="submit">Submit</button>
 											</div>
 										</form>
 									</div>
