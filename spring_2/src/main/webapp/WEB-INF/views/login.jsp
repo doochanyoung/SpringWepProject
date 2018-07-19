@@ -44,7 +44,7 @@
   <header id="header">
     <div class="container">
       <div id="logo" class="pull-left">
-        <a href="<c:url value='/home'/>"><img src="img/logo.png" alt="" title="" /></img></a>
+        <a href="<c:url value='/'/>"><img src="img/logo.png" alt="" title="" /></img></a>
         <!-- Uncomment below if you prefer to use a text logo -->
         <!--<h1><a href="#hero">Regna</a></h1>-->
       </div>

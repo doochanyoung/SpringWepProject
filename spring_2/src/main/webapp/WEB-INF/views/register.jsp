@@ -44,7 +44,7 @@
   <header id="header">
     <div class="container">
       <div id="logo" class="pull-left">
-        <a href="<c:url value='/home'/>"><img src="img/logo.png" alt="" title="" /></img></a>
+        <a href="<c:url value='/'/>"><img src="img/logo.png" alt="" title="" /></img></a>
         <!-- Uncomment below if you prefer to use a text logo -->
         <!--<h1><a href="#hero">Regna</a></h1>-->
       </div>
@@ -87,7 +87,7 @@
 						<div class="row">
 							<div class="col-md-6 mx-auto">
 								<!-- form card login -->
-								<div class="card">
+								<div class="card" >
 									<div class="card-header">
 										<h3 class="login-title">Register</h3>
 									</div>
@@ -100,7 +100,7 @@
 													name="userId" id="userId" placeholder="Write ID">
 												<div class="validation"></div>
 											</div>
-											<div class="form-group">
+											<div class="form-group" >
 												<label class="login-text">Password</label> <input
 													type="password" class="form-control form-control-lg"
 													name="userPassword" id="userPassword"
@@ -108,7 +108,7 @@
 												<div class="invalid-feedback">Enter your password too!</div>
 												<div class="validation"></div>
 											</div>
-											<div class="form-group">
+											<div class="form-group" >
 												<label for="Nickname" class="login-text">Nickname</label> <input
 													type="text" class="form-control form-control-lg"
 													name="userNickname" id="userNickname"
