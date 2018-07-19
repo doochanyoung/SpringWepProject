@@ -1027,6 +1027,74 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #999;
 }
 
+/*--------------------------------------------------------------
+# board form
+--------------------------------------------------------------*/
+
+#boards #sendmessage {
+  color: #2dc997;
+  border: 1px solid #2dc997;
+  display: none;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#boards #errormessage {
+  color: red;
+  display: none;
+  border: 1px solid red;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#boards #sendmessage.show, #boards #errormessage.show, #boards .show {
+  display: block;
+}
+
+#boards .validation {
+  color: red;
+  display: none;
+  margin: 0 0 20px;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+#boards input, #hero textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+#boards button[type="submit"] {
+  background: #2dc997;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+#boards button[type="submit"]:hover {
+  background: #51d8ad;
+}
+
+#boards .title {
+  font-size: 32px;
+  color: #111;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+#boards .text {
+  text-align: center;
+  color: #999;
+}
+
 
 /*--------------------------------------------------------------
 # Social Icons

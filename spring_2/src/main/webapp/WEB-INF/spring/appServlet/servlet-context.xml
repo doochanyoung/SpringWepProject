@@ -22,6 +22,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.java.spring2" />
-	<context:component-scan base-package="com.java.controller" />
 	
 </beans:beans>
