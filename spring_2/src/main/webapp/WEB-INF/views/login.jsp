@@ -54,7 +54,7 @@
           <li class="menu-active"><a href="#hero">Home</a></li>
           <li><a href="#">Portfolio</a></li>
           <li><a href="#">Studies</a></li>
-          <li><a href="#communities">Comuunity</a></li>
+          <li><a href="#communities">Community</a></li>
           <li class="menu-has-children"><a href="">로그인을 하세요</a>
             <ul>
               <li><a href="<c:url value='/login'/>">로그인</a></li>
