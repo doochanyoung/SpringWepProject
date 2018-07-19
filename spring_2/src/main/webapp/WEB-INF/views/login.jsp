@@ -42,40 +42,39 @@
   Header
   ============================-->
 	<header id="header">
-		<div class="container">
-			<div id="logo" class="pull-left">
-				<a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>
-				<!-- Uncomment below if you prefer to use a text logo -->
-				<!--<h1><a href="#hero">Regna</a></h1>-->
-			</div>
+    <div class="container">
+      <div id="logo" class="pull-left">
+        <a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>
+        <!-- Uncomment below if you prefer to use a text logo -->
+        <!--<h1><a href="#hero">Regna</a></h1>-->
+      </div>
 
-			<nav id="nav-menu-container">
-				<ul class="nav-menu">
-					<li class="menu-active"><a href="#hero">Home</a></li>
-					<li><a href="#portfolio">Portfolio</a></li>
-					<li><a href="#services">Studies</a></li>
-					<li><a href="#team">Comuunity</a></li>
-					<li class="menu-has-children"><a href="">드롭다운</a>
-						<ul>
-							<li><a href="#">Drop Down 1</a></li>
-							<li class="menu-has-children"><a href="#">Drop Down 2</a>
-								<ul>
-									<li><a href="#">Deep Drop Down 1</a></li>
-									<li><a href="#">Deep Drop Down 2</a></li>
-									<li><a href="#">Deep Drop Down 3</a></li>
-									<li><a href="#">Deep Drop Down 4</a></li>
-									<li><a href="#">Deep Drop Down 5</a></li>
-								</ul></li>
-							<li><a href="#">Drop Down 3</a></li>
-							<li><a href="#">Drop Down 4</a></li>
-							<li><a href="#">Drop Down 5</a></li>
-						</ul></li>
-					<li><a href="#contact">로그인버튼생성</a></li>
-				</ul>
-			</nav>
-			<!-- #nav-menu-container -->
-		</div>
-	</header>
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#hero">Home</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Studies</a></li>
+          <li><a href="#communities">Comuunity</a></li>
+          <li class="menu-has-children"><a href="">로그인을 하세요</a>
+            <ul>
+              <li><a href="<c:url value='/login'/>">로그인</a></li>
+              <li><a href="<c:url value='/register'/>">회원가입</a></li>
+              <li class="menu-has-children"><a href="#">Drop Down 2</a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <!-- <li><a href="#contact">로그인버튼생성</a></li> -->
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header>
 	<!-- #header -->
 
 	<!--==========================

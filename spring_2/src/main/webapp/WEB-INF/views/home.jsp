@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>GA & Doo & CHUNG WEPPAGE</title>
+  <title>GAE & Doo & CHUNG WEPPAGE</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -52,10 +52,11 @@
           <li class="menu-active"><a href="#hero">Home</a></li>
           <li><a href="#">Portfolio</a></li>
           <li><a href="#">Studies</a></li>
-          <li><a href="#">Comuunity</a></li>
-          <li class="menu-has-children"><a href="">드롭다운</a>
+          <li><a href="#communities">Comuunity</a></li>
+          <li class="menu-has-children"><a href="">로그인을 하세요</a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
+              <li><a href="<c:url value='/login'/>">로그인</a></li>
+              <li><a href="<c:url value='/register'/>">회원가입</a></li>
               <li class="menu-has-children"><a href="#">Drop Down 2</a>
                 <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
@@ -65,12 +66,9 @@
                   <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
               </li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-              <li><a href="#">Drop Down 5</a></li>
             </ul>
           </li>
-          <li><a href="#contact">로그인버튼생성</a></li>
+          <!-- <li><a href="#contact">로그인버튼생성</a></li> -->
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -86,7 +84,6 @@
       <a href="#about" class="btn-get-started">Get Started</a>
     </div>
   </section><!-- #hero -->
-<<<<<<< HEAD
   
   <!--==========================
     About Section
@@ -126,6 +123,41 @@
 
       </div>
     </section><!-- #about -->
+    
+    <!--==========================
+      Services Section
+    ============================-->
+    
+    <section id="communities">
+      <div class="container wow fadeIn">
+        <div class="section-header">
+          <h3 class="section-title">Community</h3>
+          <p class="section-description">각 분야별 게시판을 활용하여 정보를 찾아보세요.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="box">
+              <div class="icon"><a href=""><i class="fa fa-desktop"></i></a></div>
+              <h4 class="title"><a href="">자유게시판</a></h4>
+              <p class="description">자유게시판</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+            <div class="box">
+              <div class="icon"><a href=""><i class="fa fa-bar-chart"></i></a></div>
+              <h4 class="title"><a href="">자료실</a></h4>
+              <p class="description">자료실</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+            <div class="box">
+              <div class="icon"><a href=""><i class="fa fa-paper-plane"></i></a></div>
+              <h4 class="title"><a href="">사진첩</a></h4>
+              <p class="description">사진첩</p>
+            </div>
+          </div>
+      </div>
+    </section>
   
   <!--==========================
       Team Section
@@ -137,12 +169,12 @@
           <h3 class="section-title">Team</h3>
           <p class="section-description">D & G & C의 개발자 소개</p>
         </div>
-        <div class="row">
+        <div class="row" align="center">
           <div class="col-lg-3 col-md-6">
             <div class="member">
-              <div class="pic"><img src="img/team-1.jpg" alt=""></div>
+              <div class="pic"><img src="img/doo.jpg" alt=""></div>
               <h4>두찬영</h4>
-              <span>Chief Executive Officer</span>
+              <span>Programming Wep Developer</span>
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
                 <a href=""><i class="fa fa-facebook"></i></a>
@@ -156,7 +188,7 @@
             <div class="member">
               <div class="pic"><img src="img/team-2.jpg" alt=""></div>
               <h4>김태훈</h4>
-              <span>Product Manager</span>
+              <span>Programming Wep Developer</span>
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
                 <a href=""><i class="fa fa-facebook"></i></a>
@@ -170,7 +202,7 @@
             <div class="member">
               <div class="pic"><img src="img/team-3.jpg" alt=""></div>
               <h4>이화섭</h4>
-              <span>CTO</span>
+              <span>Programming Wep Developer</span>
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
                 <a href=""><i class="fa fa-facebook"></i></a>
@@ -204,7 +236,7 @@
 					</div>
 				</div>
 				<div class="col-6">
-					<div class="credits">
+					<div class="copyright">
 						<div class="row">부산외국어대학교 I412 알고리즘 연구/개발실</div>
 						<div class="row">두찬영 Doodoo 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
 						<div class="row">김태훈 Gaetang 010-2436-xxxx&nbsp;<a href="">dcy93@naver.com</a></div>
