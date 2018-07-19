@@ -44,14 +44,14 @@
   <header id="header">
     <div class="container">
       <div id="logo" class="pull-left">
-        <a href="<c:url value='/'/>"><img src="img/logo.png" alt="" title="" /></img></a>
+        <a href="<c:url value='/'/>"><img src="img/LOGO2-TEST.png" alt="" title="" /></img></a>
         <!-- Uncomment below if you prefer to use a text logo -->
         <!--<h1><a href="#hero">Regna</a></h1>-->
       </div>
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="#hero">Home</a></li>
+          <li class="menu-active"><a href="<c:url value='/'/>">Home</a></li>
           <li><a href="#">Portfolio</a></li>
           <li><a href="#">Study</a></li>
           <li><a href="#communities">Comuunity</a></li>
