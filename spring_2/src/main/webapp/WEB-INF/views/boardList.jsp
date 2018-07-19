@@ -58,7 +58,7 @@
 
 			<nav id="nav-menu-container">
 				<ul class="nav-menu">
-					<li class="menu-active"><a href="#hero">Home</a></li>
+					<li class="menu-active"><a href="/home">Home</a></li>
 					<li><a href="#">Portfolio</a></li>
 					<li><a href="#studies">Study</a></li>
 					<li><a href="#communities">Comuunity</a></li>
