@@ -25,6 +25,9 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icon Library -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
   <!-- =======================================================
     Theme Name: Regna
@@ -314,7 +317,7 @@
           <p class="section-description">D & G & C의 개발자 소개</p>
         </div>
         <div class="row" align="center">
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="member">
               <div class="pic"><img src="img/doo.jpg" alt=""></div>
               <h4>두찬영</h4>
@@ -328,7 +331,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="member">
               <div class="pic"><img src="img/gaetang.jpg" alt=""></div>
               <h4>김태훈</h4>
@@ -342,7 +345,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="member">
               <div class="pic"><img src="img/chungma.jpg" alt=""></div>
               <h4>이화섭</h4>
