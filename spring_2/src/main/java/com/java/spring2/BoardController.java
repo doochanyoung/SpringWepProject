@@ -19,4 +19,5 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		logger.info("get : /boardList");
 		return "board/boardList";
 	}
+	
 }
