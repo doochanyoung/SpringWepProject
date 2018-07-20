@@ -160,7 +160,7 @@
 				</div>
 			</div>
 		</div>
-		<nav>
+		<nav class="wow fadeIn">
 			<ul class="pagination pagination-info justify-content-center">
 				<li class="page-item"><a class="page-link" href="#"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
