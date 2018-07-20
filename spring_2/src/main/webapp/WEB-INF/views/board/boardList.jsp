@@ -48,52 +48,42 @@
 	<!--==========================
   Header
   ============================-->
-	<header id="header">
-		<div class="container">
-			<div id="logo" class="pull-left">
-				<a href="/"><img src="../img/logo.png" alt="" title="" /></img></a>
-				<!-- Uncomment below if you prefer to use a text logo -->
-				<!--<h1><a href="#hero">Regna</a></h1>-->
-			</div>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand nav-menu" href="#">Community</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-			<nav id="nav-menu-container">
-				<ul class="nav-menu">
-					<li class="menu-active"><a href="/">Home</a></li>
-					<li><a href="#">Portfolio</a></li>
-					<li><a href="#studies">Study</a></li>
-					<li><a href="#communities">Comuunity</a></li>
-					<li class="menu-has-children"><a href="">로그인을 하세요</a>
-						<ul>
-							<li><a href="<c:url value='/login'/>">로그인</a></li>
-							<li><a href="<c:url value='/register'/>">회원가입</a></li>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav nav-menu">
+					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
+					<li class="nav-item menu-active"><a href="#">Board</a></li>
+					<li class="nav-item"><a href="#">Data Room</a></li>
+					<li class="nav-item"><a href="#">Gallery</a></li>
+					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
+						<ul class="navbar-nav">
+							<li class="nav-item"><a href="<c:url value='/login'/>">로그인</a></li>
+							<li class="nav-item"><a href="<c:url value='/register'/>">회원가입</a></li>
 							<li class="menu-has-children"><a href="#">Drop Down 2</a>
-								<ul>
-									<li><a href="#">Deep Drop Down 1</a></li>
-									<li><a href="#">Deep Drop Down 2</a></li>
-									<li><a href="#">Deep Drop Down 3</a></li>
-									<li><a href="#">Deep Drop Down 4</a></li>
-									<li><a href="#">Deep Drop Down 5</a></li>
+								<ul class="navbar-nav">
+									<li class="nav-item"><a href="#">Deep Drop Down 1</a></li>
+									<li class="nav-item"><a href="#">Deep Drop Down 2</a></li>
+									<li class="nav-item"><a href="#">Deep Drop Down 3</a></li>
+									<li class="nav-item"><a href="#">Deep Drop Down 4</a></li>
+									<li class="nav-item"><a href="#">Deep Drop Down 5</a></li>
 								</ul></li>
 						</ul></li>
 					<!-- <li><a href="#contact">로그인버튼생성</a></li> -->
 				</ul>
-			</nav>
-			<!-- #nav-menu-container -->
-		</div>
+			</div>
+		</nav>
 	</header>
 	<!-- #header -->
 
-	<!--==========================
-    Hero Section
-  ============================-->
-	<section id="hero">
-		<div class="hero-container">
-			<h1>Welcome to DGC</h1>
-			<h3>DGC의 Spring 개발 프로젝트 페이지입니다.</h3>
-			<a href="#about" class="btn-get-started">Get Started</a>
-		</div>
-	</section>
-	<!-- #hero -->
 
 	<!--==========================
       Services Section
@@ -111,8 +101,8 @@
 					<div class="row">
 						<div class="col-8">
 							<div class="form-group">
-								<input type="text" class="form-control"
-									name="boardSearch" id="boardSearch" placeholder="search....">
+								<input type="text" class="form-control" name="boardSearch"
+									id="boardSearch" placeholder="search....">
 							</div>
 						</div>
 						<div class="col-3">
