@@ -303,7 +303,7 @@
 							<a href=""><i class="fa fa-desktop"></i></a>
 						</div>
 						<h4 class="title">
-							<a href="/boardList">자유게시판</a>
+							<a href="/board/boardList">자유게시판</a>
 						</h4>
 						<p class="description">자유게시판</p>
 					</div>

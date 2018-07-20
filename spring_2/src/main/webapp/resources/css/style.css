@@ -1032,7 +1032,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 
 #boards #sendmessage {
-  color: #2dc997;
+  color: #A19CFF;
   border: 1px solid #2dc997;
   display: none;
   text-align: center;
@@ -1063,21 +1063,27 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 13px;
 }
 
-#boards input, #hero textarea {
+#boards input, #boards textarea {
   border-radius: 0;
   box-shadow: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 
-#boards button[type="submit"] {
+#boards #select {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+#boards button {
   background: #2dc997;
   border: 0;
-  padding: 10px 24px;
+  padding: 7px 22px;
   color: #fff;
   transition: 0.4s;
 }
 
-#boards button[type="submit"]:hover {
+#boards button:hover {
   background: #51d8ad;
 }
 

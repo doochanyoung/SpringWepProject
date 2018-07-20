@@ -10,8 +10,8 @@
 <meta content="" name="description">
 
 <!-- Favicons -->
-<link href="img/favicon.png" rel="icon">
-<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="../img/favicon.png" rel="icon">
+<link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
 <link
@@ -19,14 +19,15 @@
 	rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="lib/animate/animate.min.css" rel="stylesheet">
+<link href="../lib/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+<link href="../lib/animate/animate.min.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
 
 <!-- Bootstrap Icon Library -->
 <link rel="stylesheet"
@@ -50,8 +51,7 @@
 	<header id="header">
 		<div class="container">
 			<div id="logo" class="pull-left">
-				<a href="<c:url value='/home'/>"><img src="img/logo.png" alt=""
-					title="" /></img></a>
+				<a href="/"><img src="../img/logo.png" alt="" title="" /></img></a>
 				<!-- Uncomment below if you prefer to use a text logo -->
 				<!--<h1><a href="#hero">Regna</a></h1>-->
 			</div>
@@ -105,8 +105,36 @@
 				<h3 class="section-title">자유게시판</h3>
 				<p class="section-description">자유 게시판을 활용하여 많은 사람들과 소통해보세요.</p>
 			</div>
+			<div class="card m-4">
+				<div class="card-header">Search</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-8">
+							<div class="form-group">
+								<input type="text" class="form-control"
+									name="boardSearch" id="boardSearch" placeholder="search....">
+							</div>
+						</div>
+						<div class="col-3">
+							<select class="custom-select" id="select">
+								<option selected value="none" id="select">-------</option>
+								<option value="title" id="select">제목</option>
+								<option value="writer" id="select">작성자</option>
+								<option value="titleWriter" id="select">제목 + 작성자</option>
+							</select>
+						</div>
+						<div class="col-1">
+							<div class="text-center">
+								<button class="btn btn-default float-right" type="submit">검색</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="my-4">
 			<div class="row">
-				<table class="table table-striped table table" style="text-align:center; border: 1px solid #dddddd">
+				<table class="table table-striped table table"
+					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
 							<th scope="col">id</th>
@@ -136,11 +164,27 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="text-center m-3">
-					<button class="btn btn-default float-right" type="submit">글 작성</button>
+				<div class="text-center">
+					<button class="btn btn-default float-right m-2" type="submit">글
+						작성</button>
 				</div>
 			</div>
 		</div>
+		<nav>
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+						class="sr-only">Next</span>
+				</a></li>
+			</ul>
+		</nav>
 	</section>
 
 	<footer id="footer">
@@ -184,23 +228,23 @@
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
 	<!-- JavaScript Libraries -->
-	<script src="lib/jquery/jquery.min.js"></script>
-	<script src="lib/jquery/jquery-migrate.min.js"></script>
-	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/easing/easing.min.js"></script>
-	<script src="lib/wow/wow.min.js"></script>
+	<script src="../lib/jquery/jquery.min.js"></script>
+	<script src="../lib/jquery/jquery-migrate.min.js"></script>
+	<script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../lib/easing/easing.min.js"></script>
+	<script src="../lib/wow/wow.min.js"></script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>
 
-	<script src="lib/waypoints/waypoints.min.js"></script>
-	<script src="lib/counterup/counterup.min.js"></script>
-	<script src="lib/superfish/hoverIntent.js"></script>
-	<script src="lib/superfish/superfish.min.js"></script>
+	<script src="../lib/waypoints/waypoints.min.js"></script>
+	<script src="../lib/counterup/counterup.min.js"></script>
+	<script src="../lib/superfish/hoverIntent.js"></script>
+	<script src="../lib/superfish/superfish.min.js"></script>
 
 	<!-- Contact Form JavaScript File -->
-	<script src="contactform/contactform.js"></script>
+	<script src="../contactform/contactform.js"></script>
 
 	<!-- Template Main Javascript File -->
-	<script src="js/main.js"></script>
+	<script src="../js/main.js"></script>
 </body>
 </html>
