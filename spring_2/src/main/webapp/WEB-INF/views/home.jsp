@@ -314,7 +314,7 @@
 							<a href=""><i class="fa fa-bar-chart"></i></a>
 						</div>
 						<h4 class="title">
-							<a href="">자료실</a>
+							<a href="/board/dataroomList">자료실</a>
 						</h4>
 						<p class="description">자료실</p>
 					</div>

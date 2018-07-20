@@ -61,8 +61,8 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
-					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item"><a href="/board/dataroomList">Data Room</a></li>
+					<li class="nav-item"><a href="/board/boardList">Board</a></li>
+					<li class="nav-item menu-active"><a href="/board/dataroomList">Data Room</a></li>
 					<li class="nav-item"><a href="#">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
 						<ul class="navbar-nav">
@@ -92,8 +92,8 @@
 	<section id="boards">
 		<div class="container wow fadeIn">
 			<div class="section-header m-5">
-				<h3 class="section-title">자유게시판</h3>
-				<p class="section-description">자유 게시판을 활용하여 많은 사람들과 소통해보세요.</p>
+				<h3 class="section-title">자료실</h3>
+				<p class="section-description">자료실을 활용하여 많은 정보를 얻어보세요.</p>
 			</div>
 			<div class="card m-4">
 				<div class="card-header">Search</div>

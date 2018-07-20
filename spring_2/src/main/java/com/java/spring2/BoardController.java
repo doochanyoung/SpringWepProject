@@ -15,9 +15,15 @@ public class BoardController {
 private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String board(Locale locale, Model model) {
 		logger.info("get : /boardList");
 		return "board/boardList";
+	}
+	
+	@RequestMapping(value = "/dataroomList", method = RequestMethod.GET)
+	public String dataroomList(Locale locale, Model model) {
+		logger.info("get : /dataroomList");
+		return "board/dataroomList";
 	}
 	
 }
