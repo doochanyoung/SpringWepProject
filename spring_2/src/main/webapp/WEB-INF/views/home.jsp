@@ -50,7 +50,7 @@
 	<header id="header">
 		<div class="container">
 			<div id="logo" class="pull-left">
-				<a href="<c:url value='/'/>"><img src="img/logo.png" alt=""
+				<a href="<c:url value='/'/>"><img src="img/LOGO2-TEST.png" alt=""
 					title="" /></img></a>
 				<!-- Uncomment below if you prefer to use a text logo -->
 				<!--<h1><a href="#hero">Regna</a></h1>-->
@@ -58,7 +58,7 @@
 
 			<nav id="nav-menu-container">
 				<ul class="nav-menu">
-					<li class="menu-active"><a href="#hero">Home</a></li>
+					<li class="menu-active"><a href="<c:url value='/'/>">Home</a></li>
 					<li><a href="#">Portfolio</a></li>
 					<li><a href="#studies">Study</a></li>
 					<li><a href="#communities">Comuunity</a></li>
@@ -357,7 +357,7 @@
 							<img src="img/doo.jpg" alt="">
 						</div>
 						<h4>두찬영</h4>
-						<span>Programming Wep Developer</span>
+						<span>Programming Web Developer</span>
 						<div class="social">
 							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
 								class="fab fa-facebook"></i></a> <a href=""><i
@@ -373,7 +373,7 @@
 							<img src="img/gaetang.jpg" alt="">
 						</div>
 						<h4>김태훈</h4>
-						<span>Programming Wep Developer</span>
+						<span>Programming Web Developer</span>
 						<div class="social">
 							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
 								class="fab fa-facebook"></i></a> <a href=""><i
@@ -389,7 +389,7 @@
 							<img src="img/chungma.jpg" alt="">
 						</div>
 						<h4>이화섭</h4>
-						<span>Programming Wep Developer</span>
+						<span>Programming Web Developer</span>
 						<div class="social">
 							<a href=""><i class="fab fa-twitter"></i></a> <a href=""><i
 								class="fab fa-facebook"></i></a> <a href=""><i
