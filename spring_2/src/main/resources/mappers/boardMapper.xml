@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.BoardMapper">
 	<insert id="create">
-		insert into tbl_board(boardTitle, boardContent, boardUserId)
-		values(#{boardTitle}, #{boardContent}, #{boardUserId})
+		insert into tbl_board(boardTitle, boardContent, boardRegdate, boardUserId)
+		values(#{boardTitle}, #{boardContent}, now(), #{boardUserId})
 	</insert>
 </mapper>

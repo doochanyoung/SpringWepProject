@@ -35,6 +35,8 @@
 	integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
 	crossorigin="anonymous">
 
+<script src="../ckeditor/ckeditor.js"></script>
+
 <!-- =======================================================
     Theme Name: Regna
     Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
@@ -103,7 +105,8 @@
 									<h3 class="title">Write</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" action="/board/boardWrite" autocomplete="off" id="formBoard" method="POST">
+									<form class="form" action="/board/boardWrite"
+										autocomplete="off" id="formBoard" method="POST">
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
@@ -111,19 +114,21 @@
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
-											<label class="writer">Writer</label> <input type="text"
-												class="form-control form-control-lg" name="boardUserId"
-												id="boardUserId">
+											<label for="writer" class="text">Writer</label> <input
+												type="text" class="form-control form-control-lg"
+												name="boardUserId" id="boardUserId">
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
-											<textarea class="form-control"  placeholder="write content please......" id="boardContent"
-												maxlength="4096" name="boardContent" style="width:875px;"></textarea>
+											<textarea class="form-control"
+												placeholder="write content please......" id="boardContent"
+												maxlength="40" name="boardContent"></textarea>
 											<div class="validation"></div>
 										</div>
 										<div class="text-center">
-											<button class="btn btn-default btn-sm btn-block" id="boardSave" type="submit">Submit</button>
+											<button class="btn btn-default btn-sm btn-block"
+												id="boardSave" type="submit">Submit</button>
 										</div>
 									</form>
 								</div>
@@ -202,43 +207,24 @@
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
 
-	<!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
-	<script type="text/javascript"
-		src="../smarteditor2/dist/js/service/HuskyEZCreator.js"
-		charset="utf-8"></script>
-
-	<script type="text/javascript">
-		var oEditors = [];
-		$(function() {
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef : oEditors,
-				elPlaceHolder : "boardContent", //textarea에서 지정한 id와 일치해야 합니다. 
-				//SmartEditor2Skin.html 파일이 존재하는 경로
-				sSkinURI : "../smarteditor2/workspace/SmartEditor2Skin.html",
-				htParams : {
-					// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-					bUseToolbar : true,
-					// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-					bUseVerticalResizer : true,
-					// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-					bUseModeChanger : true,
-					fOnBeforeUnload : function() {
-					}
-				},
-				fOnAppLoad : function() {
-					//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-					oEditors.getById["boardContent"].exec("PASTE_HTML",
-							[ "글을 작성해주세요." ]);
-				},
-				fCreator : "createSEditor2"
-			});
-
-			//저장버튼 클릭시 form 전송
-			$("#boardSave").click(function() {
-				oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
-				$("#formBoard").submit();
-			});	
+	<script>
+		CKEDITOR.replace('boardContent', {
+			 height: '400px',
+			 resize_enabled: false
 		});
+
+		window.onload = function() {
+			CKEDITOR.instances.boardContent.on('key', function() {
+				var str = CKEDITOR.instances.boardContent.getData();
+				if (str.length >= 4096) {
+					CKEDITOR.instances.boardContent.setData(str.substring(0, 4090));
+					alert('최대 4096글자까지 등록 가능합니다');
+				}
+			});
+		};
 	</script>
+
+
+
 </body>
 </html>
