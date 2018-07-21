@@ -155,8 +155,7 @@
 					</tbody>
 				</table>
 				<div class="text-center">
-					<button class="btn btn-default float-right m-2" type="submit">글
-						작성</button>
+					<button class="btn btn-default float-right m-2" type="button" id="boardWrite">글 작성</button>
 				</div>
 			</div>
 		</div>
@@ -236,5 +235,13 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			$('#boardWrite').on("click", function(ext) {
+				self.location = "boardWrite";
+			});
+		});
+	</script>
 </body>
 </html>
