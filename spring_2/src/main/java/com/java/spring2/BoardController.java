@@ -38,7 +38,9 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	public String boardWritePOST(BoardVO board, Model model) throws Exception {
 		logger.info("post : /boardWrite");
 		logger.info(board.toString());
-		service.regist(board);
+		int maxGroup = Math.max(service.maxGroup(), 0);
+		logger.info("maxGroup : " + maxGroup);
+		service.regist(board, maxGroup);
 		return "redirect:/board/boardList";
 	}
 	

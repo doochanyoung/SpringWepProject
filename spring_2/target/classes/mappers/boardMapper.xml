@@ -3,7 +3,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.BoardMapper">
 	<insert id="create">
-		insert into tbl_board(boardTitle, boardContent, boardRegdate, boardUserId)
-		values(#{boardTitle}, #{boardContent}, now(), #{boardUserId})
+		insert into tbl_board(boardTitle, boardContent, boardRegdate, boardHit, boardLike, boardGroup, boardSequence, boardIsReply, boardUserId) values(#{boardTitle}, #{boardContent}, now(), 0, 0, #{maxGroup}, 0, false, #{boardUserId})
 	</insert>
+	<select id ="maxGroup" resultType="int">
+		select max(boardGroup) from tbl_board
+	</select>
 </mapper>

@@ -16,8 +16,8 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO dao;
 
 	@Override
-	public void regist(BoardVO vo) throws Exception {
-		dao.create(vo);
+	public void regist(BoardVO vo, int maxGroup) throws Exception {
+		dao.create(vo, maxGroup);
 	}
 
 	@Override
@@ -48,6 +48,11 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> listAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int maxGroup() throws Exception {
+		return dao.maxGroup();
 	}
 	
 	

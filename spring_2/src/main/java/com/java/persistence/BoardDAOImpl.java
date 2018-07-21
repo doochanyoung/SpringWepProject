@@ -1,6 +1,8 @@
 package com.java.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -15,11 +17,17 @@ public class BoardDAOImpl implements BoardDAO {
 	@Inject
 	private SqlSession session;
 	
-	private static final String namespace = "com.java.mapper.BoardMapper"; 
+	private static String namespace = "com.java.mapper.BoardMapper"; 
 
 	@Override
-	public void create(BoardVO vo) throws Exception {
-		session.insert(namespace + ".create", vo);
+	public void create(BoardVO vo, int maxGroup) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("boardTitle", vo.getBoardTitle());
+		paramMap.put("boardContent", vo.getBoardContent());
+		paramMap.put("boardUserId", vo.getBoardUserId());
+		paramMap.put("maxGroup", maxGroup + 1);
+		System.out.println(paramMap);
+		session.insert(namespace + ".create", paramMap);
 	}
 
 	@Override
@@ -50,6 +58,11 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> listAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int maxGroup() throws Exception {
+		return session.selectOne(namespace + ".maxGroup");
 	}
 
 }
