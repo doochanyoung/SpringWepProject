@@ -20,6 +20,12 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		return "board/boardList";
 	}
 	
+	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
+	public String boardWrite(Locale locale, Model model) {
+		logger.info("get : /boardWrite");
+		return "board/boardWrite";
+	}
+	
 	@RequestMapping(value = "/dataroomList", method = RequestMethod.GET)
 	public String dataroomList(Locale locale, Model model) {
 		logger.info("get : /dataroomList");
