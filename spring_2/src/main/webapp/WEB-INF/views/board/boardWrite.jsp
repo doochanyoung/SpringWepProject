@@ -103,8 +103,7 @@
 									<h3 class="title">Write</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" target="/board/insert" role="form"
-										autocomplete="off" id="formBoard" method="POST">
+									<form class="form" action="/board/boardWrite" autocomplete="off" id="formBoard" method="POST">
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
@@ -112,23 +111,19 @@
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
-											<label class="writer">Writer</label> <input type="password"
-												class="form-control form-control-lg" name="boardWriter"
-												id="boardWriter">
+											<label class="writer">Writer</label> <input type="text"
+												class="form-control form-control-lg" name="boardUserId"
+												id="boardUserId">
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
-											<textarea class="form-control" name="userIntro" rows="15"
-												data-rule="required"
-												data-msg="Please write something for us"
-												placeholder="write content please......" id="boardContent"
-												maxlength="4096"></textarea>
+											<textarea class="form-control"  placeholder="write content please......" id="boardContent"
+												maxlength="4096" name="boardContent"></textarea>
 											<div class="validation"></div>
 										</div>
 										<div class="text-center">
-											<button class="btn btn-default btn-sm btn-block"
-												type="submit">Submit</button>
+											<button class="btn btn-default btn-sm btn-block" id="boardSave" type="submit">Submit</button>
 										</div>
 									</form>
 								</div>
@@ -239,12 +234,10 @@
 			});
 
 			//저장버튼 클릭시 form 전송
-			$("#boardSave").click(
-					function() {
-						oEditors.getById["boardContent"].exec(
-								"UPDATE_CONTENTS_FIELD", []);
-						$("#formBoard").submit();
-					});
+			$("#boardSave").click(function() {
+				oEditors.getById["boardContent"].exec("UPDATE_CONTENTS_FIELD", []);
+				$("#formBoard").submit();
+			});	
 		});
 	</script>
 </body>

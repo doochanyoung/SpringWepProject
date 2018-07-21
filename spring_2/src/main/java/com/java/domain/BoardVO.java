@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BoardVO {
 	private int boardId;
+	private String boardTitle;
 	private String boardContent;
 	private Date boardRegdate;
 	private Date updatedate;
@@ -12,10 +13,12 @@ public class BoardVO {
 	private int boardGroup;
 	private int boardSequence;
 	private boolean isReply;
+	private String boardUserId;
 	public BoardVO() {};
-	public BoardVO(int boardId, String boardContent, Date boardRegdate, Date updatedate, int boardHit, int boardLike,
-			int boardGroup, int boardSequence, boolean isReply) {
+	public BoardVO(int boardId, String boardTitle, String boardContent, Date boardRegdate, Date updatedate, int boardHit, int boardLike,
+			int boardGroup, int boardSequence, boolean isReply, String boardUserId) {
 		this.boardId = boardId;
+		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardRegdate = boardRegdate;
 		this.updatedate = updatedate;
@@ -24,12 +27,19 @@ public class BoardVO {
 		this.boardGroup = boardGroup;
 		this.boardSequence = boardSequence;
 		this.isReply = isReply;
+		this.boardUserId = boardUserId;
 	}
 	public int getBoardId() {
 		return boardId;
 	}
-	public void setBoardID(int boardId) {
+	public void setBoardId(int boardId) {
 		this.boardId = boardId;
+	}
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
 	public String getBoardContent() {
 		return boardContent;
@@ -79,10 +89,17 @@ public class BoardVO {
 	public void setReply(boolean isReply) {
 		this.isReply = isReply;
 	}
+	public String getBoardUserId() {
+		return boardUserId;
+	}
+	public void setBoardUserId(String boardUserId) {
+		this.boardUserId = boardUserId;
+	}
 	@Override
 	public String toString() {
-		return "BoardVO [boardId=" + boardId + ", boardContent=" + boardContent + ", boardRegdate=" + boardRegdate
-				+ ", updatedate=" + updatedate + ", boardHit=" + boardHit + ", boardLike=" + boardLike + ", boardGroup="
-				+ boardGroup + ", boardSequence=" + boardSequence + ", isReply=" + isReply + "]";
+		return "BoardVO [boardId=" + boardId + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", boardRegdate=" + boardRegdate + ", updatedate=" + updatedate + ", boardHit=" + boardHit
+				+ ", boardLike=" + boardLike + ", boardGroup=" + boardGroup + ", boardSequence=" + boardSequence
+				+ ", isReply=" + isReply + ", boardUserId=" + boardUserId + "]";
 	}
 }
