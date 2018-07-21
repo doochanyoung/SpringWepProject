@@ -36,9 +36,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
 	public String boardWritePOST(BoardVO board, Model model) throws Exception {
-		if(board.getBoardTitle().trim().length() <= 4 || board.getBoardContent().trim().length() <= 4) {
-			return "redirect:/board/boardWrite";
-		}
 		logger.info("post : /boardWrite");
 		logger.info(board.toString());
 		service.regist(board);

@@ -96,7 +96,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
-						<div class="col-md-12 mx-auto">
+						<div class="col-md-10 mx-auto">
 							<!-- form card login -->
 							<div class="card">
 								<div class="card-header">
@@ -119,7 +119,7 @@
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
 											<textarea class="form-control"  placeholder="write content please......" id="boardContent"
-												maxlength="4096" name="boardContent"></textarea>
+												maxlength="4096" name="boardContent" style="width:875px;"></textarea>
 											<div class="validation"></div>
 										</div>
 										<div class="text-center">
