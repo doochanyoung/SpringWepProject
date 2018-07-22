@@ -165,7 +165,7 @@
 									<a href=""><i class="fa fa-comments"></i></a>
 								</div>
 								<h4 class="title">
-									<a href="">&nbsp;Free</a>
+									<a href="<c:url value='/board/boardList'/>">&nbsp;Free</a>
 								</h4>
 							</div>
 						</div>

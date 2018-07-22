@@ -54,7 +54,7 @@
   ============================-->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand nav-menu" href="#">Community&nbsp;</a>
+			<a class="navbar-brand nav-menu" href="/board/boardList">Community&nbsp;</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -110,8 +110,8 @@
 										autocomplete="off" id="formBoard" method="POST"
 										class="contactForm" role="form">
 										<div class="form-group">
-											<label for="title" class="text">Title</label> <input
-												type="text" class="form-control form-control-lg"
+											<label for="title" class="text">Title</label>
+											<input type="text" class="form-control form-control-lg"
 												name="boardTitle" id="boardTitle" placeholder="write Title">
 											<div class="validation"></div>
 										</div>
@@ -124,7 +124,7 @@
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
 											<textarea class="form-control"
-												placeholder="write content please......" id="boardContent" name="boardContent"></textarea>
+												 id="boardContent" name="boardContent" placeholder="write content please......"></textarea>
 											<div class="validation"></div>
 										</div>
 										<div class="text-center">
