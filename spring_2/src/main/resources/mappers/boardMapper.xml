@@ -8,4 +8,12 @@
 	<select id ="maxGroup" resultType="int">
 		select max(boardGroup) from tbl_board
 	</select>
+	<select id="listAll" resultType="com.java.domain.BoardVO">
+		<![CDATA[
+			select *
+			from tbl_board
+			where boardId > 0
+			order by boardGroup desc, boardSequence
+		]]>
+	</select>
 </mapper>

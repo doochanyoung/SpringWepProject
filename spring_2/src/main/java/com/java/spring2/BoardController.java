@@ -23,15 +23,14 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	private BoardService service;
 	
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
-	public String board(Locale locale, Model model) {
+	public void board(Locale locale, Model model) throws Exception {
 		logger.info("get : /boardList");
-		return "board/boardList";
+		model.addAttribute("list", service.listAll());
 	}
 	
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
-	public String boardWriteGET(Locale locale, Model model) {
+	public void boardWriteGET(Locale locale, Model model) {
 		logger.info("get : /boardWrite");
-		return "board/boardWrite";
 	}
 	
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
@@ -47,9 +46,8 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value = "/dataroomList", method = RequestMethod.GET)
-	public String dataroomList(Locale locale, Model model) {
+	public void dataroomList(Locale locale, Model model) {
 		logger.info("get : /dataroomList");
-		return "board/dataroomList";
 	}
 	
 }

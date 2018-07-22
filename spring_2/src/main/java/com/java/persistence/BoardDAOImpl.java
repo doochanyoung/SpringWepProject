@@ -56,8 +56,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardVO> listAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectList(namespace + ".listAll");
 	}
 
 	@Override

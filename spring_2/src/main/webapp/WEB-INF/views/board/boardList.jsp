@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page pageEncoding="utf-8" session="false"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -123,7 +124,7 @@
 			</div>
 			<hr class="my-4">
 			<div class="row">
-				<table class="table table-striped table table"
+				<table class="table table-striped table-sm"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
@@ -131,27 +132,21 @@
 							<th scope="col">제목</th>
 							<th class="mobile" scope="col">작성자</th>
 							<th class="mobile" scope="col">작성일</th>
+							<th class="mobile" scope="col">조회수</th>
+							<th class="mobile" scope="col">좋아요</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th class="mobile" scope="row">1</th>
-							<td>Mark</td>
-							<td class="mobile">Otto</td>
-							<td class="mobile">@mdo</td>
-						</tr>
-						<tr>
-							<th class="mobile" scope="row">2</th>
-							<td>Jacob</td>
-							<td class="mobile">Thornton</td>
-							<td class="mobile">@fat</td>
-						</tr>
-						<tr>
-							<th class="mobile" scope="row">3</th>
-							<td>Larry</td>
-							<td class="mobile" >the Bird</td>
-							<td class="mobile">@twitter</td>
-						</tr>
+						<c:forEach items="${list}" var="boardVO">
+							<tr>
+								<th class="mobile" scope="row">${boardVO.boardId }</th>
+								<td><a href='/board/boardRead?boardId=${boardVO.boardId}'>${boardVO.boardTitle }</a></td>
+								<td class="mobile">${boardVO.boardUserId }</td>
+								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></td>
+								<td class="mobile">${boardVO.boardHit }</td>
+								<td class="mobile">${boardVO.boardLike }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div class="text-center">

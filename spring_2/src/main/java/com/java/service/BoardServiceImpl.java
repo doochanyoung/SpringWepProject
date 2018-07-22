@@ -46,8 +46,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public List<BoardVO> listAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.listAll();
 	}
 
 	@Override
