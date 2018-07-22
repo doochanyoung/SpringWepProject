@@ -33,14 +33,12 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void modify(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		dao.update(vo);
 	}
 
 	@Override
 	public void remove(int boardId) throws Exception {
-		// TODO Auto-generated method stub
-		
+		dao.delete(boardId);
 	}
 
 	@Override

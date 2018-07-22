@@ -40,6 +40,27 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		model.addAttribute("boardVO", service.read(boardId));
 	}
 	
+	@RequestMapping(value = "/boardDelete", method = RequestMethod.POST)
+	public String boardDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
+		logger.info("get : /boardDelete");
+		service.remove(boardId);
+		return "redirect:/board/boardList";
+	}
+	
+	@RequestMapping(value = "/boardModify", method = RequestMethod.GET)
+	public void boardModifyGET(int boardId, Model model) throws Exception {
+		logger.info("get : /boardModify");
+		model.addAttribute("boardVO", service.read(boardId));
+	}
+	
+	@RequestMapping(value = "/boardModify", method = RequestMethod.POST)
+	public String boardModifyPOST(BoardVO vo, Model model) throws Exception {
+		logger.info("get : /boardModify");
+		service.modify(vo);
+		return "redirect:/board/boardRead?boardId=" + vo.getBoardId();
+	}
+	
+	
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
 	public String boardWritePOST(BoardVO board, Model model) throws Exception {
 		logger.info("post : /boardWrite");

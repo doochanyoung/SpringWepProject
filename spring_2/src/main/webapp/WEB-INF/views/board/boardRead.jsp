@@ -106,9 +106,9 @@
 									<h3 class="title">Read</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" action="/board/boardWrite"
-										autocomplete="off" id="formBoard" method="POST"
-										class="contactForm" role="form">
+									<form class="form" role="form" method="post">
+										<input type="hidden" name="boardId" id="boardId" value="${boardVO.boardId }">
+									</form>
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
@@ -143,7 +143,6 @@
 											<button class="btn btn-default btn-sm ml-3" id="boardList" type="button" style="background:#5AAEFF">List</button>
 											<button class="btn btn-default btn-sm ml-3" id="boardLike" type="button" style="background:#ABF200">Like</button>
 										</div>
-									</form>
 								</div>
 								<!--/card-block-->
 							</div>
@@ -224,6 +223,24 @@
 		CKEDITOR.replace('boardContent', {
 			 height: '600px',
 			 resize_enabled: false
+		});
+		$(document).ready(function(){
+			var formObj = $("form[role='form']");
+			$("#boardModify").on("click", function(){
+				formObj.attr("action", "/board/boardModify");
+				formObj.attr("method", "get");
+				formObj.submit();
+			});
+			$("#boardRemove").on("click", function(){
+				var bool = confirm("정말 삭제 하시겠습니까?");
+				if(bool){
+					formObj.attr("action", "/board/boardDelete");
+					formObj.submit();
+				}
+			});
+			$("#boardList").on("click", function(){
+				self.location = "/board/boardList";
+			});
 		});
 	</script>
 

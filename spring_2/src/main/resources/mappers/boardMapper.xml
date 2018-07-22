@@ -21,4 +21,10 @@
 		from tbl_board
 		where boardId = #{boardId}
 	</select>
+	<delete id="delete">
+		delete from tbl_board where boardId = #{boardId}
+	</delete>
+	<update id="update">
+		update tbl_board set boardTitle = #{boardTitle}, boardContent = #{boardContent}, boardUpdatedate = now() where boardId = #{boardId}
+	</update>
 </mapper>

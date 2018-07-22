@@ -43,14 +43,12 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void update(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub
-
+		session.update(namespace + ".update", vo);
 	}
 
 	@Override
 	public void delete(int boardId) throws Exception {
-		// TODO Auto-generated method stub
-
+		session.delete(namespace + ".delete", boardId);
 	}
 
 	@Override
