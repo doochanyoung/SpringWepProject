@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.domain.BoardVO;
 import com.java.service.BoardService;
@@ -31,6 +32,12 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public void boardWriteGET(Locale locale, Model model) {
 		logger.info("get : /boardWrite");
+	}
+	
+	@RequestMapping(value = "/boardRead", method = RequestMethod.GET)
+	public void boardReadGET(@RequestParam("boardId") int boardId, Model model) throws Exception {
+		logger.info("get : /boardRead");
+		model.addAttribute("boardVO", service.read(boardId));
 	}
 	
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)

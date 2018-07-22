@@ -16,4 +16,9 @@
 			order by boardGroup desc, boardSequence
 		]]>
 	</select>
+	<select id="read" resultType="com.java.domain.BoardVO">
+		select *
+		from tbl_board
+		where boardId = #{boardId}
+	</select>
 </mapper>
