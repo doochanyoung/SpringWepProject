@@ -106,7 +106,8 @@
 								</div>
 								<div class="card-body">
 									<form class="form" action="/board/boardWrite"
-										autocomplete="off" id="formBoard" method="POST">
+										autocomplete="off" id="formBoard" method="POST"
+										class="contactForm" role="form">
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
@@ -213,7 +214,7 @@
 			 resize_enabled: false
 		});
 
-		window.onload = function() {
+		/* window.onload = function() {
 			CKEDITOR.instances.boardContent.on('key', function() {
 				var str = CKEDITOR.instances.boardContent.getData();
 				if (str.length >= 4096) {
@@ -221,10 +222,44 @@
 					alert('최대 4096글자까지 등록 가능합니다');
 				}
 			});
-		};
+		}; */
+		$(document).ready(function() {
+			  $('#formBoard').submit(function(e) {
+			    e.preventDefault();
+			    var boardTitle = $('#boardTitle').val();
+			    var boardContent = $('#boardContent').val();
+			    var boardUserId = $('#boardUserId').val();
+
+			    $(".error").remove();
+				
+			    var valid = true;
+			    if (boardTitle.length < 1) {
+			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			      valid = false;
+			    } else if (boardTitle.length > 45) {
+				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+				      valid = false;
+				}
+			    if (boardContent.length < 1) {
+			      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			      valid = false;
+			    }  else if (boardContent.length > 4096) {
+				      $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
+				      valid = false;
+				}
+			    if (boardUserId.length < 1) {
+			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			      valid = false;
+			    } else if (boardUserId.length > 45) {
+				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+				      valid = false;
+				}
+			    if(valid){
+			    	 document.getElementById("formBoard").submit();
+			    }
+			  });
+		});
 	</script>
-
-
 
 </body>
 </html>
