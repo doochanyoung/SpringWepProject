@@ -139,9 +139,9 @@
 										<hr>
 										<div class="row">
 											<button class="btn btn-default btn-sm ml-3" id="boardModify" type="button">Modify</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardModify" type="button" style="background:#FF6C6C;">Remove</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardModify" type="button" style="background:#5AAEFF">List</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardModify" type="button" style="background:#ABF200">Like</button>
+											<button class="btn btn-default btn-sm ml-3" id="boardRemove" type="button" style="background:#FF6C6C;">Remove</button>
+											<button class="btn btn-default btn-sm ml-3" id="boardList" type="button" style="background:#5AAEFF">List</button>
+											<button class="btn btn-default btn-sm ml-3" id="boardLike" type="button" style="background:#ABF200">Like</button>
 										</div>
 									</form>
 								</div>
@@ -222,7 +222,7 @@
 
 	<script>
 		CKEDITOR.replace('boardContent', {
-			 height: '400px',
+			 height: '600px',
 			 resize_enabled: false
 		});
 	</script>

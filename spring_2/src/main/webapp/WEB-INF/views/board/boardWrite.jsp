@@ -124,8 +124,7 @@
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
 											<textarea class="form-control"
-												placeholder="write content please......" id="boardContent"
-												maxlength="40" name="boardContent"></textarea>
+												placeholder="write content please......" id="boardContent" name="boardContent"></textarea>
 											<div class="validation"></div>
 										</div>
 										<div class="text-center">
@@ -211,7 +210,7 @@
 
 	<script>
 		CKEDITOR.replace('boardContent', {
-			 height: '400px',
+			 height: '600px',
 			 resize_enabled: false
 		});
 
@@ -226,13 +225,11 @@
 		}; */
 		$(document).ready(function() {
 			  $('#formBoard').submit(function(e) {
-			    e.preventDefault();
+				e.preventDefault();
 			    var boardTitle = $('#boardTitle').val();
-			    var boardContent = $('#boardContent').val();
+			    var boardContent = CKEDITOR.instances.boardContent.getData();
 			    var boardUserId = $('#boardUserId').val();
-
 			    $(".error").remove();
-				
 			    var valid = true;
 			    if (boardTitle.length < 1) {
 			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
@@ -241,19 +238,19 @@
 				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
-			    if (boardContent.length < 1) {
-			      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-			      valid = false;
-			    }  else if (boardContent.length > 4096) {
-				      $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
-				      valid = false;
-				}
 			    if (boardUserId.length < 1) {
 			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
 			    } else if (boardUserId.length > 45) {
 				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
+				}
+			    if (boardContent.length < 1) {
+				      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+				      valid = false;
+			 	}  else if (boardContent.length > 4096) {
+					   $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
+					   valid = false;
 				}
 			    if(valid){
 			    	 document.getElementById("formBoard").submit();
