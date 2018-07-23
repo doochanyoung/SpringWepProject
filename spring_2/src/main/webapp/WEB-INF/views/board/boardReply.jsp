@@ -110,6 +110,8 @@
 										autocomplete="off" id="formBoard" method="POST"
 										class="contactForm" role="form">
 										<input type="hidden" name="boardId" id="boardId" value="${boardId }">
+										<input type="hidden" name="page" id="page" value="${page }">
+										<input type="hidden" name="perPageNum" id="perPageNum" value="${perPageNum }">
 										<div class="form-group">
 											<label for="title" class="text">Title</label>
 											<input type="text" class="form-control form-control-lg"

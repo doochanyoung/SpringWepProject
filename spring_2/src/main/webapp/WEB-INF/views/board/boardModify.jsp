@@ -108,6 +108,8 @@
 								<div class="card-body">
 									<form class="form" role="form" method="post" id="formBoard">
 										<input type="hidden" name="boardId" id="boardId" value="${boardVO.boardId }">
+										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
+										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
@@ -259,11 +261,13 @@
 		$(document).ready(function(){
 			var formObj = $("form[role='form']");
 			var boardId = $('#boardId').val();
+			var page = $('#page').val();
+			var perPageNum = $('#perPageNum').val();
 			$("#boardSave").on("click", function(){
 				formObj.submit();
 			});
 			$("#boardCancel").on("click", function(){
-				self.location = "/board/boardRead?boardId=" + boardId;
+				self.location = "/board/boardRead?boardId=" + boardId +"&page=" + page + "&perPageNum=" + perPageNum;
 			});
 		});
 	</script>

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.java.domain.BoardVO;
+import com.java.domain.PageHandler;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -73,6 +74,23 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int maxSequence(int boardGroup) throws Exception {
 		return session.selectOne(namespace + ".maxSequence", boardGroup);
+	}
+
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		if(page <= 0) page = 1;
+		page = (page - 1) * 30;
+		return session.selectList(namespace + ".listPage", page);
+	}
+
+	@Override
+	public List<BoardVO> listPageHandler(PageHandler handler) throws Exception {
+		return session.selectList(namespace + ".listPageHandler", handler);
+	}
+
+	@Override
+	public int countPaging() throws Exception {
+		return session.selectOne(namespace + ".countPaging");
 	}
 
 }

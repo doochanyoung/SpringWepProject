@@ -91,7 +91,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container wow fadeIn">
+		<div class="container">
 			<div class="section-header m-5">
 				<h3 class="section-title">자유게시판</h3>
 				<p class="section-description">자유 게시판을 활용하여 많은 사람들과 소통해보세요.</p>
@@ -140,7 +140,7 @@
 						<c:forEach items="${list}" var="boardVO">
 							<tr>
 								<th class="mobile" scope="row">${boardVO.boardId }</th>
-								<td><a href='/board/boardRead?boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i>&nbsp;</c:if>${boardVO.boardTitle }</a></td>
+								<td><a href='/board/boardRead${pageMaker.makeQuery(pageMaker.pageHandler.page)}&boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i></c:if>${boardVO.boardTitle }</a></td>
 								<td class="mobile">${boardVO.boardUserId }</td>
 								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></td>
 								<td class="mobile">${boardVO.boardHit }</td>
@@ -154,19 +154,21 @@
 				</div>
 			</div>
 		</div>
-		<nav class="wow fadeIn">
+		<nav>
 			<ul class="pagination pagination-info justify-content-center">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
-				</a></li>
-				<li class="page-item active"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-						class="sr-only">Next</span>
-				</a></li>
+				<c:if test="${pageMaker.prev }">
+				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span></a></li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+					<li class = "page-item <c:out value="${pageMaker.pageHandler.page == idx ? 'active' : ''}" />">
+					<a class="page-link" href="boardList${pageMaker.makeQuery(idx)}">${idx }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeQuery(pageMaker.endPage + 1) }" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+						class="sr-only">Next</span></a></li>
+				</c:if>
 			</ul>
 		</nav>
 	</section>

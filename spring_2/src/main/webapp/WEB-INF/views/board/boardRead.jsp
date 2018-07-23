@@ -108,6 +108,8 @@
 								<div class="card-body">
 									<form class="form" role="form" method="post">
 										<input type="hidden" name="boardId" id="boardId" value="${boardVO.boardId }">
+										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
+										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
 									</form>
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
@@ -241,7 +243,9 @@
 				}
 			});
 			$("#boardList").on("click", function(){
-				self.location = "/board/boardList";
+				formObj.attr("action", "/board/boardList");
+				formObj.attr("method", "get");
+				formObj.submit();
 			});
 			$("#boardReply").on("click", function(){
 				formObj.attr("action", "/board/boardReply");

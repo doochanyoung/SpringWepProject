@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.java.domain.BoardVO;
+import com.java.domain.PageHandler;
 import com.java.persistence.BoardDAO;
 
 @Service
@@ -60,5 +61,20 @@ public class BoardServiceImpl implements BoardService{
 		return dao.maxSequence(boardGroup);
 	}
 
-	
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		return dao.listPage(page);
+	}
+
+	@Override
+	public List<BoardVO> listPageHandler(PageHandler handler) throws Exception {
+		return dao.listPageHandler(handler);
+	}
+
+	@Override
+	public int countPaging() throws Exception {
+		return dao.countPaging();
+	}
+
+
 }

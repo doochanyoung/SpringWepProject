@@ -3,6 +3,7 @@ package com.java.service;
 import java.util.List;
 
 import com.java.domain.BoardVO;
+import com.java.domain.PageHandler;
 
 public interface BoardService {
 	public void regist(BoardVO vo, int maxGroup) throws Exception;
@@ -14,4 +15,7 @@ public interface BoardService {
 	public int maxGroup() throws Exception;
 	public int maxSequence(int boardGroup) throws Exception;
 	public int getGroup(int boardId) throws Exception;
+	public List<BoardVO> listPage(int page) throws Exception;
+	public List<BoardVO> listPageHandler(PageHandler handler) throws Exception;
+	public int countPaging() throws Exception;
 }
