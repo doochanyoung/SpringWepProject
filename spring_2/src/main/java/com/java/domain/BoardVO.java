@@ -12,11 +12,11 @@ public class BoardVO {
 	private int boardLike;
 	private int boardGroup;
 	private int boardSequence;
-	private boolean isReply;
+	private boolean boardIsReply;
 	private String boardUserId;
 	public BoardVO() {};
 	public BoardVO(int boardId, String boardTitle, String boardContent, Date boardRegdate, Date updatedate, int boardHit, int boardLike,
-			int boardGroup, int boardSequence, boolean isReply, String boardUserId) {
+			int boardGroup, int boardSequence, boolean boardIsReply, String boardUserId) {
 		this.boardId = boardId;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
@@ -26,7 +26,7 @@ public class BoardVO {
 		this.boardLike = boardLike;
 		this.boardGroup = boardGroup;
 		this.boardSequence = boardSequence;
-		this.isReply = isReply;
+		this.boardIsReply = boardIsReply;
 		this.boardUserId = boardUserId;
 	}
 	public int getBoardId() {
@@ -83,23 +83,23 @@ public class BoardVO {
 	public void setBoardSequence(int boardSequence) {
 		this.boardSequence = boardSequence;
 	}
-	public boolean isReply() {
-		return isReply;
-	}
-	public void setReply(boolean isReply) {
-		this.isReply = isReply;
-	}
 	public String getBoardUserId() {
 		return boardUserId;
 	}
 	public void setBoardUserId(String boardUserId) {
 		this.boardUserId = boardUserId;
 	}
+	public boolean isBoardIsReply() {
+		return boardIsReply;
+	}
+	public void setBoardIsReply(boolean boardIsReply) {
+		this.boardIsReply = boardIsReply;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [boardId=" + boardId + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", boardRegdate=" + boardRegdate + ", updatedate=" + updatedate + ", boardHit=" + boardHit
 				+ ", boardLike=" + boardLike + ", boardGroup=" + boardGroup + ", boardSequence=" + boardSequence
-				+ ", isReply=" + isReply + ", boardUserId=" + boardUserId + "]";
+				+ ", boardIsReply=" + boardIsReply + ", boardUserId=" + boardUserId + "]";
 	}
 }

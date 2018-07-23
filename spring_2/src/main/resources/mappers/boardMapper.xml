@@ -5,6 +5,9 @@
 	<insert id="create">
 		insert into tbl_board(boardTitle, boardContent, boardRegdate, boardHit, boardLike, boardGroup, boardSequence, boardIsReply, boardUserId) values(#{boardTitle}, #{boardContent}, now(), 0, 0, #{maxGroup}, 0, false, #{boardUserId})
 	</insert>
+	<insert id="createReply">
+		insert into tbl_board(boardTitle, boardContent, boardRegdate, boardHit, boardLike, boardGroup, boardSequence, boardIsReply, boardUserId) values(#{boardTitle}, #{boardContent}, now(), 0, 0, #{boardGroup}, #{boardSequence}, true, #{boardUserId})
+	</insert>
 	<select id ="maxGroup" resultType="int">
 		select max(boardGroup) from tbl_board
 	</select>
@@ -27,4 +30,10 @@
 	<update id="update">
 		update tbl_board set boardTitle = #{boardTitle}, boardContent = #{boardContent}, boardUpdatedate = now() where boardId = #{boardId}
 	</update>
+	<select id="getGroup" resultType="int">
+		select boardGroup from tbl_board where boardId = #{boardId}
+	</select>
+	<select id="maxSequence" resultType="int">
+		select max(boardSequence) from tbl_board where boardGroup = #{boardGroup}
+	</select>
 </mapper>

@@ -21,9 +21,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void registReply(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void registReply(BoardVO vo, int boardGroup, int maxSequence) throws Exception {
+		dao.createReply(vo, boardGroup, maxSequence);
 	}
 
 	@Override
@@ -50,6 +49,16 @@ public class BoardServiceImpl implements BoardService{
 	public int maxGroup() throws Exception {
 		return dao.maxGroup();
 	}
-	
+
+	@Override
+	public int getGroup(int boardId) throws Exception {
+		return dao.getGroup(boardId);
+	}
+
+	@Override
+	public int maxSequence(int boardGroup) throws Exception {
+		return dao.maxSequence(boardGroup);
+	}
+
 	
 }

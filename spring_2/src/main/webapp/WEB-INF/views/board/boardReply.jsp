@@ -36,12 +36,15 @@
 	integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
 	crossorigin="anonymous">
 
+<script src="../ckeditor/ckeditor.js"></script>
+
 <!-- =======================================================
     Theme Name: Regna
     Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
+
 </head>
 
 <body>
@@ -63,7 +66,8 @@
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
 					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item"><a href="/board/dataroomList">Data Room</a></li>
+					<li class="nav-item"><a href="/board/dataroomList">Data
+							Room</a></li>
 					<li class="nav-item"><a href="#">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
 						<ul class="navbar-nav">
@@ -87,89 +91,63 @@
 
 
 	<!--==========================
-      Services Section
+      boards Section
     ============================-->
 
 	<section id="boards">
-		<div class="container wow fadeIn">
-			<div class="section-header m-5">
-				<h3 class="section-title">자유게시판</h3>
-				<p class="section-description">자유 게시판을 활용하여 많은 사람들과 소통해보세요.</p>
-			</div>
-			<div class="card m-4">
-				<div class="card-header">Search</div>
-				<div class="card-body">
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-md-12">
 					<div class="row">
-						<div class="col-7">
-							<div class="form-group">
-								<input type="text" class="form-control" name="boardSearch"
-									id="boardSearch" placeholder="search....">
+						<div class="col-md-10 mx-auto">
+							<!-- form card login -->
+							<div class="card">
+								<div class="card-header">
+									<h3 class="title">reply</h3>
+								</div>
+								<div class="card-body">
+									<form class="form" action="/board/boardReply"
+										autocomplete="off" id="formBoard" method="POST"
+										class="contactForm" role="form">
+										<input type="hidden" name="boardId" id="boardId" value="${boardId }">
+										<div class="form-group">
+											<label for="title" class="text">Title</label>
+											<input type="text" class="form-control form-control-lg"
+												name="boardTitle" id="boardTitle" placeholder="write Title">
+											<div class="validation"></div>
+										</div>
+										<div class="form-group">
+											<label for="writer" class="text">Reply</label> <input
+												type="text" class="form-control form-control-lg"
+												name="boardUserId" id="boardUserId">
+											<div class="validation"></div>
+										</div>
+										<div class="form-group">
+											<label for="content" class="text">Content</label>
+											<textarea class="form-control"
+												 id="boardContent" name="boardContent" placeholder="write content please......"></textarea>
+											<div class="validation"></div>
+										</div>
+										<div class="text-center">
+											<button class="btn btn-default btn-sm btn-block"
+												id="boardSave" type="submit">Submit</button>
+										</div>
+									</form>
+								</div>
+								<!--/card-block-->
 							</div>
-						</div>
-						<div class="col-2">
-							<select class="custom-select" id="select">
-								<option selected value="none" id="select">-------</option>
-								<option value="title" id="select">제목</option>
-								<option value="writer" id="select">작성자</option>
-								<option value="content" id="select">내용</option>
-							</select>
-						</div>
-						<div class="col-1">
-							<div class="text-center">
-								<button class="btn btn-default float-left" type="submit">검색</button>
-							</div>
+							<!-- /form card login -->
 						</div>
 					</div>
+					<!--/row-->
 				</div>
+				<!--/col-->
 			</div>
-			<hr class="my-4">
-			<div class="row">
-				<table class="table table-striped table-sm"
-					style="text-align: center; border: 1px solid #dddddd">
-					<thead>
-						<tr>
-							<th class="mobile" scope="col">id</th>
-							<th scope="col">제목</th>
-							<th class="mobile" scope="col">작성자</th>
-							<th class="mobile" scope="col">작성일</th>
-							<th class="mobile" scope="col">조회수</th>
-							<th class="mobile" scope="col">좋아요</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list}" var="boardVO">
-							<tr>
-								<th class="mobile" scope="row">${boardVO.boardId }</th>
-								<td><a href='/board/boardRead?boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i>&nbsp;</c:if>${boardVO.boardTitle }</a></td>
-								<td class="mobile">${boardVO.boardUserId }</td>
-								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></td>
-								<td class="mobile">${boardVO.boardHit }</td>
-								<td class="mobile">${boardVO.boardLike }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<div class="text-center">
-					<button class="btn btn-default float-right m-2" type="button" id="boardWrite">글 작성</button>
-				</div>
-			</div>
+			<!--/row-->
 		</div>
-		<nav class="wow fadeIn">
-			<ul class="pagination pagination-info justify-content-center">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
-				</a></li>
-				<li class="page-item active"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-						class="sr-only">Next</span>
-				</a></li>
-			</ul>
-		</nav>
+		<!--/container-->
 	</section>
+	<!-- #boards -->
 
 	<footer id="footer">
 		<div class="footer-top">
@@ -230,13 +208,57 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
-	
+
 	<script>
-		$(document).ready(function() {
-			$('#boardWrite').on("click", function(ext) {
-				self.location = "boardWrite";
+		CKEDITOR.replace('boardContent', {
+			 height: '600px',
+			 resize_enabled: false
+		});
+
+		/* window.onload = function() {
+			CKEDITOR.instances.boardContent.on('key', function() {
+				var str = CKEDITOR.instances.boardContent.getData();
+				if (str.length >= 4096) {
+					CKEDITOR.instances.boardContent.setData(str.substring(0, 4090));
+					alert('최대 4096글자까지 등록 가능합니다');
+				}
 			});
+		}; */
+		$(document).ready(function() {
+			  $('#formBoard').submit(function(e) {
+				e.preventDefault();
+			    var boardTitle = $('#boardTitle').val();
+			    var boardContent = CKEDITOR.instances.boardContent.getData();
+			    var boardUserId = $('#boardUserId').val();
+			    $(".error").remove();
+			    var valid = true;
+			    if (boardTitle.length < 1) {
+			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			      valid = false;
+			    } else if (boardTitle.length > 45) {
+				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+				      valid = false;
+				}
+			    if (boardUserId.length < 1) {
+			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			      valid = false;
+			    } else if (boardUserId.length > 45) {
+				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+				      valid = false;
+				}
+			    if (boardContent.length < 1) {
+				      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+				      valid = false;
+			 	}  else if (boardContent.length > 4096) {
+					   $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
+					   valid = false;
+				}
+			    if(valid){
+			    	 document.getElementById("formBoard").submit();
+			    }
+			  });
 		});
 	</script>
+
 </body>
 </html>

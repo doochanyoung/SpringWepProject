@@ -129,7 +129,7 @@
 												<span><strong>조회수</strong> : ${boardVO.boardHit }</span>
 											</div>
 											<div class="col-4">
-												<span><strong>좋아요</strong> : ${boardVO.boardHit }</span>
+												<span><strong>좋아요</strong> : ${boardVO.boardLike }</span>
 											</div>
 											<div class="col-4">
 												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></span>
@@ -258,11 +258,12 @@
 		});
 		$(document).ready(function(){
 			var formObj = $("form[role='form']");
+			var boardId = $('#boardId').val();
 			$("#boardSave").on("click", function(){
 				formObj.submit();
 			});
 			$("#boardCancel").on("click", function(){
-				self.location = "/board/boardList";
+				self.location = "/board/boardRead?boardId=" + boardId;
 			});
 		});
 	</script>

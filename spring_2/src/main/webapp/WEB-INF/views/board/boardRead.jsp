@@ -142,6 +142,7 @@
 											<button class="btn btn-default btn-sm ml-3" id="boardRemove" type="button" style="background:#FF6C6C;">Remove</button>
 											<button class="btn btn-default btn-sm ml-3" id="boardList" type="button" style="background:#5AAEFF">List</button>
 											<button class="btn btn-default btn-sm ml-3" id="boardLike" type="button" style="background:#ABF200">Like</button>
+											<button class="btn btn-default btn-sm ml-3" id="boardReply" type="button" style="background:#FD65B0">Reply</button>
 										</div>
 								</div>
 								<!--/card-block-->
@@ -226,6 +227,7 @@
 		});
 		$(document).ready(function(){
 			var formObj = $("form[role='form']");
+			var boardId = $('#boardId').val();
 			$("#boardModify").on("click", function(){
 				formObj.attr("action", "/board/boardModify");
 				formObj.attr("method", "get");
@@ -240,6 +242,11 @@
 			});
 			$("#boardList").on("click", function(){
 				self.location = "/board/boardList";
+			});
+			$("#boardReply").on("click", function(){
+				formObj.attr("action", "/board/boardReply");
+				formObj.attr("method", "get");
+				formObj.submit();
 			});
 		});
 	</script>
