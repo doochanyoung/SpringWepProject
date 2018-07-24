@@ -81,8 +81,8 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	public String boardWritePOST(BoardVO board, Model model) throws Exception {
 		logger.info("post : /boardWrite");
 		logger.info(board.toString());
-		board.setBoardTitle(board.getBoardTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
-		board.setBoardContent(board.getBoardContent().replaceAll("\n", "<br>"));
+		board.setTitle(board.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+		board.setContent(board.getContent().replaceAll("\n", "<br>"));
 		int maxGroup = Math.max(service.maxGroup(), 0);
 		logger.info("maxGroup : " + maxGroup);
 		service.regist(board, maxGroup);
