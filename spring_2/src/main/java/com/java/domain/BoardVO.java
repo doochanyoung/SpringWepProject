@@ -4,54 +4,40 @@ import java.util.Date;
 
 public class BoardVO {
 	private int boardId;
-	private String boardTitle;
-	private String boardContent;
-	private Date boardRegdate;
+	private String title;
+	private String content;
+	private Date regdate;
 	private Date updatedate;
-	private int boardHit;
-	private int boardLike;
-	private int boardGroup;
-	private int boardSequence;
-	private boolean boardIsReply;
-	private String boardUserId;
-	public BoardVO() {};
-	public BoardVO(int boardId, String boardTitle, String boardContent, Date boardRegdate, Date updatedate, int boardHit, int boardLike,
-			int boardGroup, int boardSequence, boolean boardIsReply, String boardUserId) {
-		this.boardId = boardId;
-		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
-		this.boardRegdate = boardRegdate;
-		this.updatedate = updatedate;
-		this.boardHit = boardHit;
-		this.boardLike = boardLike;
-		this.boardGroup = boardGroup;
-		this.boardSequence = boardSequence;
-		this.boardIsReply = boardIsReply;
-		this.boardUserId = boardUserId;
-	}
+	private int hit;
+	private int likes;
+	private int groups;
+	private int sequence;
+	private boolean isReply;
+	private String userId;
+	
 	public int getBoardId() {
 		return boardId;
 	}
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
-	public String getBoardTitle() {
-		return boardTitle;
+	public String getTitle() {
+		return title;
 	}
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getBoardContent() {
-		return boardContent;
+	public String getContent() {
+		return content;
 	}
-	public void setBoardContent(String boardContent) {
-		this.boardContent = boardContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public Date getBoardRegdate() {
-		return boardRegdate;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setBoardRegdate(Date boardRegdate) {
-		this.boardRegdate = boardRegdate;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 	public Date getUpdatedate() {
 		return updatedate;
@@ -59,47 +45,40 @@ public class BoardVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
-	public int getBoardHit() {
-		return boardHit;
+	public int getHit() {
+		return hit;
 	}
-	public void setBoardHit(int boardHit) {
-		this.boardHit = boardHit;
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
-	public int getBoardLike() {
-		return boardLike;
+	public int getLikes() {
+		return likes;
 	}
-	public void setBoardLike(int boardLike) {
-		this.boardLike = boardLike;
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
-	public int getBoardGroup() {
-		return boardGroup;
+	public int getGroups() {
+		return groups;
 	}
-	public void setBoardGroup(int boardGroup) {
-		this.boardGroup = boardGroup;
+	public void setGroups(int groups) {
+		this.groups = groups;
 	}
-	public int getBoardSequence() {
-		return boardSequence;
+	public int getSequence() {
+		return sequence;
 	}
-	public void setBoardSequence(int boardSequence) {
-		this.boardSequence = boardSequence;
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
 	}
-	public String getBoardUserId() {
-		return boardUserId;
+	public boolean getIsReply() {
+		return isReply;
 	}
-	public void setBoardUserId(String boardUserId) {
-		this.boardUserId = boardUserId;
+	public void setReply(boolean isReply) {
+		this.isReply = isReply;
 	}
-	public boolean isBoardIsReply() {
-		return boardIsReply;
+	public String getUserId() {
+		return userId;
 	}
-	public void setBoardIsReply(boolean boardIsReply) {
-		this.boardIsReply = boardIsReply;
-	}
-	@Override
-	public String toString() {
-		return "BoardVO [boardId=" + boardId + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardRegdate=" + boardRegdate + ", updatedate=" + updatedate + ", boardHit=" + boardHit
-				+ ", boardLike=" + boardLike + ", boardGroup=" + boardGroup + ", boardSequence=" + boardSequence
-				+ ", boardIsReply=" + boardIsReply + ", boardUserId=" + boardUserId + "]";
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

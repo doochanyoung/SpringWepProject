@@ -115,28 +115,28 @@
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
-												name="boardTitle" id="boardTitle" placeholder="write Title" value="${boardVO.boardTitle }">
+												name="title" id="title" placeholder="write Title" value="${boardVO.title }">
 										</div>
 										<div class="form-group">
 											<label for="writer" class="text">Writer</label> <input
 												type="text" class="form-control form-control-lg"
-												name="boardUserId" id="boardUserId" readonly="readonly" value="${boardVO.boardUserId }">
+												name="userId" id="userId" readonly="readonly" value="${boardVO.userId }">
 										</div>
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
 											<textarea class="form-control"
-												placeholder="write content please......" id="boardContent"
-												maxlength="40" name="boardContent">${boardVO.boardContent }</textarea>
+												placeholder="write content please......" id="content"
+												maxlength="40" name="content">${boardVO.content }</textarea>
 										</div>								
 										<div class="row">
 											<div class="col-4">
-												<span><strong>조회수</strong> : ${boardVO.boardHit }</span>
+												<span><strong>조회수</strong> : ${boardVO.hit }</span>
 											</div>
 											<div class="col-4">
-												<span><strong>좋아요</strong> : ${boardVO.boardLike }</span>
+												<span><strong>좋아요</strong> : ${boardVO.likes }</span>
 											</div>
 											<div class="col-4">
-												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></span>
+												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate }"/></span>
 											</div>
 										</div>
 										<hr>
@@ -222,37 +222,37 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-		CKEDITOR.replace('boardContent', {
+		CKEDITOR.replace('content', {
 			 height: '600px',
 			 resize_enabled: false
 		});
 		$(document).ready(function() {
 			  $('#formBoard').submit(function(e) {
 				e.preventDefault();
-			    var boardTitle = $('#boardTitle').val();
-			    var boardContent = CKEDITOR.instances.boardContent.getData();
-			    var boardUserId = $('#boardUserId').val();
+			    var title = $('#title').val();
+			    var content = CKEDITOR.instances.content.getData();
+			    var userId = $('#userId').val();
 			    $(".error").remove();
 			    var valid = true;
-			    if (boardTitle.length < 1) {
-			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (title.length < 1) {
+			      $('#title').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardTitle.length > 45) {
-				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (title.length > 45) {
+				      $('#title').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
-			    if (boardUserId.length < 1) {
-			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (userId.length < 1) {
+			      $('#userId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardUserId.length > 45) {
-				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (userId.length > 45) {
+				      $('#userId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
-			    if (boardContent.length < 1) {
-				      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (content.length < 1) {
+				      $('#content').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 				      valid = false;
-			 	}  else if (boardContent.length > 4096) {
-					   $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
+			 	}  else if (content.length > 4096) {
+					   $('#content').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
 					   valid = false;
 				}
 			    if(valid){

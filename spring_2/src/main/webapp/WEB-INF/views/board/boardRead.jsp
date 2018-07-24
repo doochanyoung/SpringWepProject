@@ -116,28 +116,28 @@
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
-												name="boardTitle" id="boardTitle" placeholder="write Title" readonly="readonly" value="${boardVO.boardTitle }">
+												name="title" id="title" placeholder="write Title" readonly="readonly" value="${boardVO.title }">
 										</div>
 										<div class="form-group">
 											<label for="writer" class="text">Writer</label> <input
 												type="text" class="form-control form-control-lg"
-												name="boardUserId" id="boardUserId" readonly="readonly" value="${boardVO.boardUserId }">
+												name="userId" id="userId" readonly="readonly" value="${boardVO.userId }">
 										</div>
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
 											<textarea class="form-control"
-												placeholder="write content please......" id="boardContent"
-												maxlength="40" name="boardContent" readonly="readonly">${boardVO.boardContent }</textarea>
+												placeholder="write content please......" id="content"
+												maxlength="40" name="content" readonly="readonly">${boardVO.content }</textarea>
 										</div>								
 										<div class="row">
 											<div class="col-4">
-												<span><strong>조회수</strong> : ${boardVO.boardHit }</span>
+												<span><strong>조회수</strong> : ${boardVO.hit }</span>
 											</div>
 											<div class="col-4">
-												<span><strong>좋아요</strong> : ${boardVO.boardHit }</span>
+												<span><strong>좋아요</strong> : ${boardVO.likes }</span>
 											</div>
 											<div class="col-4">
-												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></span>
+												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate }"/></span>
 											</div>
 										</div>
 										<hr>
@@ -225,7 +225,7 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-		CKEDITOR.replace('boardContent', {
+		CKEDITOR.replace('content', {
 			 height: '600px',
 			 resize_enabled: false
 		});

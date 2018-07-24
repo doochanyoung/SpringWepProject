@@ -13,7 +13,7 @@ public class PageMaker {
 	private boolean prev;
 	private boolean next;
 	
-	private int displayPageNum = 15;
+	private int displayPageNum = 10;
 	
 	private SearchPageHandler pageHandler;
 
