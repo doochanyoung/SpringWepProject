@@ -92,7 +92,7 @@
 										<h3 class="login-title">Login</h3>
 									</div>
 									<div class="card-body">
-										<form class="form" role="" autocomplete="off"
+										<form class="form" role="" autocomplete="off" action="<%=request.getContextPath()%>/login/loginCheck"
 											id="formLogin" method="post">
 											<div class="form-group">
 												<label for="uname1" class="login-text">ID</label> <input

@@ -1,11 +1,13 @@
 package com.java.login;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class LoginDAOImpl implements LoginDAO {
 	private SqlSession sql;
-
-	public boolean loginCheck(LoginInfo loginInfo) {
+	
+	public boolean loginCheck(LoginVO loginInfo) {
 		int count = Integer.parseInt(sql.selectOne("loginCheck", loginInfo).toString()),
 				totalCount = sql.selectOne("totalAccount");
 

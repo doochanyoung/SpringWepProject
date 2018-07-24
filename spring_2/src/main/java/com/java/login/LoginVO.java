@@ -1,6 +1,6 @@
 package com.java.login;
 
-public class LoginInfo {
+public class LoginVO {
 	private String id;
 	private String password;
 	private String nickname;
