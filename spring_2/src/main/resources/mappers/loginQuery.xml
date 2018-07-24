@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="query">
-	<resultMap type="com.study.board.login.LoginInfo" id="LoginInfoResult">
+	<resultMap type="com.java.login.LoginVO" id="LoginInfoResult">
 		<result column="ID" property="id"/>
 		<result column="PASSWOED" property="password"/>
 	</resultMap>
 	
-	<select id="loginCheck" resultType="integer" parameterType="com.study.board.login.LoginInfo">
+	<select id="loginCheck" resultType="integer" parameterType="com.java.login.LoginVO">
 		select count(*) from tb_account
 		<where>
 			id = #{id}

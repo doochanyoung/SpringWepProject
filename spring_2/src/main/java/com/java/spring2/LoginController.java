@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.java.login.LoginDAO;
 import com.java.login.LoginVO;
@@ -21,7 +22,7 @@ public class LoginController {
 	@Inject
 	private LoginDAO loginDAO;
 	
-	@RequestMapping(value="/login")
+	@RequestMapping(value="/login/loginCheck")
 	public void loginCheck( LoginVO loginInfo, HttpSession session, HttpServletResponse response) throws IOException{
 		logger.info("get : /loginController");
 		response.setContentType("text/html; charset=UTF-8");
