@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.BoardCommentMapper">
+	<select id="list" resultType="com.java.domain.BoardCommentVO">
+		select * from tbl_board_comment where boardId = #{boardId}
+	</select>
+	<insert id="create">
+		insert into tbl_board_comment(content, like, group)
+	</insert>
+	<delete id="delete">
+		delete from tbl_board_comment where boardCommentId = #{boardCommentId}
+	</delete>
+</mapper>
