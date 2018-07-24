@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.java.domain.BoardVO;
 import com.java.domain.PageHandler;
+import com.java.domain.SearchPageHandler;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -91,6 +92,16 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int countPaging() throws Exception {
 		return session.selectOne(namespace + ".countPaging");
+	}
+
+	@Override
+	public List<BoardVO> listSearch(SearchPageHandler handler) throws Exception {
+		return session.selectList(namespace + ".listSearch", handler);
+	}
+
+	@Override
+	public int listSearchCount(SearchPageHandler handler) throws Exception {
+		return session.selectOne(namespace + ".listSearchCount", handler);
 	}
 
 }

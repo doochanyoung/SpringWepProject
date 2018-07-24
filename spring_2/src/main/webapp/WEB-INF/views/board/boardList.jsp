@@ -103,20 +103,20 @@
 						<div class="col-7">
 							<div class="form-group">
 								<input type="text" class="form-control" name="boardSearch"
-									id="boardSearch" placeholder="search....">
+									id="keyword" name="keyword" placeholder="search...." value="${pageHandler.keyword }">
 							</div>
 						</div>
 						<div class="col-2">
-							<select class="custom-select" id="select">
-								<option selected value="none" id="select">-------</option>
-								<option value="title" id="select">제목</option>
-								<option value="writer" id="select">작성자</option>
-								<option value="content" id="select">내용</option>
+							<select class="custom-select" id="searchType" name="searchType">
+								<option value="none" id="select" <c:out value="${pageHandler.searchType == null ? 'selected':'' }" />>-------</option>
+								<option value="title" id="select" <c:out value="${pageHandler.searchType eq 'title' ? 'selected':'' }" />>제목</option>
+								<option value="writer" id="select" <c:out value="${pageHandler.searchType eq 'writer' ? 'selected':'' }" />>작성자</option>
+								<option value="content" id="select" <c:out value="${pageHandler.searchType eq 'content' ? 'selected':'' }" />>내용</option>
 							</select>
 						</div>
 						<div class="col-1">
 							<div class="text-center">
-								<button class="btn btn-default float-left" type="submit">검색</button>
+								<button class="btn btn-default float-left" id="searchButton" type="button">검색</button>
 							</div>
 						</div>
 					</div>
@@ -140,7 +140,7 @@
 						<c:forEach items="${list}" var="boardVO">
 							<tr>
 								<th class="mobile" scope="row">${boardVO.boardId }</th>
-								<td><a href='/board/boardRead${pageMaker.makeQuery(pageMaker.pageHandler.page)}&boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i></c:if>${boardVO.boardTitle }</a></td>
+								<td><a href='/board/boardRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i></c:if>${boardVO.boardTitle }</a></td>
 								<td class="mobile">${boardVO.boardUserId }</td>
 								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></td>
 								<td class="mobile">${boardVO.boardHit }</td>
@@ -157,16 +157,16 @@
 		<nav>
 			<ul class="pagination pagination-info justify-content-center">
 				<c:if test="${pageMaker.prev }">
-				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeSearch(pageMaker.startPage - 1) }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">Previous</span></a></li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 					<li class = "page-item <c:out value="${pageMaker.pageHandler.page == idx ? 'active' : ''}" />">
-					<a class="page-link" href="boardList${pageMaker.makeQuery(idx)}">${idx }</a>
+					<a class="page-link" href="boardList${pageMaker.makeSearch(idx)}">${idx }</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeQuery(pageMaker.endPage + 1) }" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeSearch(pageMaker.endPage + 1) }" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 						class="sr-only">Next</span></a></li>
 				</c:if>
 			</ul>
@@ -237,6 +237,10 @@
 		$(document).ready(function() {
 			$('#boardWrite').on("click", function(ext) {
 				self.location = "boardWrite";
+			});
+			$("#searchButton").on("click", function(event){
+				self.location = "boardList" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val()
+				+ "&keyword=" + encodeURIComponent($('#keyword').val());
 			});
 		});
 	</script>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.java.domain.BoardVO;
 import com.java.domain.PageHandler;
+import com.java.domain.SearchPageHandler;
 import com.java.persistence.BoardDAO;
 
 @Service
@@ -76,5 +77,14 @@ public class BoardServiceImpl implements BoardService{
 		return dao.countPaging();
 	}
 
+	@Override
+	public List<BoardVO> listSearchPageHandler(SearchPageHandler handler) throws Exception {
+		return dao.listSearch(handler);
+	}
+
+	@Override
+	public int searchCountPaging(SearchPageHandler handler) throws Exception {
+		return dao.listSearchCount(handler);
+	}
 
 }

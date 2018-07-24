@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.java.domain.BoardVO;
 import com.java.domain.PageHandler;
+import com.java.domain.SearchPageHandler;
 
 public interface BoardService {
 	public void regist(BoardVO vo, int maxGroup) throws Exception;
@@ -18,4 +19,6 @@ public interface BoardService {
 	public List<BoardVO> listPage(int page) throws Exception;
 	public List<BoardVO> listPageHandler(PageHandler handler) throws Exception;
 	public int countPaging() throws Exception;
+	public List<BoardVO> listSearchPageHandler(SearchPageHandler handler) throws Exception;
+	public int searchCountPaging(SearchPageHandler handler) throws Exception;
 }

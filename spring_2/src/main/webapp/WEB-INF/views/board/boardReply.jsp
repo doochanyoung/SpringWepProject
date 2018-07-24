@@ -110,8 +110,10 @@
 										autocomplete="off" id="formBoard" method="POST"
 										class="contactForm" role="form">
 										<input type="hidden" name="boardId" id="boardId" value="${boardId }">
-										<input type="hidden" name="page" id="page" value="${page }">
-										<input type="hidden" name="perPageNum" id="perPageNum" value="${perPageNum }">
+										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
+										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
+										<input type="hidden" name="searchType" id="searchType" value="${pageHandler.searchType }">
+										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
 										<div class="form-group">
 											<label for="title" class="text">Title</label>
 											<input type="text" class="form-control form-control-lg"

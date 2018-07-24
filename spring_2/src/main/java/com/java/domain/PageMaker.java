@@ -1,5 +1,7 @@
 package com.java.domain;
 
+import java.net.URLEncoder;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -11,11 +13,11 @@ public class PageMaker {
 	private boolean prev;
 	private boolean next;
 	
-	private int displayPageNum = 10;
+	private int displayPageNum = 15;
 	
-	private PageHandler pageHandler;
+	private SearchPageHandler pageHandler;
 
-	public void setPageHandler(PageHandler pageHandler) {
+	public void setPageHandler(SearchPageHandler pageHandler) {
 		this.pageHandler = pageHandler;
 	}
 
@@ -90,6 +92,28 @@ public class PageMaker {
 				.queryParam("perPageNum", pageHandler.getPerPageNum())
 				.build();
 		return uriComponents.toUriString();
+	}
+	
+	public String makeSearch(int page) {
+		UriComponents uriComponents = 
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", pageHandler.getPerPageNum())
+				.queryParam("searchType",  pageHandler.getSearchType())
+				.queryParam("keyword", encoding(pageHandler.getKeyword()))
+				.build();
+		return uriComponents.toUriString();
+	}
+	
+	private String encoding(String keyword) {
+		if(keyword == null || keyword.trim().length() == 0) {
+			return "";
+		}
+		try {
+			return URLEncoder.encode(keyword, "UTF-8");
+		}catch(Exception e) {
+			return "";
+		}
 	}
 
 	@Override

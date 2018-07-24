@@ -110,6 +110,8 @@
 										<input type="hidden" name="boardId" id="boardId" value="${boardVO.boardId }">
 										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
 										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
+										<input type="hidden" name="searchType" id="searchType" value="${pageHandler.searchType }">
+										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
 									</form>
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input

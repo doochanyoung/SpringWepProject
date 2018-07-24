@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.java.domain.BoardVO;
 import com.java.domain.PageHandler;
+import com.java.domain.SearchPageHandler;
 
 public interface BoardDAO {
 	public void create(BoardVO vo, int maxGroup) throws Exception;
@@ -18,4 +19,6 @@ public interface BoardDAO {
 	public List<BoardVO> listPage(int page) throws Exception;
 	public List<BoardVO> listPageHandler(PageHandler handler) throws Exception;
 	public int countPaging() throws Exception;
+	public List<BoardVO> listSearch(SearchPageHandler handler) throws Exception;
+	public int listSearchCount(SearchPageHandler handler) throws Exception;
 }

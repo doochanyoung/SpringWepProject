@@ -106,10 +106,12 @@
 									<h3 class="title">Modify</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" role="form" method="post" id="formBoard">
+									<form class="form" action="/board/boardModify" role="form" method="post" id="formBoard">
 										<input type="hidden" name="boardId" id="boardId" value="${boardVO.boardId }">
 										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
 										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
+										<input type="hidden" name="searchType" id="searchType" value="${pageHandler.searchType }">
+										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
 										<div class="form-group">
 											<label for="title" class="text">Title</label> <input
 												type="text" class="form-control form-control-lg"
@@ -263,11 +265,14 @@
 			var boardId = $('#boardId').val();
 			var page = $('#page').val();
 			var perPageNum = $('#perPageNum').val();
+			var searchType = $('#searchType').val();
+			var keyword = $('#keyword').val();
 			$("#boardSave").on("click", function(){
 				formObj.submit();
 			});
 			$("#boardCancel").on("click", function(){
-				self.location = "/board/boardRead?boardId=" + boardId +"&page=" + page + "&perPageNum=" + perPageNum;
+				self.location = "/board/boardRead?boardId=" + boardId +"&page=" + page + "&perPageNum=" + perPageNum
+						+"&searchType=" + searchType + "&keyword=" + keyword;
 			});
 		});
 	</script>
