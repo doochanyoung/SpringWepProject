@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.java.login.LoginDAO;
 import com.java.login.LoginVO;
@@ -21,6 +22,16 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Inject
 	private LoginDAO loginDAO;
+	
+	@RequestMapping(value="/")
+	public ModelAndView indexView(ModelAndView mv)
+	{
+		logger.info("ModelAndView");
+		String page = "Home";
+		mv.setViewName(page);
+		
+		return mv;
+	}
 	
 	@RequestMapping(value="/login/loginCheck")
 	public void loginCheck( LoginVO loginInfo, HttpSession session, HttpServletResponse response) throws IOException{
@@ -32,7 +43,7 @@ public class LoginController {
 				&& loginInfo.getPassword() != null && !loginInfo.getPassword().equals(""))) {
 			if ( loginDAO.loginCheck(loginInfo)) {
 				logger.info("login succece!");
-				session.setAttribute("login", 0); //로그인 성공 세션
+				session.setAttribute("login", 1); //로그인 성공 세션
 				System.out.println("세션 추가됨");
 				
 				session.setAttribute("id", loginInfo.getId());
