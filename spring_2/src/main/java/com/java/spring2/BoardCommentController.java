@@ -100,6 +100,7 @@ public class BoardCommentController {
 			map.put("pageMaker", pageMaker);
 			
 			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			System.out.println(entity);
 		}catch(Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);

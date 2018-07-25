@@ -160,6 +160,8 @@
 											type="button" style="background: #ABF200">Like</button>
 										<button class="btn btn-default btn-sm ml-3" id="boardReply"
 											type="button" style="background: #FD65B0">Reply</button>
+										<button class="btn btn-default btn-sm ml-3" id="boardViewComment"
+											type="button" style="background: #7536CF">ViewComment</button>
 									</div>
 								</div>
 								<!--/card-block-->
@@ -199,7 +201,7 @@
 									</div>
 									<hr>
 									<div class="row">
-										<button class="btn btn-default btn-sm ml-3" id="boardComment"
+										<button class="btn btn-default btn-sm ml-3" id="commentSubmit"
 											type="button">Submit</button>
 									</div>
 								</div>
@@ -215,9 +217,15 @@
 			<!--/row-->
 		</div>
 		<!--/container-->
+		<!-- handlebars -->
 		<div id="commentlists">
 		
 		</div>
+		<nav>
+			<ul class="pagination pagination-info justify-content-center">
+			
+			</ul>
+		</nav>
 	</section>
 	<!-- #boards -->
 
@@ -314,22 +322,23 @@
 		});
 	</script>
 
-	<script id="template" type="text/x-handlebars-template">
-		<div class="container py-3 timeline">
+	<script id="templateList" type="text/x-handlebars-template">
+		{{#each .}}
+		<div class="container py-3 commentCard">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-10 mx-auto">
 							<!-- form card login -->
-							<div class="card">
+							<div class="card" data-rno={{boardCommentId}}>
 								<div class="card-body">
-									<h6 class="card-title">Writer - {{boardCommentUserId}} - 날짜</h6>
+									<h6 class="card-title">Writer - {{boardCommentUserId}} - {{commentDate boardCommentRegdate}}</h6>
 									<div class="form-group">
-										 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+										 <p class="card-text">{{boardCommentContent}}</p>
 									</div>
 									<hr>
 									<div class="row">
-										<button class="btn btn-default btn-sm ml-3" id="boardComment"
+										<button class="btn btn-default btn-sm ml-3" id="boardCommentModify"
 											type="button">Modify</button>
 									</div>
 								</div>
@@ -339,6 +348,91 @@
 				</div>
 			</div>
 		</div>
+		{{/each}}
+	</script>
+	
+	<script>
+		$.ajaxSetup({cache:false});
+		Handlebars.registerHelper("commentDate", function(timeValue){ //handlers의 commentDate 처리 함수
+			var dateObj = new Date(timeValue);
+			var year = dateObj.getFullYear();
+			var month = dateObj.getMonth() + 1;
+			var date = dateObj.getDate();
+			return year + "/" + month + "/" + date;
+		});
+		var printData = function(commentArr, target, templateObject){
+			console.log(commentArr);
+			var template = Handlebars.compile(templateObject.html());
+			var html = template(commentArr);
+			$(".commentCard").remove();
+			target.after(html);
+		}
+		var boardId = ${boardVO.boardId};
+		var replyPage = 1;
+		function getPage(pageInfo){
+			$.getJSON(pageInfo, function(data){
+				printData(data.list, $("#commentlists"), $("#templateList"));
+				printPaging(data.pageMaker, $(".pagination"));
+				$("#modifyModal").modal('hide');
+			});
+		}
+		var printPaging = function(pageMaker, target){
+			var str = "";
+			if(pageMaker.prev){
+				str += "<li class='page-item'><a class='page-link' href='"+(pageMaker.startPage - 1)+ "' aria-label='Previous'>" 
+				+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
+			}
+			for(var i=pageMaker.startPage, len = pageMaker.endPage; i <= len; i++){
+				var strClass = pageMaker.pageHandler.page == i ? 'active' : '';
+				str += "<li class = 'page-item "+ strClass +"'><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+			}
+			if(pageMaker.next){
+				str += "<li class='page-item'><a class='page-link' href='"+(pageMaker.endPage + 1)+ "' aria-label='Previous'>" 
+				+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Pr evious</span></a></li>";
+			}
+			target.html(str);
+		}
+		$("#boardViewComment").on("click", function(){ //버튼 누르면 /replies를 호출하여 restcontroller에서 댓글 목록을 출력해준다
+			if($(".commentCard .card").size() > 1){
+				return;
+			}
+			getPage("/replies/" + boardId + "/1");
+		});
+		$('.pagination').on("click", "li a", function(event) {
+			event.preventDefault();
+			replyPage = $(this).attr("href");
+			getPage("/replies/" + boardId + "/" + replyPage);
+		});
+		$("#commentSubmit").on("click", function(){
+			var boardCommentUserIdObj = $("#boardCommentUserId");
+			var boardCommentContentObj = $("#boardCommentContent");
+			var boardCommentUserId = boardCommentUserIdObj.val();
+			var boardCommentContent = boardCommentContentObj.val();
+			$.ajax({
+				type : 'post',
+				url : '/replies/',
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST",
+				},
+				dataType : 'text',
+				data : JSON.stringify({
+					boardCommentBoardId : boardId,
+					boardCommentUserId : boardCommentUserId,
+					boardCommentContent : boardCommentContent
+				}),
+				success:function(result){
+					console.log("result: " + result);
+					if(result == 'SUCCESS'){
+						alert('등록 되었습니다.');
+						replyPage = 1;
+						getPage("/replies/" + boardId + "/" + replyPage);
+						boardCommentUserIdObj.val("");
+						boardCommentContentObj.val("");
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>

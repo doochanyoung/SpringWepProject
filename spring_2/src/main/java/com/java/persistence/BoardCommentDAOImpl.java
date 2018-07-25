@@ -54,6 +54,9 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 
 	@Override
 	public int maxGroup(int boardId) throws Exception {
+		if(count(boardId) == 0) {
+			return 0;
+		}
 		return session.selectOne(namespace + ".maxGroup", boardId);
 	}
 
