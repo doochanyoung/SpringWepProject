@@ -15,9 +15,9 @@ public class PageMaker {
 	
 	private int displayPageNum = 10;
 	
-	private SearchPageHandler pageHandler;
+	private PageHandler pageHandler;
 
-	public void setPageHandler(SearchPageHandler pageHandler) {
+	public void setPageHandler(PageHandler pageHandler) {
 		this.pageHandler = pageHandler;
 	}
 
@@ -99,8 +99,8 @@ public class PageMaker {
 				UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
 				.queryParam("perPageNum", pageHandler.getPerPageNum())
-				.queryParam("searchType",  pageHandler.getSearchType())
-				.queryParam("keyword", encoding(pageHandler.getKeyword()))
+				.queryParam("searchType",  ((SearchPageHandler)pageHandler).getSearchType())
+				.queryParam("keyword", encoding(((SearchPageHandler)pageHandler).getKeyword()))
 				.build();
 		return uriComponents.toUriString();
 	}

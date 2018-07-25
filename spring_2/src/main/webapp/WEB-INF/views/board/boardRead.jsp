@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page pageEncoding="utf-8" session="false"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -37,6 +37,7 @@
 	crossorigin="anonymous">
 
 <script src="../ckeditor/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <!-- =======================================================
     Theme Name: Regna
@@ -107,47 +108,59 @@
 								</div>
 								<div class="card-body">
 									<form class="form" role="form" method="post">
-										<input type="hidden" name="boardId" id="boardId" value="${boardVO.boardId }">
-										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
-										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
-										<input type="hidden" name="searchType" id="searchType" value="${pageHandler.searchType }">
-										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
+										<input type="hidden" name="boardId" id="boardId"
+											value="${boardVO.boardId }"> <input type="hidden"
+											name="page" id="page" value="${pageHandler.page }"> <input
+											type="hidden" name="perPageNum" id="perPageNum"
+											value="${pageHandler.perPageNum }"> <input
+											type="hidden" name="searchType" id="searchType"
+											value="${pageHandler.searchType }"> <input
+											type="hidden" name="keyword" id="keyword"
+											value="${pageHandler.keyword }">
 									</form>
-										<div class="form-group">
-											<label for="title" class="text">Title</label> <input
-												type="text" class="form-control form-control-lg"
-												name="title" id="title" placeholder="write Title" readonly="readonly" value="${boardVO.title }">
+									<div class="form-group">
+										<label for="title" class="text">Title</label> <input
+											type="text" class="form-control form-control-lg" name="boardTitle"
+											id="boardTitle" placeholder="write Title" readonly="readonly"
+											value="${boardVO.boardTitle }">
+									</div>
+									<div class="form-group">
+										<label for="writer" class="text">Writer</label> <input
+											type="text" class="form-control form-control-lg"
+											name="boardUserId" id="boardUserId" readonly="readonly"
+											value="${boardVO.boardUserId }">
+									</div>
+									<div class="form-group">
+										<label for="content" class="text">Content</label>
+										<textarea class="form-control"
+											placeholder="write content please......" id="boardContent"
+											maxlength="40" name="boardContent" readonly="readonly">${boardVO.boardContent }</textarea>
+									</div>
+									<div class="row">
+										<div class="col-4">
+											<span><strong>조회수</strong> : ${boardVO.boardHit }</span>
 										</div>
-										<div class="form-group">
-											<label for="writer" class="text">Writer</label> <input
-												type="text" class="form-control form-control-lg"
-												name="userId" id="userId" readonly="readonly" value="${boardVO.userId }">
+										<div class="col-4">
+											<span><strong>좋아요</strong> : ${boardVO.boardLike }</span>
 										</div>
-										<div class="form-group">
-											<label for="content" class="text">Content</label>
-											<textarea class="form-control"
-												placeholder="write content please......" id="content"
-												maxlength="40" name="content" readonly="readonly">${boardVO.content }</textarea>
-										</div>								
-										<div class="row">
-											<div class="col-4">
-												<span><strong>조회수</strong> : ${boardVO.hit }</span>
-											</div>
-											<div class="col-4">
-												<span><strong>좋아요</strong> : ${boardVO.likes }</span>
-											</div>
-											<div class="col-4">
-												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate }"/></span>
-											</div>
+										<div class="col-4">
+											<span><strong>작성일</strong> : <fmt:formatDate
+													pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }" /></span>
 										</div>
-										<hr>
-										<div class="row">
-											<button class="btn btn-default btn-sm ml-3" id="boardModify" type="button">Modify</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardRemove" type="button" style="background:#FF6C6C;">Remove</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardList" type="button" style="background:#5AAEFF">List</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardLike" type="button" style="background:#ABF200">Like</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardReply" type="button" style="background:#FD65B0">Reply</button>
-										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<button class="btn btn-default btn-sm ml-3" id="boardModify"
+											type="button">Modify</button>
+										<button class="btn btn-default btn-sm ml-3" id="boardRemove"
+											type="button" style="background: #FF6C6C;">Remove</button>
+										<button class="btn btn-default btn-sm ml-3" id="boardList"
+											type="button" style="background: #5AAEFF">List</button>
+										<button class="btn btn-default btn-sm ml-3" id="boardLike"
+											type="button" style="background: #ABF200">Like</button>
+										<button class="btn btn-default btn-sm ml-3" id="boardReply"
+											type="button" style="background: #FD65B0">Reply</button>
+									</div>
 								</div>
 								<!--/card-block-->
 							</div>
@@ -161,6 +174,50 @@
 			<!--/row-->
 		</div>
 		<!--/container-->
+		<div class="container py-3">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-10 mx-auto">
+							<!-- form card login -->
+							<div class="card">
+								<div class="card-header">
+									<h3 class="title">comment</h3>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<label for="writer" class="text">Writer</label> <input
+											type="text" class="form-control form-control-lg"
+											name="boardCommentUserId" id="boardCommentUserId"
+											value="${boardVO.boardUserId }">
+									</div>
+									<div class="form-group">
+										<label for="content" class="text">Content</label>
+										<textarea class="form-control"
+											placeholder="write comment please......" id="boardCommentContent"
+											maxlength="40" name="boardCommentContent" rows="5"></textarea>
+									</div>
+									<hr>
+									<div class="row">
+										<button class="btn btn-default btn-sm ml-3" id="boardComment"
+											type="button">Submit</button>
+									</div>
+								</div>
+								<!--/card-block-->
+							</div>
+							<!-- /form card login -->
+						</div>
+					</div>
+					<!--/row-->
+				</div>
+				<!--/col-->
+			</div>
+			<!--/row-->
+		</div>
+		<!--/container-->
+		<div id="commentlists">
+		
+		</div>
 	</section>
 	<!-- #boards -->
 
@@ -225,31 +282,31 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-		CKEDITOR.replace('content', {
-			 height: '600px',
-			 resize_enabled: false
+		CKEDITOR.replace('boardContent', {
+			height : '600px',
+			resize_enabled : false
 		});
-		$(document).ready(function(){
+		$(document).ready(function() {
 			var formObj = $("form[role='form']");
 			var boardId = $('#boardId').val();
-			$("#boardModify").on("click", function(){
+			$("#boardModify").on("click", function() {
 				formObj.attr("action", "/board/boardModify");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
-			$("#boardRemove").on("click", function(){
+			$("#boardRemove").on("click", function() {
 				var bool = confirm("정말 삭제 하시겠습니까?");
-				if(bool){
+				if (bool) {
 					formObj.attr("action", "/board/boardDelete");
 					formObj.submit();
 				}
 			});
-			$("#boardList").on("click", function(){
+			$("#boardList").on("click", function() {
 				formObj.attr("action", "/board/boardList");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
-			$("#boardReply").on("click", function(){
+			$("#boardReply").on("click", function() {
 				formObj.attr("action", "/board/boardReply");
 				formObj.attr("method", "get");
 				formObj.submit();
@@ -257,5 +314,31 @@
 		});
 	</script>
 
+	<script id="template" type="text/x-handlebars-template">
+		<div class="container py-3 timeline">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-10 mx-auto">
+							<!-- form card login -->
+							<div class="card">
+								<div class="card-body">
+									<h6 class="card-title">Writer - {{boardCommentUserId}} - 날짜</h6>
+									<div class="form-group">
+										 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									</div>
+									<hr>
+									<div class="row">
+										<button class="btn btn-default btn-sm ml-3" id="boardComment"
+											type="button">Modify</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
 </body>
 </html>

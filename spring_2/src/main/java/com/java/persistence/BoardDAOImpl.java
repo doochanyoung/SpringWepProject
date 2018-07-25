@@ -24,9 +24,9 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void create(BoardVO vo, int maxGroup) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("title", vo.getTitle());
-		paramMap.put("content", vo.getContent());
-		paramMap.put("userId", vo.getUserId());
+		paramMap.put("title", vo.getBoardTitle());
+		paramMap.put("content", vo.getBoardContent());
+		paramMap.put("userId", vo.getBoardUserId());
 		paramMap.put("maxGroup", maxGroup + 1);
 		session.insert(namespace + ".create", paramMap);
 	}
@@ -34,10 +34,10 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void createReply(BoardVO vo, int boardGroup, int maxSequence) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("title", vo.getTitle());
-		paramMap.put("content", vo.getContent());
-		paramMap.put("userId", vo.getUserId());
-		paramMap.put("groups", boardGroup);
+		paramMap.put("title", vo.getBoardTitle());
+		paramMap.put("content", vo.getBoardContent());
+		paramMap.put("userId", vo.getBoardUserId());
+		paramMap.put("group", boardGroup);
 		paramMap.put("sequence", maxSequence + 1);
 		session.insert(namespace + ".createReply", paramMap);
 	}

@@ -3,47 +3,59 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.BoardMapper">
 	<insert id="create">
-		insert into tbl_board(title, content, regdate, hit, likes, groups, sequence, isReply, userId) values(#{title}, #{content}, now(), 0, 0, #{maxGroup}, 0, false, #{userId})
+		insert into tbl_board(boardTitle, boardContent,
+		boardRegdate, boardHit, boardLike, boardGroup, boardSequence,
+		boardIsReply, boardUserId) values(#{title}, #{content}, now(), 0, 0,
+		#{maxGroup}, 0, false, #{userId})
 	</insert>
 	<insert id="createReply">
-		insert into tbl_board(title, content, regdate, hit, likes, groups, sequence, isReply, userId) values(#{title}, #{content}, now(), 0, 0, #{groups}, #{sequence}, true, #{userId})
+		insert into tbl_board(boardTitle, boardContent,
+		boardRegdate, boardHit, boardLike, boardGroup, boardSequence,
+		boardIsReply, boardUserId) values(#{title}, #{content}, now(), 0, 0,
+		#{group}, #{sequence}, true, #{userId})
 	</insert>
-	<select id ="maxGroup" resultType="int">
-		select max(groups) from tbl_board
+	<select id="maxGroup" resultType="int">
+		select max(boardGroup) from
+		tbl_board
 	</select>
 	<select id="listAll" resultType="com.java.domain.BoardVO">
 		<![CDATA[
 			select *
 			from tbl_board
 			where boardId > 0
-			order by groups desc, sequence
+			order by boardGroup desc, boardSequence
 		]]>
 	</select>
 	<select id="read" resultType="com.java.domain.BoardVO">
 		select *
 		from tbl_board
-		where boardId = #{boardId}
+		where boardId
+		= #{boardId}
 	</select>
 	<delete id="delete">
 		delete from tbl_board where boardId = #{boardId}
 	</delete>
 	<update id="update">
-		update tbl_board set title = #{title}, content = #{content}, updatedate = now() where boardId = #{boardId}
+		update tbl_board set boardTitle = #{title}, boardContent =
+		#{content}, boardUpdatedate = now() where boardId = #{boardId}
 	</update>
 	<select id="getGroup" resultType="int">
-		select groups from tbl_board where boardId = #{boardId}
+		select boardGroup from tbl_board
+		where boardId = #{boardId}
 	</select>
 	<select id="maxSequence" resultType="int">
-		select max(sequence) from tbl_board where groups = #{groups}
+		select max(boardSequence) from
+		tbl_board where boardGroup = #{boardGroup}
 	</select>
 	<select id="listPage" resultType="com.java.domain.BoardVO">
 		<![CDATA[
-			select * from tbl_board where boardId > 0 order by groups desc, sequence limit #{page}, 30
+			select * from tbl_board where boardId > 0 order by boardGroup desc, boardSequence limit #{page}, 30
 		]]>
 	</select>
-	<select id="listPageHandler" resultType="com.java.domain.BoardVO">
+	<select id="listPageHandler"
+		resultType="com.java.domain.BoardVO">
 		<![CDATA[
-			select * from tbl_board where boardId > 0 order by groups desc, sequence limit #{pageStart}, #{perPageNum}
+			select * from tbl_board where boardId > 0 order by boardGroup desc, boardSequence limit #{pageStart}, #{perPageNum}
 		]]>
 	</select>
 	<select id="countPaging" resultType="int">
@@ -54,13 +66,13 @@
 	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'title'.toString()">
-				and title like concat('%', #{keyword}, '%')
+				and boardTitle like concat('%', #{keyword}, '%')
 			</if>
 			<if test="searchType == 'writer'.toString()">
-				and userId like concat('%', #{keyword}, '%')
+				and boardUserId like concat('%', #{keyword}, '%')
 			</if>
 			<if test="searchType == 'content'.toString()">
-				and content like concat('%', #{keyword}, '%')
+				and boardContent like concat('%', #{keyword}, '%')
 			</if>
 		</if>
 	</sql>
@@ -70,7 +82,7 @@
 		]]>
 		<include refid="search" />
 		<![CDATA[
-			order by groups desc, sequence limit #{pageStart}, #{perPageNum}
+			order by boardGroup desc, boardSequence limit #{pageStart}, #{perPageNum}
 		]]>
 	</select>
 	<select id="listSearchCount" resultType="int">

@@ -4,81 +4,87 @@ import java.util.Date;
 
 public class BoardVO {
 	private int boardId;
-	private String title;
-	private String content;
-	private Date regdate;
-	private Date updatedate;
-	private int hit;
-	private int likes;
-	private int groups;
-	private int sequence;
-	private boolean isReply;
-	private String userId;
-	
+	private String boardTitle;
+	private String boardContent;
+	private Date boardRegdate;
+	private Date boardUpdatedate;
+	private int boardHit;
+	private int boardLike;
+	private int boardGroup;
+	private int boardSequence;
+	private boolean boardIsReply;
+	private String boardUserId;
 	public int getBoardId() {
 		return boardId;
 	}
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
-	public String getTitle() {
-		return title;
+	public String getBoardTitle() {
+		return boardTitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
-	public String getContent() {
-		return content;
+	public String getBoardContent() {
+		return boardContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getBoardRegdate() {
+		return boardRegdate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setBoardRegdate(Date boardRegdate) {
+		this.boardRegdate = boardRegdate;
 	}
-	public Date getUpdatedate() {
-		return updatedate;
+	public Date getBoardUpdatedate() {
+		return boardUpdatedate;
 	}
-	public void setUpdatedate(Date updatedate) {
-		this.updatedate = updatedate;
+	public void setBoardUpdatedate(Date boardUpdatedate) {
+		this.boardUpdatedate = boardUpdatedate;
 	}
-	public int getHit() {
-		return hit;
+	public int getBoardHit() {
+		return boardHit;
 	}
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setBoardHit(int boardHit) {
+		this.boardHit = boardHit;
 	}
-	public int getLikes() {
-		return likes;
+	public int getBoardLike() {
+		return boardLike;
 	}
-	public void setLikes(int likes) {
-		this.likes = likes;
+	public void setBoardLike(int boardLike) {
+		this.boardLike = boardLike;
 	}
-	public int getGroups() {
-		return groups;
+	public int getBoardGroup() {
+		return boardGroup;
 	}
-	public void setGroups(int groups) {
-		this.groups = groups;
+	public void setBoardGroup(int boardGroup) {
+		this.boardGroup = boardGroup;
 	}
-	public int getSequence() {
-		return sequence;
+	public int getBoardSequence() {
+		return boardSequence;
 	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
+	public void setBoardSequence(int boardSequence) {
+		this.boardSequence = boardSequence;
 	}
-	public boolean getIsReply() {
-		return isReply;
+	public boolean isBoardIsReply() {
+		return boardIsReply;
 	}
-	public void setReply(boolean isReply) {
-		this.isReply = isReply;
+	public void setBoardIsReply(boolean boardIsReply) {
+		this.boardIsReply = boardIsReply;
 	}
-	public String getUserId() {
-		return userId;
+	public String getBoardUserId() {
+		return boardUserId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setBoardUserId(String boardUserId) {
+		this.boardUserId = boardUserId;
+	}
+	@Override
+	public String toString() {
+		return "BoardVO [boardId=" + boardId + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", boardRegdate=" + boardRegdate + ", boardUpdatedate=" + boardUpdatedate + ", boardHit=" + boardHit
+				+ ", boardLike=" + boardLike + ", boardGroup=" + boardGroup + ", boardSequence=" + boardSequence
+				+ ", boardIsReply=" + boardIsReply + ", boardUserId=" + boardUserId + "]";
 	}
 }

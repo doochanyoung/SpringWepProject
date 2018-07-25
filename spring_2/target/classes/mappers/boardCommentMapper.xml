@@ -3,12 +3,32 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.BoardCommentMapper">
 	<select id="list" resultType="com.java.domain.BoardCommentVO">
-		select * from tbl_board_comment where boardId = #{boardId}
+		select * from tbl_board_comment
+		where boardCommentBoardId = #{boardId}
+	</select>
+	<select id="listPage"
+		resultType="com.java.domain.BoardCommentVO">
+		select * from tbl_board_comment where boardCommentBoardId =
+		#{boardCommentBoardId} order by groups desc, sequence limit
+		#{pageStart}, #{perPageNum}
+	</select>
+	<select id="count" resultType="int">
+		select count(boardId) from
+		tbl_board_comment where boardCommentBoardId = #{boardId}
+	</select>
+	<select id="maxGroup" resultType="int">
+		select max(group) from
+		tbl_board_comment where boardCommentBoardId = #{boardId}
 	</select>
 	<insert id="create">
-		insert into tbl_board_comment(content, like, group)
+		insert into tbl_board_comment(boardCommentContent,
+		like, boardCommentGroup, boardCommentSequence, boardCommentIsReply,
+		boardCommentRegdate, boardCommentBoardId, boardCommentUserId)
+		values(#{content}, 0, #{maxGroup}, 0, false,
+		now(), #{boardId}, #{userId})
 	</insert>
 	<delete id="delete">
-		delete from tbl_board_comment where boardCommentId = #{boardCommentId}
+		delete from tbl_board_comment where boardCommentId =
+		#{boardCommentId}
 	</delete>
 </mapper>
