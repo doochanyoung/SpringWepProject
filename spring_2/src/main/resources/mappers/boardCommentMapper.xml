@@ -18,6 +18,14 @@
 		select max(boardCommentGroup) from
 		tbl_board_comment where boardCommentBoardId = #{boardId}
 	</select>
+	<select id="maxSequence" resultType="int">
+		select max(boardCommentSequence) from
+		tbl_board_comment where boardCommentGroup = #{boardCommentGroup}
+	</select>
+	<select id="getGroup" resultType="int">
+		select boardCommentGroup from tbl_board_comment
+		where boardId = #{boardCommentId}
+	</select>
 	<insert id="create">
 		insert into tbl_board_comment(boardCommentContent,
 		boardCommentlike, boardCommentGroup, boardCommentSequence, boardCommentIsReply,

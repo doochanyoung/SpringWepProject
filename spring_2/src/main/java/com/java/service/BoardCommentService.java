@@ -14,4 +14,6 @@ public interface BoardCommentService {
 	public int getMaxGroup(int boardId) throws Exception;
 	public List<BoardCommentVO> listCommentPage(int boardId, PageHandler pageHandler) throws Exception;
 	public int count(int boardId) throws Exception;
+	public int getGroup(int boardCommentId) throws Exception;
+	public int maxSequence(int boardCommentGroup) throws Exception;
 }

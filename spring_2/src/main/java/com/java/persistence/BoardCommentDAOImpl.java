@@ -37,8 +37,13 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	
 	@Override
 	public void createReply(BoardCommentVO vo, int group, int sequence) throws Exception {
-		// TODO Auto-generated method stub
-		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("content", vo.getBoardCommentContent());
+		paramMap.put("userId", vo.getBoardCommentUserId());
+		paramMap.put("boardId", vo.getBoardCommentBoardId());
+		paramMap.put("group", group);
+		paramMap.put("sequence", sequence + 1);
+		session.insert(namespace + ".createReply", paramMap);
 	}
 
 	@Override
@@ -72,6 +77,16 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 	@Override
 	public int count(int boardId) throws Exception {
 		return session.selectOne(namespace + ".count", boardId);
+	}
+
+	@Override
+	public int getGroup(int boardCommentId) throws Exception {
+		return session.selectOne(namespace + ".getGroup", boardCommentId);
+	}
+
+	@Override
+	public int maxSequence(int boardCommentGroup) throws Exception {
+		return session.selectOne(namespace + ".maxSequence", boardCommentGroup);
 	}
 
 }

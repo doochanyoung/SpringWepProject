@@ -37,7 +37,8 @@
 	crossorigin="anonymous">
 
 <script src="../ckeditor/ckeditor.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <!-- =======================================================
     Theme Name: Regna
@@ -120,9 +121,9 @@
 									</form>
 									<div class="form-group">
 										<label for="title" class="text">Title</label> <input
-											type="text" class="form-control form-control-lg" name="boardTitle"
-											id="boardTitle" placeholder="write Title" readonly="readonly"
-											value="${boardVO.boardTitle }">
+											type="text" class="form-control form-control-lg"
+											name="boardTitle" id="boardTitle" placeholder="write Title"
+											readonly="readonly" value="${boardVO.boardTitle }">
 									</div>
 									<div class="form-group">
 										<label for="writer" class="text">Writer</label> <input
@@ -160,8 +161,9 @@
 											type="button" style="background: #ABF200">Like</button>
 										<button class="btn btn-default btn-sm ml-3" id="boardReply"
 											type="button" style="background: #FD65B0">Reply</button>
-										<button class="btn btn-default btn-sm ml-3" id="boardViewComment"
-											type="button" style="background: #7536CF">ViewComment</button>
+										<button class="btn btn-default btn-sm ml-3"
+											id="boardViewComment" type="button"
+											style="background: #7536CF">ViewComment</button>
 									</div>
 								</div>
 								<!--/card-block-->
@@ -196,8 +198,9 @@
 									<div class="form-group">
 										<label for="content" class="text">Content</label>
 										<textarea class="form-control"
-											placeholder="write comment please......" id="boardCommentContent"
-											maxlength="40" name="boardCommentContent" rows="5"></textarea>
+											placeholder="write comment please......"
+											id="boardCommentContent" maxlength="1024"
+											name="boardCommentContent" rows="5"></textarea>
 									</div>
 									<hr>
 									<div class="row">
@@ -218,14 +221,30 @@
 		</div>
 		<!--/container-->
 		<!-- handlebars -->
-		<div id="commentlists">
-		
-		</div>
+		<div id="commentlists"></div>
 		<nav>
 			<ul class="pagination pagination-info justify-content-center">
-			
+
 			</ul>
 		</nav>
+		<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Modify</h4>
+					</div>
+					<div class="modal-body" data-rno>
+						<textarea class="form-control" placeholder="write comment please......" id="boardCommentContent"
+							maxlength="1024" name="boardCommentContent"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default btn-sm" id="modifyModalModify" type="button">Modify</button>
+						<button class="btn btn-default btn-sm" id="modifyModalDelete" style="background: #FF6C6C;" type="button">Delete</button>
+						<button class="btn btn-default btn-sm" id="modifyModalClose" style="background: #5AAEFF" type="button" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	<!-- #boards -->
 
@@ -332,14 +351,14 @@
 							<!-- form card login -->
 							<div class="card" data-rno={{boardCommentId}}>
 								<div class="card-body">
-									<h6 class="card-title">Writer - {{boardCommentUserId}} - {{commentDate boardCommentRegdate}}</h6>
+									<h6 class="card-title">{{boardCommentUserId}} - {{commentDate boardCommentRegdate}}</h6>
 									<div class="form-group">
 										 <p class="card-text">{{boardCommentContent}}</p>
 									</div>
 									<hr>
 									<div class="row">
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentModify"
-											type="button">Modify</button>
+											type="button" data-toggle="modal" data-target="#modifyModal">Modify</button>
 									</div>
 								</div>
 							</div>
@@ -350,17 +369,19 @@
 		</div>
 		{{/each}}
 	</script>
-	
+
 	<script>
-		$.ajaxSetup({cache:false});
-		Handlebars.registerHelper("commentDate", function(timeValue){ //handlers의 commentDate 처리 함수
+		$.ajaxSetup({
+			cache : false
+		});
+		Handlebars.registerHelper("commentDate", function(timeValue) { //handlers의 commentDate 처리 함수
 			var dateObj = new Date(timeValue);
 			var year = dateObj.getFullYear();
 			var month = dateObj.getMonth() + 1;
 			var date = dateObj.getDate();
 			return year + "/" + month + "/" + date;
 		});
-		var printData = function(commentArr, target, templateObject){
+		var printData = function(commentArr, target, templateObject) {
 			console.log(commentArr);
 			var template = Handlebars.compile(templateObject.html());
 			var html = template(commentArr);
@@ -369,31 +390,36 @@
 		}
 		var boardId = ${boardVO.boardId};
 		var replyPage = 1;
-		function getPage(pageInfo){
-			$.getJSON(pageInfo, function(data){
+		function getPage(pageInfo) {
+			$.getJSON(pageInfo, function(data) {
 				printData(data.list, $("#commentlists"), $("#templateList"));
 				printPaging(data.pageMaker, $(".pagination"));
 				$("#modifyModal").modal('hide');
 			});
 		}
-		var printPaging = function(pageMaker, target){
+		var printPaging = function(pageMaker, target) {
 			var str = "";
-			if(pageMaker.prev){
-				str += "<li class='page-item'><a class='page-link' href='"+(pageMaker.startPage - 1)+ "' aria-label='Previous'>" 
-				+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
+			if (pageMaker.prev) {
+				str += "<li class='page-item'><a class='page-link' href='"
+						+ (pageMaker.startPage - 1)
+						+ "' aria-label='Previous'>"
+						+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
 			}
-			for(var i=pageMaker.startPage, len = pageMaker.endPage; i <= len; i++){
+			for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
 				var strClass = pageMaker.pageHandler.page == i ? 'active' : '';
-				str += "<li class = 'page-item "+ strClass +"'><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+				str += "<li class = 'page-item "+ strClass +"'><a class='page-link' href='"+i+"'>"
+						+ i + "</a></li>";
 			}
-			if(pageMaker.next){
-				str += "<li class='page-item'><a class='page-link' href='"+(pageMaker.endPage + 1)+ "' aria-label='Previous'>" 
-				+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Pr evious</span></a></li>";
+			if (pageMaker.next) {
+				str += "<li class='page-item'><a class='page-link' href='"
+						+ (pageMaker.endPage + 1)
+						+ "' aria-label='Previous'>"
+						+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Pr evious</span></a></li>";
 			}
 			target.html(str);
 		}
-		$("#boardViewComment").on("click", function(){ //버튼 누르면 /replies를 호출하여 restcontroller에서 댓글 목록을 출력해준다
-			if($(".commentCard .card").size() > 1){
+		$("#boardViewComment").on("click", function() { //버튼 누르면 /replies를 호출하여 restcontroller에서 댓글 목록을 출력해준다
+			if ($(".commentCard .card").size() > 1) {
 				return;
 			}
 			getPage("/replies/" + boardId + "/1");
@@ -403,7 +429,7 @@
 			replyPage = $(this).attr("href");
 			getPage("/replies/" + boardId + "/" + replyPage);
 		});
-		$("#commentSubmit").on("click", function(){
+		$("#commentSubmit").on("click", function() {
 			var boardCommentUserIdObj = $("#boardCommentUserId");
 			var boardCommentContentObj = $("#boardCommentContent");
 			var boardCommentUserId = boardCommentUserIdObj.val();
@@ -421,9 +447,9 @@
 					boardCommentUserId : boardCommentUserId,
 					boardCommentContent : boardCommentContent
 				}),
-				success:function(result){
+				success : function(result) {
 					console.log("result: " + result);
-					if(result == 'SUCCESS'){
+					if (result == 'SUCCESS') {
 						alert('등록 되었습니다.');
 						replyPage = 1;
 						getPage("/replies/" + boardId + "/" + replyPage);
