@@ -8,21 +8,17 @@ public class LoginVo {
 	private String phone;
 	private String intro;
 	
-	public String getuserId() {
-		System.out.println("get userID :: " + userId);
+	public String getId() {
 		return userId;
 	}
-	public void setuserId(String userId) {
-		System.out.println("set userID :: " + userId);
-		this.userId = userId;
+	public void setId(String id) {
+		this.userId = id;
 	}
-	public String getuserPassword() {
-		System.out.println("get userPassword :: " + userPassword);
+	public String getPassword() {
 		return userPassword;
 	}
-	public void setuserPassword(String userPassword) {
-		System.out.println("set userPassword :: " + userPassword);
-		this.userPassword = userPassword;
+	public void setPassword(String password) {
+		this.userPassword = password;
 	}
 	public String getNickname() {
 		return nickname;
