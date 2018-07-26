@@ -48,8 +48,10 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 
 	@Override
 	public void update(BoardCommentVO vo) throws Exception {
-		// TODO Auto-generated method stub
-
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("boardCommentId", vo.getBoardCommentId());
+		paramMap.put("boardCommentContent", vo.getBoardCommentContent());
+		session.update(namespace + ".update", paramMap);
 	}
 
 	@Override

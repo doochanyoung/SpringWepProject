@@ -221,7 +221,9 @@
 		</div>
 		<!--/container-->
 		<!-- handlebars -->
-		<div id="commentlists"></div>
+		<div id="commentlists">
+		
+		</div>
 		<nav>
 			<ul class="pagination pagination-info justify-content-center">
 
@@ -234,13 +236,34 @@
 						<h4 class="modal-title">Modify</h4>
 					</div>
 					<div class="modal-body" data-rno>
-						<textarea class="form-control" placeholder="write comment please......" id="boardCommentContent"
-							maxlength="1024" name="boardCommentContent"></textarea>
+						<input type="text" class="form-control form-control-lg" name="modifyModalUserId" id="modifyModalUserId">
+						<textarea class="form-control" placeholder="write comment please......" id="modifyModalText"
+							maxlength="1024" rows="5" name="modifyModalText"></textarea>
+						<input type="hidden" name="modifyModalNum" id="modifyModalNum">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-default btn-sm" id="modifyModalModify" type="button">Modify</button>
 						<button class="btn btn-default btn-sm" id="modifyModalDelete" style="background: #FF6C6C;" type="button">Delete</button>
 						<button class="btn btn-default btn-sm" id="modifyModalClose" style="background: #5AAEFF" type="button" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="replyModal" class="modal modal-primary fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Reply</h4>
+					</div>
+					<div class="modal-body" data-rno>
+						<input type="text" class="form-control form-control-lg" name="replyModalUserId" id="replyModalUserId">
+						<textarea class="form-control" placeholder="write comment please......" id="replyModalText"
+							maxlength="1024" rows="5" name="replyModalText"></textarea>
+						<input type="hidden" name="replyModalNum" id="replyModalNum">
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default btn-sm" id="replyModalSubmit" type="button">Submit</button>
+						<button class="btn btn-default btn-sm" id="replyModalClose" style="background: #5AAEFF" type="button" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
@@ -349,16 +372,21 @@
 					<div class="row">
 						<div class="col-md-10 mx-auto">
 							<!-- form card login -->
-							<div class="card" data-rno={{boardCommentId}}>
+							<div class="card">
 								<div class="card-body">
-									<h6 class="card-title">{{boardCommentUserId}} - {{commentDate boardCommentRegdate}}</h6>
+									<input type="hidden" id="cardNum" name="cardNum" value="{{boardCommentId}}">
+									<h6 class="card-title">{{#fn_isIf}}<i class="fab fa-replyd"></i>{{/fn_isIf}} {{boardCommentUserId}} - {{commentDate boardCommentRegdate}}</h6>
 									<div class="form-group">
 										 <p class="card-text">{{boardCommentContent}}</p>
 									</div>
 									<hr>
 									<div class="row">
+										<button class="btn btn-default btn-sm ml-3" id="boardCommentReply"
+											type="button" data-toggle="modal" data-target="#replyModal" style="background: #5AAEFF">Reply</button>
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentModify"
 											type="button" data-toggle="modal" data-target="#modifyModal">Modify</button>
+										<button class="btn btn-default btn-sm ml-3" id="boardCommentLike"
+											type="button" style="background: #ABF200">Like</button>
 									</div>
 								</div>
 							</div>
@@ -374,6 +402,13 @@
 		$.ajaxSetup({
 			cache : false
 		});
+		Handlebars.registerHelper("fn_isIf", function(option) {
+            if (this.boardCommentIsReply == true) {
+                return option.fn(this);
+            } else {
+                return option.inverse(this); // 반대
+            }
+        });
 		Handlebars.registerHelper("commentDate", function(timeValue) { //handlers의 commentDate 처리 함수
 			var dateObj = new Date(timeValue);
 			var year = dateObj.getFullYear();
@@ -458,6 +493,91 @@
 					}
 				}
 			});
+		});
+		$("#replyModalSubmit").on("click", function() {
+			var replyModalUserIdObj = $("#replyModalUserId");
+			var replyModalTextObj = $("#replyModalText");
+			var replyModalTargetIdObj = $("#replyModalNum");
+			var replyModalUserId = replyModalUserIdObj.val();
+			var replyModalText = replyModalTextObj.val();
+			var replyModalTargetId = replyModalTargetIdObj.val();
+			alert("replyModalUserId : "+replyModalUserId +" replyModalText : "+replyModalText+ " replyModalTargetId : " + replyModalTargetId + " board Id : " + boardId);
+			$.ajax({
+				type : 'post',
+				url : '/replies/reply',
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "post",
+				},
+				dataType : 'text',
+				data : JSON.stringify({
+					boardCommentId : replyModalTargetId,
+					boardCommentContent : replyModalText,
+					boardCommentBoardId : boardId,
+					boardCommentUserId : replyModalUserId
+				}),
+				success : function(result) {
+					console.log("result: " + result);
+					if (result == 'SUCCESS') {
+						alert('답글이 등록 되었습니다.');
+						getPage("/replies/" + boardId + "/" + replyPage);
+					}
+				}
+			});
+		});
+		$("#modifyModalModify").on("click", function() {
+			var commentId = $("#modifyModalNum").val();
+			var commentText = $("#modifyModalText").val();
+			$.ajax({
+				type : 'put',
+				url : '/replies/'+commentId,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "PUT",
+				},
+				dataType : 'text',
+				data : JSON.stringify({
+					boardCommentContent : commentText
+				}),
+				success : function(result) {
+					console.log("result: " + result);
+					if (result == 'SUCCESS') {
+						alert('수정 되었습니다.');
+						getPage("/replies/" + boardId + "/" + replyPage);
+					}
+				}
+			});
+		});
+		$("#modifyModalDelete").on("click", function() {
+			var commentId = $("#modifyModalNum").val();
+			var commentText = $("#modifyModalText").val();
+			var bool = confirm('정말 삭제하시겠습니까?');
+			if (!bool) return;
+			$.ajax({
+				type : 'delete',
+				url : '/replies/'+commentId,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "delete",
+				},
+				dataType : 'text',
+				success : function(result) {
+					console.log("result: " + result);
+					if (result == 'SUCCESS') {
+						alert('삭제 되었습니다.');
+						getPage("/replies/" + boardId + "/" + replyPage);
+					}
+				}
+			});
+		});
+	</script>
+	
+	<script>
+		$(document).on("click", ".commentCard", function(){
+			var comm = $(this);
+			$("#modifyModalText").val(comm.find('.card-text').text());
+			$("#modifyModalNum").val(comm.find('#cardNum').val());
+			$("#replyModalNum").val(comm.find('#cardNum').val());
 		});
 	</script>
 </body>

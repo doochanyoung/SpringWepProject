@@ -1,47 +1,46 @@
 package com.java.login;
 
 public class LoginVO {
-	private String id;
-	private String password;
-	private String nickname;
-	private String email;
-	private String phone;
-	private String intro;
-	
-	public String getId() {
-		return id;
+	private String userId;
+	private String userPassword;
+	private String userNickname;
+	private String userEmail;
+	private String userPhone;
+	private String userIntro;
+	public String getUserId() {
+		return userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getPassword() {
-		return password;
+	public String getUserPassword() {
+		return userPassword;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getUserNickname() {
+		return userNickname;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
 	}
-	public String getEmail() {
-		return email;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
-	public String getPhone() {
-		return phone;
+	public String getUserPhone() {
+		return userPhone;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
-	public String getIntro() {
-		return intro;
+	public String getUserIntro() {
+		return userIntro;
 	}
-	public void setIntro(String intro) {
-		this.intro = intro;
+	public void setUserIntro(String userIntro) {
+		this.userIntro = userIntro;
 	}
 }

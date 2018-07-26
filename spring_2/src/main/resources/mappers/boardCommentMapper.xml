@@ -24,7 +24,7 @@
 	</select>
 	<select id="getGroup" resultType="int">
 		select boardCommentGroup from tbl_board_comment
-		where boardId = #{boardCommentId}
+		where boardCommentId = #{boardCommentId}
 	</select>
 	<insert id="create">
 		insert into tbl_board_comment(boardCommentContent,
@@ -33,8 +33,18 @@
 		values(#{content}, 0, #{maxGroup}, 0, false,
 		now(), #{boardId}, #{userId})
 	</insert>
+	<insert id="createReply">
+		insert into tbl_board_comment(boardCommentContent,
+		boardCommentlike, boardCommentGroup, boardCommentSequence, boardCommentIsReply,
+		boardCommentRegdate, boardCommentBoardId, boardCommentUserId)
+		values(#{content}, 0, #{group}, #{sequence}, true,
+		now(), #{boardId}, #{userId})
+	</insert>
+	<update id="update">
+		update tbl_board_comment set boardCommentContent = #{boardCommentContent},
+		boardCommentUpdatedate = now() where boardCommentId = #{boardCommentId}
+	</update>
 	<delete id="delete">
-		delete from tbl_board_comment where boardCommentId =
-		#{boardCommentId}
+		delete from tbl_board_comment where boardCommentId = #{boardCommentId}
 	</delete>
 </mapper>

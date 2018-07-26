@@ -31,19 +31,21 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login/loginCheck", method = RequestMethod.POST)
-	public void loginCheck( LoginVO loginInfo, HttpSession session, HttpServletResponse response) throws IOException{
+	public void loginCheck(LoginVO loginInfo, HttpSession session, HttpServletResponse response) throws IOException{
 		logger.info("get : /loginController");
 		response.setContentType("text/html; charset=UTF-8");
+		System.out.println(loginInfo.getUserId());
+		System.out.println(loginInfo.getUserPassword());
 		PrintWriter out=response.getWriter();
 		
-		if((loginInfo.getId() != null && !loginInfo.getId().equals("") 
-				&& loginInfo.getPassword() != null && !loginInfo.getPassword().equals(""))) {
+		if((loginInfo.getUserId() != null && !loginInfo.getUserId().equals("") 
+				&& loginInfo.getUserPassword() != null && !loginInfo.getUserPassword().equals(""))) {
 			if ( loginDAO.loginCheck(loginInfo)) {
 				logger.info("login succece!");
 				session.setAttribute("login", 0); //sdfs
 				System.out.println("sdf");
 				
-				session.setAttribute("id", loginInfo.getId());
+				session.setAttribute("id", loginInfo.getUserId());
 				
 				out.println("<script>location.href='/'); </script>");
 				out.flush();
