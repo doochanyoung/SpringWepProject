@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<!-- <logger name="jdbc.sqlonly" additivity="false">
+	<logger name="jdbc.sqlonly" additivity="false">
 		<level value="INFO"></level>
 		<appender-ref ref="console"/>
 	</logger>
@@ -19,7 +19,7 @@
 	<logger name="jdbc.resultsettable" additivity="false">
 		<level value="INFO"></level>
 		<appender-ref ref="console"/>
-	</logger> -->
+	</logger> 
 	
 	<logger name="com.java.spring2">
 		<level value="info" />

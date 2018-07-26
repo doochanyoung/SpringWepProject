@@ -15,7 +15,6 @@ public class LoginDAOImpl implements LoginDAO {
 	
 	@Override
 	public boolean loginCheck(LoginVO loginVo) {
-		
 		int count = Integer.parseInt(sql.selectOne(namespace+".loginCheck", loginVo).toString());
 		int	totalCount = sql.selectOne("totalAccount");
 		System.out.println(count);

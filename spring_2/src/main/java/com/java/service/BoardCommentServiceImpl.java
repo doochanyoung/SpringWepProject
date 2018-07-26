@@ -56,4 +56,14 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		return dao.count(boardId);
 	}
 
+	@Override
+	public int getGroup(int boardCommentId) throws Exception {
+		return dao.getGroup(boardCommentId);
+	}
+
+	@Override
+	public int maxSequence(int boardCommentGroup) throws Exception {
+		return dao.maxSequence(boardCommentGroup);
+	}
+
 }

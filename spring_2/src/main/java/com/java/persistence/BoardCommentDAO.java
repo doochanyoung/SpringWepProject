@@ -14,4 +14,6 @@ public interface BoardCommentDAO {
 	public int maxGroup(int boardId) throws Exception;
 	public List<BoardCommentVO> listPage(int boardId, PageHandler pageHandler) throws Exception;
 	public int count(int boardId) throws Exception;
+	public int getGroup(int boardCommentId) throws Exception;
+	public int maxSequence(int boardCommentGroup) throws Exception;
 }
