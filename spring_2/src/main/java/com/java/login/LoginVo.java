@@ -1,24 +1,28 @@
 package com.java.login;
 
-public class LoginVO {
-	private String id;
-	private String password;
+public class LoginVo {
+	private String userId;
+	private String userPassword;
 	private String nickname;
 	private String email;
 	private String phone;
 	private String intro;
 	
-	public String getId() {
-		return id;
+	public String getuserId() {
+		System.out.println("get userID :: " + userId);
+		return userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setuserId(String userId) {
+		System.out.println("set userID :: " + userId);
+		this.userId = userId;
 	}
-	public String getPassword() {
-		return password;
+	public String getuserPassword() {
+		System.out.println("get userPassword :: " + userPassword);
+		return userPassword;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setuserPassword(String userPassword) {
+		System.out.println("set userPassword :: " + userPassword);
+		this.userPassword = userPassword;
 	}
 	public String getNickname() {
 		return nickname;

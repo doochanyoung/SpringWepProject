@@ -1,7 +1,7 @@
 package com.java.service;
 
-import com.java.login.LoginVO;
+import com.java.login.LoginVo;
 
 public interface LoginService {
-	public boolean loginCheck(LoginVO loginVo) throws Exception;
+	public boolean loginCheck(LoginVo loginVo);
 }

@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.java.login.LoginVO;
+import com.java.login.LoginVo;
 import com.java.login.LoginDAO;
 
 @Service
@@ -15,8 +15,7 @@ public class LoginServiceImpl implements LoginService{
 	private LoginDAO dao;
 
 	@Override
-	public boolean loginCheck(LoginVO loginVo) throws Exception {
-		boolean flag;
-		return flag = loginCheck(loginVo);
+	public boolean loginCheck(LoginVo loginVo) {
+		return dao.loginCheck(loginVo);
 	}
 }
