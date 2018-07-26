@@ -59,7 +59,7 @@
 			<nav id="nav-menu-container">
 				<ul class="nav-menu">
 					<li class="menu-active"><a href="<c:url value='/'/>">Home</a></li>
-					<li><a href="#">Portfolio</a></li>
+					<li><a href="<c:url value='/portfolio'/>">Portfolio</a></li>
 					<li><a href="#studies">Study</a></li>
 					<li><a href="#communities">Comuunity</a></li>
 					<li class="menu-has-children"><a href="">로그인을 하세요</a>

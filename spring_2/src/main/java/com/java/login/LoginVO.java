@@ -43,4 +43,9 @@ public class LoginVO {
 	public void setUserIntro(String userIntro) {
 		this.userIntro = userIntro;
 	}
+	@Override
+	public String toString() {
+		return "LoginVO [userId=" + userId + ", userPassword=" + userPassword + ", userNickname=" + userNickname
+				+ ", userEmail=" + userEmail + ", userPhone=" + userPhone + ", userIntro=" + userIntro + "]";
+	}
 }

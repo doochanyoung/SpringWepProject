@@ -3,21 +3,21 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="query">
 	<resultMap type="com.java.login.LoginVO" id="LoginInfoResult">
-		<result column="ID" property="id"/>
-		<result column="PASSWOED" property="password"/>
+		<result column="userId" property="userId"/>
+		<result column="userPassword" property="userPassword"/>
 	</resultMap>
 	
 	<select id="loginCheck" resultType="integer" parameterType="com.java.login.LoginVO">
-		select count(*) from tb_account
+		select count(*) from tbl_user
 		<where>
-			id = #{id}
+			userId = #{userId}
 				AND
-			password = #{password}
+			userPassword = #{userPassword}
 		</where>
 	</select>
 	
 	
 	<select id="totalAccount" resultType="integer">
-		SELECT COUNT(*) FROM tb_account
+		SELECT COUNT(*) FROM tbl_user
 	</select>
 </mapper>

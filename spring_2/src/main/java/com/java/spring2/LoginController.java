@@ -15,47 +15,52 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.java.login.LoginDAO;
 import com.java.login.LoginVO;
+import com.java.service.LoginService;
 
 @Controller
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	@Inject
-	private LoginDAO loginDAO;
-	
+	LoginService loginService;
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		System.out.println("login : GET");
 		return "login";
 	}
-	
-	@RequestMapping(value="/login/loginCheck", method = RequestMethod.POST)
-	public void loginCheck(LoginVO loginInfo, HttpSession session, HttpServletResponse response) throws IOException{
+
+	@RequestMapping(value = "/login/loginCheck", method = RequestMethod.POST)
+	public void loginCheck(LoginVO loginVO, HttpSession session, HttpServletResponse response) throws IOException {
 		logger.info("get : /loginController");
 		response.setContentType("text/html; charset=UTF-8");
-		System.out.println(loginInfo.getUserId());
-		System.out.println(loginInfo.getUserPassword());
-		PrintWriter out=response.getWriter();
-		
-		if((loginInfo.getUserId() != null && !loginInfo.getUserId().equals("") 
-				&& loginInfo.getUserPassword() != null && !loginInfo.getUserPassword().equals(""))) {
-			if ( loginDAO.loginCheck(loginInfo)) {
+		System.out.println(loginVO.getUserId());
+		System.out.println(loginVO.getUserPassword());
+		PrintWriter out = response.getWriter();
+		logger.info("login test1");
+		System.out.println(loginVO.getUserId() + "    " + loginVO.getUserPassword());
+		if ((loginVO.getUserId() != null && !loginVO.getUserId().equals("") && loginVO.getUserPassword() != null
+				&& !loginVO.getUserPassword().equals(""))) {
+			logger.info("login test1-1");
+			if (loginService.loginCheck(loginVO)) {
 				logger.info("login succece!");
-				session.setAttribute("login", 0); //sdfs
+				session.setAttribute("login", 0); // sdfs
 				System.out.println("sdf");
-				
-				session.setAttribute("id", loginInfo.getUserId());
-				
+
+				session.setAttribute("id", loginVO.getUserId());
 				out.println("<script>location.href='/'); </script>");
 				out.flush();
 				out.close();
 			}
-			if (loginDAO.loginCheck(loginInfo) == false) {
+			logger.info("login test2");
+			if (loginService.loginCheck(loginVO) == false) {
 				out.println("<script>alert('dsf'; history.go(-1); </script>");
 				out.flush();
 				out.close();
 			}
+			logger.info("login test3");
 		}
+		logger.info("login test end");
 	}
 }
