@@ -11,11 +11,15 @@ public class LoginDAOImpl implements LoginDAO {
 	@Inject
 	private SqlSession sql;
 	
+	private static String namespace = "com.java.mapper.loginMapper";
+	
 	@Override
-	public boolean loginCheck(LoginVO loginInfo) {
-		int count = Integer.parseInt(sql.selectOne("loginCheck", loginInfo).toString()),
-				totalCount = sql.selectOne("totalAccount");
-
+	public boolean loginCheck(LoginVO loginVo) {
+		
+		int count = Integer.parseInt(sql.selectOne(namespace+".loginCheck", loginVo).toString());
+		int	totalCount = sql.selectOne("totalAccount");
+		System.out.println(count);
+		System.out.println(count);
 		if (totalCount > 0) {
 			if (count > 0) {
 				return true;

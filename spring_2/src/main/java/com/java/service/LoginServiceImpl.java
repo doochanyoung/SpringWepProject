@@ -15,8 +15,7 @@ public class LoginServiceImpl implements LoginService{
 	private LoginDAO dao;
 
 	@Override
-	public boolean loginCheck(LoginVO loginVo) throws Exception {
-		boolean flag;
-		return flag = loginCheck(loginVo);
+	public boolean loginCheck(LoginVO loginVo){
+		return dao.loginCheck(loginVo);
 	}
 }

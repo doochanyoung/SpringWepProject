@@ -92,7 +92,7 @@
 										<h3 class="login-title">Login</h3>
 									</div>
 									<div class="card-body">
-										<form class="form" role="" autocomplete="off" action="<%=request.getContextPath()%>/login/loginCheck"
+										<form class="form" role="search" autocomplete="off" action="<%=request.getContextPath()%>/login/loginCheck"
 											id="formLogin" method="post">
 											<div class="form-group">
 												<label for="uname1" class="login-text">ID</label> <input
@@ -113,7 +113,7 @@
 											</div>
 											<div class="text-center">
 												<button class="btn btn-default btn-sm btn-block"
-													type="submit">Log In</button>
+													type="submit" >LogIn</button>
 											</div>
 											<div class="form-group m-2">
 												<label class="login-text"><a href="./register">Register</a> - <a href="">Forget Password</a></label>

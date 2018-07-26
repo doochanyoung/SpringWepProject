@@ -2,6 +2,9 @@ package com.java.spring2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -10,49 +13,50 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.java.login.LoginDAO;
 import com.java.login.LoginVO;
+import com.java.service.LoginService;
 
 @Controller
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Inject
-	private LoginDAO loginDAO;
+	private LoginService loginService;
 	
 	@RequestMapping(value="/")
-	public ModelAndView indexView(ModelAndView mv)
+	public ModelAndView homeView(ModelAndView mv)
 	{
 		logger.info("ModelAndView");
-		String page = "Home";
+		String page = "home";
 		mv.setViewName(page);
 		
 		return mv;
 	}
 	
 	@RequestMapping(value="/login/loginCheck")
-	public void loginCheck( LoginVO loginInfo, HttpSession session, HttpServletResponse response) throws IOException{
-		logger.info("get : /loginController");
+	public void loginCheck(Locale locale, Model model, LoginVO loginInfo, HttpSession session, HttpServletResponse response) throws IOException{
+		logger.info("get : /loginCheck");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		
-		if((loginInfo.getId() != null && !loginInfo.getId().equals("") 
-				&& loginInfo.getPassword() != null && !loginInfo.getPassword().equals(""))) {
-			if ( loginDAO.loginCheck(loginInfo)) {
-				logger.info("login succece!");
-				session.setAttribute("login", 1); //로그인 성공 세션
-				System.out.println("세션 추가됨");
+		if((loginInfo.getUserId() != null && !loginInfo.getUserId().equals("") 
+				&& loginInfo.getUserPassword() != null && !loginInfo.getUserPassword().equals(""))) {
+
+			if ( loginService.loginCheck(loginInfo)) {
+				session.setAttribute("loginId", loginInfo.getUserId()); //로그인 성공 세션
+				System.out.println("로그인 성공 세션 추가됨");
 				
-				session.setAttribute("id", loginInfo.getId());
-				
-				out.println("<script>location.href='/'); </script>");
+				out.println("<script>location.href='/'); </script>"); //페이지이동이 안됨
 				out.flush();
 				out.close();
+				
 			}
-			if (loginDAO.loginCheck(loginInfo) == false) {
+			if ( loginService.loginCheck(loginInfo) == false) {
+				System.out.println("로그인 실패");
 				out.println("<script>alert('로그인 정보를 확인하세요!'; history.go(-1); </script>");
 				out.flush();
 				out.close();
