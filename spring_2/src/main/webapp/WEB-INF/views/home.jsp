@@ -1,10 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page pageEncoding="utf-8" session="false"%>
+<%@ page pageEncoding="utf-8" session="true"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>GAE & Doo & CHUNG WEPPAGE</title>
+<title>Doo & Gae & CHUNG WEPPAGE</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -62,27 +62,36 @@
 					<li><a href="<c:url value='/portfolio'/>">Portfolio</a></li>
 					<li><a href="#studies">Study</a></li>
 					<li><a href="#communities">Comuunity</a></li>
-					<li class="menu-has-children"><a href="">로그인을 하세요</a>
-						<ul>
-							<li><a href="<c:url value='/login'/>">로그인</a></li>
-							<li><a href="<c:url value='/register'/>">회원가입</a></li>
-							<li class="menu-has-children"><a href="#">Drop Down 2</a>
-								<ul>
-									<li><a href="#">Deep Drop Down 1</a></li>
-									<li><a href="#">Deep Drop Down 2</a></li>
-									<li><a href="#">Deep Drop Down 3</a></li>
-									<li><a href="#">Deep Drop Down 4</a></li>
-									<li><a href="#">Deep Drop Down 5</a></li>
-								</ul></li>
-						</ul></li>
-					<!-- <li><a href="#contact">로그인버튼생성</a></li> -->
+					<c:choose>
+						<c:when test="${not empty sessionScope.loginId}">
+							<li>${sessionScope.loginId}님 반갑습니다.</li>
+							<li><a href="/login/logout" class="btn btn-default btn-logout">로그아웃</a></li>
+						</c:when>
+							
+						<c:otherwise>
+						<li class="menu-has-children"><a href="">로그인을 하세요</a>
+							<ul>
+								<li><a href="<c:url value='/login'/>">로그인</a></li>
+								<li><a href="<c:url value='/register'/>">회원가입</a></li>
+								<li class="menu-has-children"><a href="#">Drop Down 2</a>
+									<ul>
+										<li><a href="#">Deep Drop Down 1</a></li>
+										<li><a href="#">Deep Drop Down 2</a></li>
+										<li><a href="#">Deep Drop Down 3</a></li>
+										<li><a href="#">Deep Drop Down 4</a></li>
+										<li><a href="#">Deep Drop Down 5</a></li>
+									</ul></li>
+							</ul></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</nav>
 			<!-- #nav-menu-container -->
 		</div>
 	</header>
 	<!-- #header -->
-
+	
+	
 	<!--==========================
     Hero Section
   ============================-->

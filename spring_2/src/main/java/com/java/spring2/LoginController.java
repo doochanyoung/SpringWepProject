@@ -2,8 +2,6 @@ package com.java.spring2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -15,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.login.LoginVO;
@@ -62,5 +59,13 @@ public class LoginController {
 				out.close();
 			}
 		}
+	}
+	
+	@RequestMapping(value="/login/logout")
+	public ModelAndView logOut(ModelAndView mv, HttpSession session) {
+		String page = "redirect:/home";
+		session.removeAttribute("loginId");
+		mv.setViewName(page);
+		return mv;
 	}
 }
