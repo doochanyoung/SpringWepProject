@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page pageEncoding="utf-8" session="false"%>
+<%@ page pageEncoding="utf-8" session="true"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -121,9 +121,8 @@
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
-											<label for="writer" class="text">writer</label> <input
-												type="text" class="form-control form-control-lg"
-												name="boardUserId" id="boardUserId">
+											<input type="hidden" class="form-control form-control-lg"
+												name="boardUserId" id="boardUserId" value=${loginId }>
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">

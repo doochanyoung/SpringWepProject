@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page pageEncoding="utf-8" session="false"%>
+<%@ page pageEncoding="utf-8" session="true"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -151,19 +151,25 @@
 									</div>
 									<hr>
 									<div class="row">
+									<c:if test="${loginId == boardVO.boardUserId}">
 										<button class="btn btn-default btn-sm ml-3" id="boardModify"
 											type="button">Modify</button>
 										<button class="btn btn-default btn-sm ml-3" id="boardRemove"
 											type="button" style="background: #FF6C6C;">Remove</button>
+									</c:if>
 										<button class="btn btn-default btn-sm ml-3" id="boardList"
 											type="button" style="background: #5AAEFF">List</button>
 											<button class="btn btn-default btn-sm ml-3" id="boardLike"
 											type="submit" style="background: #ABF200">Like</button>
+										<c:if test="${boardVO.boardIsReply == false}">
 										<button class="btn btn-default btn-sm ml-3" id="boardReply"
 											type="button" style="background: #FD65B0">Reply</button>
+										</c:if>
+										<c:if test="${not empty loginId }">
 										<button class="btn btn-default btn-sm ml-3"
 											id="boardViewComment" type="button"
 											style="background: #7536CF">ViewComment <strong id="commentCnt">[${boardVO.boardCommCnt}]</strong></button>
+										</c:if>
 									</div>
 								</div>
 								<!--/card-block-->
@@ -178,6 +184,7 @@
 			<!--/row-->
 		</div>
 		<!--/container-->
+		<c:if test="${not empty loginId }">
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-12">
@@ -189,12 +196,9 @@
 									<h3 class="title">comment</h3>
 								</div>
 								<div class="card-body">
-									<div class="form-group">
-										<label for="writer" class="text">Writer</label> <input
-											type="text" class="form-control form-control-lg"
+										<input type="hidden" class="form-control form-control-lg"
 											name="boardCommentUserId" id="boardCommentUserId"
-											value="${boardVO.boardUserId }">
-									</div>
+											value="${loginId }">
 									<div class="form-group">
 										<label for="content" class="text">Content</label>
 										<textarea class="form-control"
@@ -219,6 +223,7 @@
 			</div>
 			<!--/row-->
 		</div>
+		</c:if>
 		<!--/container-->
 		<!-- handlebars -->
 		<div id="commentlists">
@@ -255,7 +260,7 @@
 						<h4 class="modal-title">Reply</h4>
 					</div>
 					<div class="modal-body" data-rno>
-						<input type="text" class="form-control form-control-lg" name="replyModalUserId" id="replyModalUserId">
+						<input type="hidden" class="form-control form-control-lg" name="replyModalUserId" id="replyModalUserId" value="${loginId }">
 						<textarea class="form-control" placeholder="write comment please......" id="replyModalText"
 							maxlength="1024" rows="5" name="replyModalText"></textarea>
 						<input type="hidden" name="replyModalNum" id="replyModalNum">
@@ -384,8 +389,10 @@
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentReply"
 											type="button" data-toggle="modal" data-target="#replyModal" style="background: #5AAEFF">Reply</button>
 										{{/fn_isIf2}}
+										{{#eqWriter}}
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentModify"
 											type="button" data-toggle="modal" data-target="#modifyModal">Modify</button>
+										{{/eqWriter}}
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentLike"
 											type="button" style="background: #ABF200">Like</button>
 									</div>
@@ -401,6 +408,13 @@
 
 	<script>
 		$.ajaxSetup({cache : false});
+		Handlebars.registerHelper("eqWriter", function(option) {
+            if (this.boardCommentUserId == '${loginId}') {
+                return option.fn(this);
+            } else {
+                return option.inverse(this); // 반대
+            }
+        });
 		Handlebars.registerHelper("fn_isIf", function(option) {
             if (this.boardCommentIsReply == true) {
                 return option.fn(this);
@@ -436,6 +450,7 @@
 				printData(data.list, $("#commentlists"), $("#templateList"));
 				printPaging(data.pageMaker, $(".pagination"));
 				$("#modifyModal").modal('hide');
+				$("#replyModal").modal('hide');
 				$("#commentCnt").html("["+data.pageMaker.totalCount+"]");
 			});
 		}
@@ -500,7 +515,6 @@
 						alert('등록 되었습니다.');
 						replyPage = 1;
 						getPage("/replies/" + boardId + "/" + replyPage);
-						boardCommentUserIdObj.val("");
 						boardCommentContentObj.val("");
 					}
 				}
@@ -536,6 +550,7 @@
 					console.log("result: " + result);
 					if (result == 'SUCCESS') {
 						alert('답글이 등록 되었습니다.');
+						replyModalTextObj.val("");
 						getPage("/replies/" + boardId + "/" + replyPage);
 					}
 				}

@@ -49,7 +49,11 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void update(BoardVO vo) throws Exception {
-		session.update(namespace + ".update", vo);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("title", vo.getBoardTitle());
+		paramMap.put("content", vo.getBoardContent());
+		paramMap.put("boardId", vo.getBoardId());
+		session.update(namespace + ".update", paramMap);
 	}
 
 	@Override
@@ -64,6 +68,9 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int maxGroup() throws Exception {
+		if(countPaging() == 0) {
+			return 0;
+		}
 		return session.selectOne(namespace + ".maxGroup");
 	}
 
@@ -102,6 +109,14 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int listSearchCount(SearchPageHandler handler) throws Exception {
 		return session.selectOne(namespace + ".listSearchCount", handler);
+	}
+	
+	@Override
+	public void updateCommCnt(int boardId, int amount) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("boardId", boardId);
+		paramMap.put("amount", amount);
+		session.update(namespace + ".updateCommCnt", paramMap);
 	}
 	
 	@Override

@@ -5,14 +5,14 @@
 	<insert id="create">
 		insert into tbl_board(boardTitle, boardContent,
 		boardRegdate, boardHit, boardLike, boardGroup, boardSequence,
-		boardIsReply, boardUserId) values(#{title}, #{content}, now(), 0, 0,
-		#{maxGroup}, 0, false, #{userId})
+		boardIsReply, boardCommcnt, boardUserId) values(#{title}, #{content}, now(), 0, 0,
+		#{maxGroup}, 0, false, 0, #{userId})
 	</insert>
 	<insert id="createReply">
 		insert into tbl_board(boardTitle, boardContent,
 		boardRegdate, boardHit, boardLike, boardGroup, boardSequence,
-		boardIsReply, boardUserId) values(#{title}, #{content}, now(), 0, 0,
-		#{group}, #{sequence}, true, #{userId})
+		boardIsReply, boardCommcnt, boardUserId) values(#{title}, #{content}, now(), 0, 0,
+		#{group}, #{sequence}, true, 0, #{userId})
 	</insert>
 	<select id="maxGroup" resultType="int">
 		select max(boardGroup) from

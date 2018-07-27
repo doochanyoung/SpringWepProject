@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page pageEncoding="utf-8" session="false"%>
+<%@ page pageEncoding="utf-8" session="true"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -150,7 +150,9 @@
 					</tbody>
 				</table>
 				<div class="text-center">
+					<c:if test="${not empty loginId}">
 					<button class="btn btn-default float-right m-2" type="button" id="boardWrite">글 작성</button>
+					</c:if>
 				</div>
 			</div>
 		</div>

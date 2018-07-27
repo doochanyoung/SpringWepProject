@@ -5,65 +5,77 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.java.domain.BoardCommentVO;
 import com.java.domain.PageHandler;
 import com.java.persistence.BoardCommentDAO;
+import com.java.persistence.BoardDAO;
 
 @Service
 public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	@Inject
-	BoardCommentDAO dao;
+	BoardCommentDAO commentDao;
+	
+	@Inject
+	BoardDAO boardDao;
 
 	@Override
 	public List<BoardCommentVO> listComment(int boardId) throws Exception {
-		return dao.list(boardId);
+		return commentDao.list(boardId);
 	}
 
+	@Transactional
 	@Override
 	public void addComment(BoardCommentVO vo, int maxGroup) throws Exception {
-		dao.create(vo, maxGroup);
+		commentDao.create(vo, maxGroup);
+		boardDao.updateCommCnt(vo.getBoardCommentBoardId(), 1);
 	}
 
+	@Transactional
 	@Override
 	public void addCommentReply(BoardCommentVO vo, int group, int sequence) throws Exception {
-		dao.createReply(vo, group, sequence);
+		commentDao.createReply(vo, group, sequence);
+		boardDao.updateCommCnt(vo.getBoardCommentBoardId(), 1);
 	}
 
 	@Override
 	public void modifyComment(BoardCommentVO vo) throws Exception {
-		dao.update(vo);
+		commentDao.update(vo);
 	}
 
+	@Transactional
 	@Override
 	public void removeComment(int boardCommentId) throws Exception {
-		dao.delete(boardCommentId);
+		int boardId = commentDao.getBoardId(boardCommentId);
+		commentDao.delete(boardCommentId);
+		boardDao.updateCommCnt(boardId, -1);
 	}
 
 	@Override
 	public int getMaxGroup(int boardId) throws Exception {
-		return dao.maxGroup(boardId);
+		return commentDao.maxGroup(boardId);
 	}
 
 	@Override
 	public List<BoardCommentVO> listCommentPage(int boardId, PageHandler pageHandler) throws Exception {
-		return dao.listPage(boardId, pageHandler);
+		return commentDao.listPage(boardId, pageHandler);
 	}
 
 	@Override
 	public int count(int boardId) throws Exception {
-		return dao.count(boardId);
+		return commentDao.count(boardId);
 	}
 
 	@Override
 	public int getGroup(int boardCommentId) throws Exception {
-		return dao.getGroup(boardCommentId);
+		return commentDao.getGroup(boardCommentId);
 	}
 
 	@Override
 	public int maxSequence(int boardCommentGroup) throws Exception {
-		return dao.maxSequence(boardCommentGroup);
+		return commentDao.maxSequence(boardCommentGroup);
 	}
 
 }
