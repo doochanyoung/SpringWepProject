@@ -27,7 +27,7 @@ public class LoginController {
 	@Inject
 	private LoginService loginService;
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="/home")
 	public ModelAndView homeView(ModelAndView mv)
 	{
 		logger.info("ModelAndView");
@@ -48,16 +48,16 @@ public class LoginController {
 
 			if ( loginService.loginCheck(loginInfo)) {
 				session.setAttribute("loginId", loginInfo.getUserId()); //로그인 성공 세션
-				System.out.println("로그인 성공 세션 추가됨");
 				
-				out.println("<script>location.href='/'); </script>"); //페이지이동이 안됨
+				logger.info("로그인이 정상적으로 완료되었습니다.", locale);
+				
+				out.println("<script>location.href='/home'; </script>");
 				out.flush();
 				out.close();
-				
 			}
 			if ( loginService.loginCheck(loginInfo) == false) {
 				System.out.println("로그인 실패");
-				out.println("<script>alert('로그인 정보를 확인하세요!'; history.go(-1); </script>");
+				out.println("<script>alert('로그인 정보를 확인하세요!'); history.go(-1); </script>");
 				out.flush();
 				out.close();
 			}
