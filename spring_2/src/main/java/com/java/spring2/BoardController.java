@@ -1,8 +1,13 @@
 package com.java.spring2;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.domain.BoardVO;
-import com.java.domain.PageHandler;
 import com.java.domain.PageMaker;
 import com.java.domain.SearchPageHandler;
 import com.java.service.BoardService;
+import com.mysql.jdbc.StringUtils;
 
 @Controller
 @RequestMapping("/board/*")
@@ -41,9 +46,28 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value = "/boardRead", method = RequestMethod.GET)
-	public void boardReadGET(@RequestParam("boardId") int boardId, @ModelAttribute("pageHandler") SearchPageHandler pageHandler, Model model) throws Exception {
+	public String boardReadGET(@RequestParam("boardId") int boardId, @ModelAttribute("pageHandler") SearchPageHandler pageHandler, Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		logger.info("get : /boardRead");
+		Cookie cookies[] = request.getCookies();
+		Map<String, String> mapCookie = new HashMap<String, String>();
+		if(request.getCookies() != null) {
+			for(int i = 0; i < cookies.length; i++) {
+				Cookie obj = cookies[i];
+				System.out.println(obj.getName() + " " + obj.getValue());
+				mapCookie.put(obj.getName(), obj.getValue());
+			}
+		}
+		String cookieReadCount = (String) mapCookie.get("readCount");
+		System.out.println(cookieReadCount);
+		String newCookieReadCount = "|" + boardId;
+		if(StringUtils.indexOfIgnoreCase(cookieReadCount, newCookieReadCount) == -1) {
+			Cookie cookie = new Cookie("readCount", cookieReadCount + newCookieReadCount);
+			cookie.setMaxAge(60 * 60 * 24 * 7);
+			response.addCookie(cookie);
+			service.updateHit(boardId);
+		}
 		model.addAttribute("boardVO", service.read(boardId));
+		return "/board/boardRead";
 	}
 	
 	@RequestMapping(value = "/boardDelete", method = RequestMethod.POST)

@@ -13,6 +13,7 @@ public class BoardVO {
 	private int boardGroup;
 	private int boardSequence;
 	private boolean boardIsReply;
+	private int boardCommCnt;
 	private String boardUserId;
 	public int getBoardId() {
 		return boardId;
@@ -74,6 +75,12 @@ public class BoardVO {
 	public void setBoardIsReply(boolean boardIsReply) {
 		this.boardIsReply = boardIsReply;
 	}
+	public int getBoardCommCnt() {
+		return boardCommCnt;
+	}
+	public void setBoardCommCnt(int boardCommCnt) {
+		this.boardCommCnt = boardCommCnt;
+	}
 	public String getBoardUserId() {
 		return boardUserId;
 	}
@@ -85,6 +92,7 @@ public class BoardVO {
 		return "BoardVO [boardId=" + boardId + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", boardRegdate=" + boardRegdate + ", boardUpdatedate=" + boardUpdatedate + ", boardHit=" + boardHit
 				+ ", boardLike=" + boardLike + ", boardGroup=" + boardGroup + ", boardSequence=" + boardSequence
-				+ ", boardIsReply=" + boardIsReply + ", boardUserId=" + boardUserId + "]";
+				+ ", boardIsReply=" + boardIsReply + ", boardCommCnt=" + boardCommCnt + ", boardUserId=" + boardUserId
+				+ "]";
 	}
 }

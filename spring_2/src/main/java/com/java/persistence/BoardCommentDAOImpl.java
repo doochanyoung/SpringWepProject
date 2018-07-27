@@ -91,4 +91,10 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		return session.selectOne(namespace + ".maxSequence", boardCommentGroup);
 	}
 
+	@Override
+	public int getBoardId(int boardCommentId) throws Exception {
+		return session.selectOne(namespace + ".getBoardId", boardCommentId);
+	}
+
+
 }

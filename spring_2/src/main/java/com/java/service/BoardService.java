@@ -21,4 +21,6 @@ public interface BoardService {
 	public int countPaging() throws Exception;
 	public List<BoardVO> listSearchPageHandler(SearchPageHandler handler) throws Exception;
 	public int searchCountPaging(SearchPageHandler handler) throws Exception;
+	public void updateHit(int boardId) throws Exception;
+	public void updateLike(int boardId) throws Exception;
 }

@@ -21,4 +21,6 @@ public interface BoardDAO {
 	public int countPaging() throws Exception;
 	public List<BoardVO> listSearch(SearchPageHandler handler) throws Exception;
 	public int listSearchCount(SearchPageHandler handler) throws Exception;
+	public void updateHit(int boardId) throws Exception;
+	public void updateLike(int boardId) throws Exception;
 }

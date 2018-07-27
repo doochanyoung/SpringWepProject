@@ -16,4 +16,6 @@ public interface BoardCommentDAO {
 	public int count(int boardId) throws Exception;
 	public int getGroup(int boardCommentId) throws Exception;
 	public int maxSequence(int boardCommentGroup) throws Exception;
+	public int getBoardId(int boardCommentId) throws Exception;
 }
+

@@ -91,4 +91,13 @@
 		]]>
 		<include refid="search" />
 	</select>
+	<update id="updateCommCnt">
+		update tbl_board set boardCommCnt = boardCommCnt + #{amount} where boardId = #{boardId}
+	</update>
+	<update id="updateHit">
+		update tbl_board set boardHit = boardHit + 1 where boardId = #{boardId}
+	</update>
+	<update id="updateLike">
+		update tbl_board set boardLike = boardLike + 1 where boardId = #{boardId}
+	</update>
 </mapper>

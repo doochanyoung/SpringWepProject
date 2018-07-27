@@ -86,5 +86,16 @@ public class BoardServiceImpl implements BoardService{
 	public int searchCountPaging(SearchPageHandler handler) throws Exception {
 		return dao.listSearchCount(handler);
 	}
+	
+
+	@Override
+	public void updateHit(int boardId) throws Exception {
+		dao.updateHit(boardId);
+	}
+
+	@Override
+	public void updateLike(int boardId) throws Exception {
+		dao.updateLike(boardId);
+	}
 
 }
