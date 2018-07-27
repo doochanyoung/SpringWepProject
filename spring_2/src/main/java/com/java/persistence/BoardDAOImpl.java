@@ -103,5 +103,16 @@ public class BoardDAOImpl implements BoardDAO {
 	public int listSearchCount(SearchPageHandler handler) throws Exception {
 		return session.selectOne(namespace + ".listSearchCount", handler);
 	}
+	
+	@Override
+	public void updateHit(int boardId) throws Exception {
+		session.update(namespace + ".updateHit", boardId);
+	}
+
+	@Override
+	public void updateLike(int boardId) throws Exception {
+		session.update(namespace + ".updateLike", boardId);
+	}
+
 
 }

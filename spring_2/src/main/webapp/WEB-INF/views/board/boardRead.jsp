@@ -157,13 +157,13 @@
 											type="button" style="background: #FF6C6C;">Remove</button>
 										<button class="btn btn-default btn-sm ml-3" id="boardList"
 											type="button" style="background: #5AAEFF">List</button>
-										<button class="btn btn-default btn-sm ml-3" id="boardLike"
-											type="button" style="background: #ABF200">Like</button>
+											<button class="btn btn-default btn-sm ml-3" id="boardLike"
+											type="submit" style="background: #ABF200">Like</button>
 										<button class="btn btn-default btn-sm ml-3" id="boardReply"
 											type="button" style="background: #FD65B0">Reply</button>
 										<button class="btn btn-default btn-sm ml-3"
 											id="boardViewComment" type="button"
-											style="background: #7536CF">ViewComment</button>
+											style="background: #7536CF">ViewComment <strong id="commentCnt">[${boardVO.boardCommCnt}]</strong></button>
 									</div>
 								</div>
 								<!--/card-block-->
@@ -236,7 +236,6 @@
 						<h4 class="modal-title">Modify</h4>
 					</div>
 					<div class="modal-body" data-rno>
-						<input type="text" class="form-control form-control-lg" name="modifyModalUserId" id="modifyModalUserId">
 						<textarea class="form-control" placeholder="write comment please......" id="modifyModalText"
 							maxlength="1024" rows="5" name="modifyModalText"></textarea>
 						<input type="hidden" name="modifyModalNum" id="modifyModalNum">
@@ -381,8 +380,10 @@
 									</div>
 									<hr>
 									<div class="row">
+										{{#fn_isIf2}}
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentReply"
 											type="button" data-toggle="modal" data-target="#replyModal" style="background: #5AAEFF">Reply</button>
+										{{/fn_isIf2}}
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentModify"
 											type="button" data-toggle="modal" data-target="#modifyModal">Modify</button>
 										<button class="btn btn-default btn-sm ml-3" id="boardCommentLike"
@@ -399,11 +400,16 @@
 	</script>
 
 	<script>
-		$.ajaxSetup({
-			cache : false
-		});
+		$.ajaxSetup({cache : false});
 		Handlebars.registerHelper("fn_isIf", function(option) {
             if (this.boardCommentIsReply == true) {
+                return option.fn(this);
+            } else {
+                return option.inverse(this); // 반대
+            }
+        });
+		Handlebars.registerHelper("fn_isIf2", function(option) {
+            if (this.boardCommentIsReply == false) {
                 return option.fn(this);
             } else {
                 return option.inverse(this); // 반대
@@ -430,6 +436,7 @@
 				printData(data.list, $("#commentlists"), $("#templateList"));
 				printPaging(data.pageMaker, $(".pagination"));
 				$("#modifyModal").modal('hide');
+				$("#commentCnt").html("["+data.pageMaker.totalCount+"]");
 			});
 		}
 		var printPaging = function(pageMaker, target) {
@@ -469,6 +476,11 @@
 			var boardCommentContentObj = $("#boardCommentContent");
 			var boardCommentUserId = boardCommentUserIdObj.val();
 			var boardCommentContent = boardCommentContentObj.val();
+			$(".error").remove();
+			if (boardCommentContent.length < 1) {
+			    $('#boardCommentContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    return; 
+			}
 			$.ajax({
 				type : 'post',
 				url : '/replies/',
@@ -501,7 +513,11 @@
 			var replyModalUserId = replyModalUserIdObj.val();
 			var replyModalText = replyModalTextObj.val();
 			var replyModalTargetId = replyModalTargetIdObj.val();
-			alert("replyModalUserId : "+replyModalUserId +" replyModalText : "+replyModalText+ " replyModalTargetId : " + replyModalTargetId + " board Id : " + boardId);
+			$(".error").remove();
+			if (replyModalText.length < 1) {
+			    $('#replyModalText').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    return; 
+			}
 			$.ajax({
 				type : 'post',
 				url : '/replies/reply',
@@ -528,6 +544,11 @@
 		$("#modifyModalModify").on("click", function() {
 			var commentId = $("#modifyModalNum").val();
 			var commentText = $("#modifyModalText").val();
+			$(".error").remove();
+			if (commentText.length < 1) {
+			    $('#modifyModalText').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    return; 
+			}
 			$.ajax({
 				type : 'put',
 				url : '/replies/'+commentId,

@@ -47,4 +47,7 @@
 	<delete id="delete">
 		delete from tbl_board_comment where boardCommentId = #{boardCommentId}
 	</delete>
+	<select id="getBoardId" resultType="int">
+		select boardCommentBoardId from tbl_board_comment where boardCommentId = #{boardCommentId}
+	</select>
 </mapper>

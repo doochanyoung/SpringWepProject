@@ -140,7 +140,7 @@
 						<c:forEach items="${list}" var="boardVO">
 							<tr>
 								<th class="mobile" scope="row">${boardVO.boardId }</th>
-								<td><a href='/board/boardRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i></c:if>${boardVO.boardTitle }</a></td>
+								<td><a href='/board/boardRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i></c:if>${boardVO.boardTitle } <strong>[${boardVO.boardCommCnt}]</strong></a></td>
 								<td class="mobile">${boardVO.boardUserId }</td>
 								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></td>
 								<td class="mobile">${boardVO.boardHit }</td>
