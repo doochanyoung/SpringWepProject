@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class UploadController {
 
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
 	public String ckeditorImageUpload(HttpServletRequest request, FileUploadVO fileUploadVO, Model model) {
+		
 		Date date = new Date();
 		int year = date.getYear() + 1900;
 		int month = date.getMonth();
@@ -48,6 +50,7 @@ public class UploadController {
 				String fileNameExt = fileName.substring(fileName.indexOf(".") + 1);
 				if(!"".equals(fileName)) {
 					File destD = new File(fileUploadPath);
+					System.out.println(fileUploadPath);
 					if(!destD.exists()) {
 						destD.mkdirs();
 					}
@@ -55,7 +58,8 @@ public class UploadController {
 					file.transferTo(destination);
 					
 					fileUploadVO.setFilename(destination.getName());
-					fileUploadVO.setImageUrl(fileUploadPath);
+					fileUploadVO.setImageUrl(contextPath + "/" + fileUploadPathTail + "/" + destination.getName());
+					System.out.println(contextPath + "/" + fileUploadPathTail + "/" + destination.getName());
 				}
 			}
 		} catch(Exception e) {

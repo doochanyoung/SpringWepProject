@@ -113,11 +113,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		return "redirect:/board/boardList";
 	}
 	
-	@RequestMapping(value = "/dataroomList", method = RequestMethod.GET)
-	public void dataroomList(Locale locale, Model model) {
-		logger.info("get : /dataroomList");
-	}
-	
 	@RequestMapping(value = "/boardReply", method = RequestMethod.GET)
 	public void boardReplyGET(int boardId, SearchPageHandler pageHandler, Model model) throws Exception {
 		logger.info("get : /boardReply");

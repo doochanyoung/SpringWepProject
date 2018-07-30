@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page pageEncoding="utf-8" session="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="utf-8" session="true"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,12 +36,15 @@
 	integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
 	crossorigin="anonymous">
 
+<script src="../ckeditor/ckeditor.js"></script>
+
 <!-- =======================================================
     Theme Name: Regna
     Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
+
 </head>
 
 <body>
@@ -62,7 +66,8 @@
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
 					<li class="nav-item"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item menu-active"><a href="/board/dataroomList">Data Room</a></li>
+					<li class="nav-item menu-active"><a href="/dataroom/dataroomList">Data
+							Room</a></li>
 					<li class="nav-item"><a href="#">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
 						<ul class="navbar-nav">
@@ -86,96 +91,76 @@
 
 
 	<!--==========================
-      Services Section
+      boards Section
     ============================-->
 
 	<section id="boards">
-		<div class="container wow fadeIn">
-			<div class="section-header m-5">
-				<h3 class="section-title">자료실</h3>
-				<p class="section-description">자료실을 활용하여 많은 정보를 얻어보세요.</p>
-			</div>
-			<div class="card m-4">
-				<div class="card-header">Search</div>
-				<div class="card-body">
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-md-12">
 					<div class="row">
-						<div class="col-7">
-							<div class="form-group">
-								<input type="text" class="form-control" name="boardSearch"
-									id="boardSearch" placeholder="search....">
+						<div class="col-md-10 mx-auto">
+							<!-- form card login -->
+							<div class="card">
+								<div class="card-header">
+									<h3 class="title">Modify</h3>
+								</div>
+								<div class="card-body">
+									<form class="form" action="/dataroom/dataroomModify" role="form" method="post" id="formBoard">
+										<input type="hidden" name="dataroomId" id="dataroomId" value="${dataroomVO.dataroomId }">
+										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
+										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
+										<input type="hidden" name="searchType" id="searchType" value="${pageHandler.searchType }">
+										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
+										<div class="form-group">
+											<label for="title" class="text">Title</label> <input
+												type="text" class="form-control form-control-lg"
+												name="dataroomTitle" id="dataroomTitle" placeholder="write Title" value="${dataroomVO.dataroomTitle }">
+										</div>
+										<div class="form-group">
+											<label for="writer" class="text">Writer</label> <input
+												type="text" class="form-control form-control-lg"
+												name="dataroomUserId" id="dataroomUserId" readonly="readonly" value="${dataroomVO.dataroomUserId }">
+										</div>
+										<div class="form-group">
+											<label for="content" class="text">Content</label>
+											<textarea class="form-control"
+												placeholder="write content please......" id="dataroomContent"
+												maxlength="40" name="dataroomContent">${dataroomVO.dataroomContent }</textarea>
+										</div>								
+										<div class="row">
+											<div class="col-4">
+												<span><strong>조회수</strong> : ${dataroomVO.dataroomHit }</span>
+											</div>
+											<div class="col-4">
+												<span><strong>좋아요</strong> : ${dataroomVO.dataroomLike }</span>
+											</div>
+											<div class="col-4">
+												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dataroomVO.dataroomRegdate }"/></span>
+											</div>
+										</div>
+										<hr>
+										<div class="row">									
+											<button class="btn btn-default btn-sm ml-3" id="dataroomSave" type="button" style="background:#5AAEFF">Save</button>
+											<button class="btn btn-default btn-sm ml-3" id="dataroomCancel" type="button" style="background:#FF6C6C;">Cancel</button>
+										</div>
+									</form>
+								</div>
+								<!--/card-block-->
 							</div>
-						</div>
-						<div class="col-2">
-							<select class="custom-select" id="select">
-								<option selected value="none" id="select">-------</option>
-								<option value="title" id="select">제목</option>
-								<option value="writer" id="select">작성자</option>
-								<option value="content" id="select">내용</option>
-							</select>
-						</div>
-						<div class="col-1">
-							<div class="text-center">
-								<button class="btn btn-default float-left" type="submit">검색</button>
-							</div>
+							<!-- /form card login -->
 						</div>
 					</div>
+					<!--/row-->
 				</div>
+				<!--/col-->
 			</div>
-			<hr class="my-4">
-			<div class="row">
-				<table class="table table-striped table table"
-					style="text-align: center; border: 1px solid #dddddd">
-					<thead>
-						<tr>
-							<th class="mobile" scope="col">id</th>
-							<th scope="col">제목</th>
-							<th class="mobile" scope="col">작성자</th>
-							<th class="mobile" scope="col">작성일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th class="mobile" scope="row">1</th>
-							<td>Mark</td>
-							<td class="mobile">Otto</td>
-							<td class="mobile">@mdo</td>
-						</tr>
-						<tr>
-							<th class="mobile" scope="row">2</th>
-							<td>Jacob</td>
-							<td class="mobile">Thornton</td>
-							<td class="mobile">@fat</td>
-						</tr>
-						<tr>
-							<th class="mobile" scope="row">3</th>
-							<td>Larry</td>
-							<td class="mobile" >the Bird</td>
-							<td class="mobile">@twitter</td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="text-center">
-					<button class="btn btn-default float-right m-2" type="submit">글
-						작성</button>
-				</div>
-			</div>
+			<!--/row-->
 		</div>
-		<nav class="wow fadeIn">
-			<ul class="pagination pagination-info justify-content-center">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
-				</a></li>
-				<li class="page-item active"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-						class="sr-only">Next</span>
-				</a></li>
-			</ul>
-		</nav>
+		<!--/container-->
 	</section>
+	<!-- #boards -->
+
 	<footer id="footer">
 		<div class="footer-top">
 			<div class="container"></div>
@@ -235,5 +220,62 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+
+	<script>
+		CKEDITOR.replace('dataroomContent', {
+			 height: '600px',
+			 resize_enabled: false
+		});
+		$(document).ready(function() {
+			  $('#formBoard').submit(function(e) {
+				e.preventDefault();
+			    var dataroomTitle = $('#dataroomTitle').val();
+			    var dataroomContent = CKEDITOR.instances.dataroomContent.getData();
+			    var dataroomUserId = $('#dataroomUserId').val();
+			    $(".error").remove();
+			    var valid = true;
+			    if (dataroomTitle.length < 1) {
+			      $('#dataroomTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			      valid = false;
+			    } else if (dataroomTitle.length > 45) {
+				      $('#dataroomTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+				      valid = false;
+				}
+			    if (dataroomUserId.length < 1) {
+			      $('#dataroomUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			      valid = false;
+			    } else if (dataroomUserId.length > 45) {
+				      $('#dataroomUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+				      valid = false;
+				}
+			    if (dataroomContent.length < 1) {
+				      $('#dataroomContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+				      valid = false;
+			 	}  else if (dataroomContent.length > 4096) {
+					   $('#dataroomContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
+					   valid = false;
+				}
+			    if(valid){
+			    	 document.getElementById("formBoard").submit();
+			    }
+			  });
+		});
+		$(document).ready(function(){
+			var formObj = $("form[role='form']");
+			var dataroomId = $('#dataroomId').val();
+			var page = $('#page').val();
+			var perPageNum = $('#perPageNum').val();
+			var searchType = $('#searchType').val();
+			var keyword = $('#keyword').val();
+			$("#dataroomSave").on("click", function(){
+				formObj.submit();
+			});
+			$("#dataroomCancel").on("click", function(){
+				self.location = "/dataroom/dataroomRead?dataroomId=" + dataroomId +"&page=" + page + "&perPageNum=" + perPageNum
+						+"&searchType=" + searchType + "&keyword=" + keyword;
+			});
+		});
+	</script>
+
 </body>
 </html>

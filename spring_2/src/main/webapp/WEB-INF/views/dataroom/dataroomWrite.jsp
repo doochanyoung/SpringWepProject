@@ -54,7 +54,7 @@
   ============================-->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand nav-menu" href="/board/boardList">Community&nbsp;</a>
+			<a class="navbar-brand nav-menu" href="/dataroom/dataroomList">Community&nbsp;</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -65,8 +65,8 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
-					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item"><a href="/dataroom/dataroomList">Data
+					<li class="nav-item"><a href="/dataroom/dataroomList">Board</a></li>
+					<li class="nav-item menu-active"><a href="/dataroom/dataroomList">Data
 							Room</a></li>
 					<li class="nav-item"><a href="#">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
@@ -91,7 +91,7 @@
 
 
 	<!--==========================
-      boards Section
+      datarooms Section
     ============================-->
 
 	<section id="boards">
@@ -103,37 +103,32 @@
 							<!-- form card login -->
 							<div class="card">
 								<div class="card-header">
-									<h3 class="title">reply</h3>
+									<h3 class="title">Write</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" action="/board/boardReply"
+									<form class="form" action="/dataroom/dataroomWrite"
 										autocomplete="off" id="formBoard" method="POST"
 										class="contactForm" role="form">
-										<input type="hidden" name="boardId" id="boardId" value="${boardId }">
-										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
-										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
-										<input type="hidden" name="searchType" id="searchType" value="${pageHandler.searchType }">
-										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
 										<div class="form-group">
 											<label for="title" class="text">Title</label>
 											<input type="text" class="form-control form-control-lg"
-												name="boardTitle" id="boardTitle" placeholder="write Title">
+												name="dataroomTitle" id="dataroomTitle" placeholder="write Title">
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
 											<input type="hidden" class="form-control form-control-lg"
-												name="boardUserId" id="boardUserId" value=${loginId }>
+												name="dataroomUserId" id="dataroomUserId" value="${loginId }">
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
 											<label for="content" class="text">Content</label>
 											<textarea class="form-control"
-												 id="boardContent" name="boardContent" placeholder="write content please......"></textarea>
+												 id="dataroomContent" name="dataroomContent" placeholder="write content please......"></textarea>
 											<div class="validation"></div>
 										</div>
 										<div class="text-center">
 											<button class="btn btn-default btn-sm btn-block"
-												id="boardSave" type="submit">Submit</button>
+												id="dataroomSave" type="submit">Submit</button>
 										</div>
 									</form>
 								</div>
@@ -150,7 +145,7 @@
 		</div>
 		<!--/container-->
 	</section>
-	<!-- #boards -->
+	<!-- #datarooms -->
 
 	<footer id="footer">
 		<div class="footer-top">
@@ -213,16 +208,16 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-		CKEDITOR.replace('boardContent', {
+		CKEDITOR.replace('dataroomContent', {
 			 height: '600px',
 			 resize_enabled: false
 		});
 
 		/* window.onload = function() {
-			CKEDITOR.instances.boardContent.on('key', function() {
-				var str = CKEDITOR.instances.boardContent.getData();
+			CKEDITOR.instances.dataroomContent.on('key', function() {
+				var str = CKEDITOR.instances.dataroomContent.getData();
 				if (str.length >= 4096) {
-					CKEDITOR.instances.boardContent.setData(str.substring(0, 4090));
+					CKEDITOR.instances.dataroomContent.setData(str.substring(0, 4090));
 					alert('최대 4096글자까지 등록 가능합니다');
 				}
 			});
@@ -230,30 +225,30 @@
 		$(document).ready(function() {
 			  $('#formBoard').submit(function(e) {
 				e.preventDefault();
-			    var boardTitle = $('#boardTitle').val();
-			    var boardContent = CKEDITOR.instances.boardContent.getData();
-			    var boardUserId = $('#boardUserId').val();
+			    var dataroomTitle = $('#dataroomTitle').val();
+			    var dataroomContent = CKEDITOR.instances.dataroomContent.getData();
+			    var dataroomUserId = $('#dataroomUserId').val();
 			    $(".error").remove();
 			    var valid = true;
-			    if (boardTitle.length < 1) {
-			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (dataroomTitle.length < 1) {
+			      $('#dataroomTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardTitle.length > 45) {
-				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (dataroomTitle.length > 45) {
+				      $('#dataroomTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
-			    if (boardUserId.length < 1) {
-			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (dataroomUserId.length < 1) {
+			      $('#dataroomUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardUserId.length > 45) {
-				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (dataroomUserId.length > 45) {
+				      $('#dataroomUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
-			    if (boardContent.length < 1) {
-				      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (dataroomContent.length < 1) {
+				      $('#dataroomContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 				      valid = false;
-			 	}  else if (boardContent.length > 4096) {
-					   $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
+			 	}  else if (dataroomContent.length > 4096) {
+					   $('#dataroomContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
 					   valid = false;
 				}
 			    if(valid){

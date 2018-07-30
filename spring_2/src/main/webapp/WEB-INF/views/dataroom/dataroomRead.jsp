@@ -57,7 +57,7 @@
   ============================-->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand nav-menu" href="/board/boardList">Community&nbsp;</a>
+			<a class="navbar-brand nav-menu" href="/dataroom/dataroomList">Community&nbsp;</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -68,8 +68,8 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
-					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item"><a href="/dataroom/dataroomList">Data
+					<li class="nav-item"><a href="/dataroom/dataroomList">Board</a></li>
+					<li class="nav-item menu-active"><a href="/dataroom/dataroomList">Data
 							Room</a></li>
 					<li class="nav-item"><a href="#">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
@@ -94,7 +94,7 @@
 
 
 	<!--==========================
-      boards Section
+   ards Section
     ============================-->
 
 	<section id="boards">
@@ -110,8 +110,8 @@
 								</div>
 								<div class="card-body">
 									<form class="form" role="form" method="post">
-										<input type="hidden" name="boardId" id="boardId"
-											value="${boardVO.boardId }"> <input type="hidden"
+										<input type="hidden" name="dataroomId" id="dataroomId"
+											value="${dataroomVO.dataroomId }"> <input type="hidden"
 											name="page" id="page" value="${pageHandler.page }"> <input
 											type="hidden" name="perPageNum" id="perPageNum"
 											value="${pageHandler.perPageNum }"> <input
@@ -123,53 +123,53 @@
 									<div class="form-group">
 										<label for="title" class="text">Title</label> <input
 											type="text" class="form-control form-control-lg"
-											name="boardTitle" id="boardTitle" placeholder="write Title"
-											readonly="readonly" value="${boardVO.boardTitle }">
+											name="dataroomTitle" id="dataroomTitle" placeholder="write Title"
+											readonly="readonly" value="${dataroomVO.dataroomTitle }">
 									</div>
 									<div class="form-group">
 										<label for="writer" class="text">Writer</label> <input
 											type="text" class="form-control form-control-lg"
-											name="boardUserId" id="boardUserId" readonly="readonly"
-											value="${boardVO.boardUserId }">
+											name="dataroomUserId" id="dataroomUserId" readonly="readonly"
+											value="${dataroomVO.dataroomUserId }">
 									</div>
 									<div class="form-group">
 										<label for="content" class="text">Content</label>
 										<textarea class="form-control"
-											placeholder="write content please......" id="boardContent"
-											maxlength="40" name="boardContent" readonly="readonly">${boardVO.boardContent }</textarea>
+											placeholder="write content please......" id="dataroomContent"
+											maxlength="40" name="dataroomContent" readonly="readonly">${dataroomVO.dataroomContent }</textarea>
 									</div>
 									<div class="row">
 										<div class="col-4">
-											<span><strong>조회수</strong> : ${boardVO.boardHit }</span>
+											<span><strong>조회수</strong> : ${dataroomVO.dataroomHit }</span>
 										</div>
 										<div class="col-4">
-											<span><strong>좋아요</strong> : ${boardVO.boardLike }</span>
+											<span><strong>좋아요</strong> : ${dataroomVO.dataroomLike }</span>
 										</div>
 										<div class="col-4">
 											<span><strong>작성일</strong> : <fmt:formatDate
-													pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }" /></span>
+													pattern="yyyy-MM-dd HH:mm" value="${dataroomVO.dataroomRegdate }" /></span>
 										</div>
 									</div>
 									<hr>
 									<div class="row">
-									<c:if test="${loginId == boardVO.boardUserId}">
-										<button class="btn btn-default btn-sm ml-3" id="boardModify"
+									<c:if test="${loginId == dataroomVO.dataroomUserId}">
+										<button class="btn btn-default btn-sm ml-3" id="dataroomModify"
 											type="button">Modify</button>
-										<button class="btn btn-default btn-sm ml-3" id="boardRemove"
+										<button class="btn btn-default btn-sm ml-3" id="dataroomRemove"
 											type="button" style="background: #FF6C6C;">Remove</button>
 									</c:if>
-										<button class="btn btn-default btn-sm ml-3" id="boardList"
+										<button class="btn btn-default btn-sm ml-3" id="dataroomList"
 											type="button" style="background: #5AAEFF">List</button>
-											<button class="btn btn-default btn-sm ml-3" id="boardLike"
+											<button class="btn btn-default btn-sm ml-3" id="dataroomLike"
 											type="submit" style="background: #ABF200">Like</button>
-										<c:if test="${boardVO.boardIsReply == false}">
-										<button class="btn btn-default btn-sm ml-3" id="boardReply"
+										<c:if test="${dataroomVO.dataroomIsReply == false}">
+										<button class="btn btn-default btn-sm ml-3" id="dataroomReply"
 											type="button" style="background: #FD65B0">Reply</button>
 										</c:if>
 										<c:if test="${not empty loginId }">
 										<button class="btn btn-default btn-sm ml-3"
-											id="boardViewComment" type="button"
-											style="background: #7536CF">ViewComment <strong id="commentCnt">[${boardVO.boardCommCnt}]</strong></button>
+											id="dataroomViewComment" type="button"
+											style="background: #7536CF">ViewComment <strong id="commentCnt">[${dataroomVO.dataroomCommCnt}]</strong></button>
 										</c:if>
 									</div>
 								</div>
@@ -198,14 +198,14 @@
 								</div>
 								<div class="card-body">
 										<input type="hidden" class="form-control form-control-lg"
-											name="boardCommentUserId" id="boardCommentUserId"
+											name="dataroomCommentUserId" id="dataroomCommentUserId"
 											value="${loginId }">
 									<div class="form-group">
 										<label for="content" class="text">Content</label>
 										<textarea class="form-control"
 											placeholder="write comment please......"
-											id="boardCommentContent" maxlength="1024"
-											name="boardCommentContent" rows="5"></textarea>
+											id="dataroomCommentContent" maxlength="1024"
+											name="dataroomCommentContent" rows="5"></textarea>
 									</div>
 									<hr>
 									<div class="row">
@@ -274,7 +274,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- #boards -->
+	<!-- #datarooms -->
 
 	<footer id="footer">
 		<div class="footer-top">
@@ -337,32 +337,32 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-		CKEDITOR.replace('boardContent', {
+		CKEDITOR.replace('dataroomContent', {
 			height : '600px',
 			resize_enabled : false
 		});
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
-			var boardId = $('#boardId').val();
-			$("#boardModify").on("click", function() {
-				formObj.attr("action", "/board/boardModify");
+			var dataroomId = $('#dataroomId').val();
+			$("#dataroomModify").on("click", function() {
+				formObj.attr("action", "/dataroom/dataroomModify");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
-			$("#boardRemove").on("click", function() {
+			$("#dataroomRemove").on("click", function() {
 				var bool = confirm("정말 삭제 하시겠습니까?");
 				if (bool) {
-					formObj.attr("action", "/board/boardDelete");
+					formObj.attr("action", "/dataroom/dataroomDelete");
 					formObj.submit();
 				}
 			});
-			$("#boardList").on("click", function() {
-				formObj.attr("action", "/board/boardList");
+			$("#dataroomList").on("click", function() {
+				formObj.attr("action", "/dataroom/dataroomList");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
-			$("#boardReply").on("click", function() {
-				formObj.attr("action", "/board/boardReply");
+			$("#dataroomReply").on("click", function() {
+				formObj.attr("action", "/dataroom/dataroomReply");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
@@ -379,22 +379,22 @@
 							<!-- form card login -->
 							<div class="card">
 								<div class="card-body">
-									<input type="hidden" id="cardNum" name="cardNum" value="{{boardCommentId}}">
-									<h6 class="card-title">{{#fn_isIf}}<i class="fab fa-replyd"></i>{{/fn_isIf}} {{boardCommentUserId}} - {{commentDate boardCommentRegdate}}</h6>
+									<input type="hidden" id="cardNum" name="cardNum" value="{{dataroomCommentId}}">
+									<h6 class="card-title">{{#fn_isIf}}<i class="fab fa-replyd"></i>{{/fn_isIf}} {{dataroomCommentUserId}} - {{commentDate dataroomCommentRegdate}}</h6>
 									<div class="form-group">
-										 <p class="card-text">{{boardCommentContent}}</p>
+										 <p class="card-text">{{dataroomCommentContent}}</p>
 									</div>
 									<hr>
 									<div class="row">
 										{{#fn_isIf2}}
-										<button class="btn btn-default btn-sm ml-3" id="boardCommentReply"
+										<button class="btn btn-default btn-sm ml-3" id="dataroomCommentReply"
 											type="button" data-toggle="modal" data-target="#replyModal" style="background: #5AAEFF">Reply</button>
 										{{/fn_isIf2}}
 										{{#eqWriter}}
-										<button class="btn btn-default btn-sm ml-3" id="boardCommentModify"
+										<button class="btn btn-default btn-sm ml-3" id="dataroomCommentModify"
 											type="button" data-toggle="modal" data-target="#modifyModal">Modify</button>
 										{{/eqWriter}}
-										<button class="btn btn-default btn-sm ml-3" id="boardCommentLike"
+										<button class="btn btn-default btn-sm ml-3" id="dataroomCommentLike"
 											type="button" style="background: #ABF200">Like</button>
 									</div>
 								</div>
@@ -410,21 +410,21 @@
 	<script>
 		$.ajaxSetup({cache : false});
 		Handlebars.registerHelper("eqWriter", function(option) {
-            if (this.boardCommentUserId == '${loginId}') {
+            if (this.dataroomCommentUserId == '${loginId}') {
                 return option.fn(this);
             } else {
                 return option.inverse(this); // 반대
             }
         });
 		Handlebars.registerHelper("fn_isIf", function(option) {
-            if (this.boardCommentIsReply == true) {
+            if (this.dataroomCommentIsReply == true) {
                 return option.fn(this);
             } else {
                 return option.inverse(this); // 반대
             }
         });
 		Handlebars.registerHelper("fn_isIf2", function(option) {
-            if (this.boardCommentIsReply == false) {
+            if (this.dataroomCommentIsReply == false) {
                 return option.fn(this);
             } else {
                 return option.inverse(this); // 반대
@@ -444,7 +444,7 @@
 			$(".commentCard").remove();
 			target.after(html);
 		}
-		var boardId = ${boardVO.boardId};
+		var dataroomId = ${dataroomVO.dataroomId};
 		var replyPage = 1;
 		function getPage(pageInfo) {
 			$.getJSON(pageInfo, function(data) {
@@ -476,47 +476,47 @@
 			}
 			target.html(str);
 		}
-		$("#boardViewComment").on("click", function() { //버튼 누르면 /replies를 호출하여 restcontroller에서 댓글 목록을 출력해준다
+		$("#dataroomViewComment").on("click", function() { //버튼 누르면 /replies2를 호출하여 restcontroller에서 댓글 목록을 출력해준다
 			if ($(".commentCard .card").size() > 1) {
 				return;
 			}
-			getPage("/replies/" + boardId + "/1");
+			getPage("/replies2/" + dataroomId + "/1");
 		});
 		$('.pagination').on("click", "li a", function(event) {
 			event.preventDefault();
 			replyPage = $(this).attr("href");
-			getPage("/replies/" + boardId + "/" + replyPage);
+			getPage("/replies2/" + dataroomId + "/" + replyPage);
 		});
 		$("#commentSubmit").on("click", function() {
-			var boardCommentUserIdObj = $("#boardCommentUserId");
-			var boardCommentContentObj = $("#boardCommentContent");
-			var boardCommentUserId = boardCommentUserIdObj.val();
-			var boardCommentContent = boardCommentContentObj.val();
+			var dataroomCommentUserIdObj = $("#dataroomCommentUserId");
+			var dataroomCommentContentObj = $("#dataroomCommentContent");
+			var dataroomCommentUserId = dataroomCommentUserIdObj.val();
+			var dataroomCommentContent = dataroomCommentContentObj.val();
 			$(".error").remove();
-			if (boardCommentContent.length < 1) {
-			    $('#boardCommentContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			if (dataroomCommentContent.length < 1) {
+			    $('#dataroomCommentContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			    return; 
 			}
 			$.ajax({
 				type : 'post',
-				url : '/replies/',
+				url : '/replies2/',
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "POST",
 				},
 				dataType : 'text',
 				data : JSON.stringify({
-					boardCommentBoardId : boardId,
-					boardCommentUserId : boardCommentUserId,
-					boardCommentContent : boardCommentContent
+					dataroomCommentBoardId : dataroomId,
+					dataroomCommentUserId : dataroomCommentUserId,
+					dataroomCommentContent : dataroomCommentContent
 				}),
 				success : function(result) {
 					console.log("result: " + result);
 					if (result == 'SUCCESS') {
 						alert('등록 되었습니다.');
 						replyPage = 1;
-						getPage("/replies/" + boardId + "/" + replyPage);
-						boardCommentContentObj.val("");
+						getPage("/replies2/" + dataroomId + "/" + replyPage);
+						dataroomCommentContentObj.val("");
 					}
 				}
 			});
@@ -535,24 +535,24 @@
 			}
 			$.ajax({
 				type : 'post',
-				url : '/replies/reply',
+				url : '/replies2/reply',
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "post",
 				},
 				dataType : 'text',
 				data : JSON.stringify({
-					boardCommentId : replyModalTargetId,
-					boardCommentContent : replyModalText,
-					boardCommentBoardId : boardId,
-					boardCommentUserId : replyModalUserId
+					dataroomCommentId : replyModalTargetId,
+					dataroomCommentContent : replyModalText,
+					dataroomCommentBoardId : dataroomId,
+					dataroomCommentUserId : replyModalUserId
 				}),
 				success : function(result) {
 					console.log("result: " + result);
 					if (result == 'SUCCESS') {
 						alert('답글이 등록 되었습니다.');
 						replyModalTextObj.val("");
-						getPage("/replies/" + boardId + "/" + replyPage);
+						getPage("/replies2/" + dataroomId + "/" + replyPage);
 					}
 				}
 			});
@@ -567,20 +567,20 @@
 			}
 			$.ajax({
 				type : 'put',
-				url : '/replies/'+commentId,
+				url : '/replies2/'+commentId,
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "PUT",
 				},
 				dataType : 'text',
 				data : JSON.stringify({
-					boardCommentContent : commentText
+					dataroomCommentContent : commentText
 				}),
 				success : function(result) {
 					console.log("result: " + result);
 					if (result == 'SUCCESS') {
 						alert('수정 되었습니다.');
-						getPage("/replies/" + boardId + "/" + replyPage);
+						getPage("/replies2/" + dataroomId + "/" + replyPage);
 					}
 				}
 			});
@@ -592,7 +592,7 @@
 			if (!bool) return;
 			$.ajax({
 				type : 'delete',
-				url : '/replies/'+commentId,
+				url : '/replies2/'+commentId,
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "delete",
@@ -602,7 +602,7 @@
 					console.log("result: " + result);
 					if (result == 'SUCCESS') {
 						alert('삭제 되었습니다.');
-						getPage("/replies/" + boardId + "/" + replyPage);
+						getPage("/replies2/" + dataroomId + "/" + replyPage);
 					}
 				}
 			});
