@@ -1,10 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page pageEncoding="utf-8" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
 <title>GAE & Doo & CHUNG WEPPAGE</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
@@ -37,6 +38,9 @@
 	crossorigin="anonymous">
 
 <script src="../ckeditor/ckeditor.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <!-- =======================================================
     Theme Name: Regna
@@ -126,7 +130,11 @@
 												 id="dataroomContent" name="dataroomContent" placeholder="write content please......"></textarea>
 											<div class="validation"></div>
 										</div>
-										<div class="text-center">
+										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
+										<ul class="mailbox-attachments clearfix uploadedList">
+										
+										</ul>
+										<div class="text-center mt-2">
 											<button class="btn btn-default btn-sm btn-block"
 												id="dataroomSave" type="submit">Submit</button>
 										</div>
@@ -200,12 +208,21 @@
 	<script src="../lib/counterup/counterup.min.js"></script>
 	<script src="../lib/superfish/hoverIntent.js"></script>
 	<script src="../lib/superfish/superfish.min.js"></script>
-
-	<!-- Contact Form JavaScript File -->
-	<script src="../contactform/contactform.js"></script>
-
+	
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+			<a href="{{fullName}}"  class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+			</span>
+ 	 	</div>
+	</li>                
+	</script>
 
 	<script>
 		CKEDITOR.replace('dataroomContent', {
@@ -257,6 +274,39 @@
 			  });
 		});
 	</script>
-
+	<script>
+		var template = Handlebars.compile($("#templateAttach").html());
+		$(".fileDrop").on("dragenter dragover", function(event){ //파일을 드래그 했을때 화면에 사진 뜨는거  방지
+			event.preventDefault();
+		});
+		
+		$(".fileDrop").on("drop", function(event) {
+			event.preventDefault();
+			var files = event.originalEvent.dataTransfer.files;
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			$.ajax({
+				url : '/uploadAjax',
+				data : formData,
+				dataType : 'text',
+				processData : false,
+				contentType : false,
+				type : 'POST',
+				success : function(data) {
+					var fileInfo = getFileInfo(data);
+					var html = template(fileInfo);
+					$(".uploadedList").append(html);
+				}
+			});
+		});
+		function getOriginalName(fileName){
+			if(checkImageType(fileName)){
+				return;
+			}
+			var idx = fileName.indexOf("_") + 1;
+			return fileName.substr(idx);
+		}
+	</script>
 </body>
 </html>

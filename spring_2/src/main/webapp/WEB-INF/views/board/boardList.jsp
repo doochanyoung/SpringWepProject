@@ -102,7 +102,7 @@
 					<div class="row">
 						<div class="col-7">
 							<div class="form-group">
-								<input type="text" class="form-control" name="boardSearch"
+								<input type="text" class="form-control"
 									id="keyword" name="keyword" placeholder="search...." value="${pageHandler.keyword }">
 							</div>
 						</div>

@@ -1,5 +1,6 @@
 package com.java.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class DataroomVO {
@@ -15,6 +16,7 @@ public class DataroomVO {
 	private boolean dataroomIsReply;
 	private int dataroomCommCnt;
 	private String dataroomUserId;
+	private String[] files;
 	public int getDataroomId() {
 		return dataroomId;
 	}
@@ -87,12 +89,19 @@ public class DataroomVO {
 	public void setDataroomUserId(String dataroomUserId) {
 		this.dataroomUserId = dataroomUserId;
 	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	@Override
 	public String toString() {
 		return "DataroomVO [dataroomId=" + dataroomId + ", dataroomTitle=" + dataroomTitle + ", dataroomContent="
 				+ dataroomContent + ", dataroomRegdate=" + dataroomRegdate + ", dataroomUpdatedate="
 				+ dataroomUpdatedate + ", dataroomHit=" + dataroomHit + ", dataroomLike=" + dataroomLike
 				+ ", dataroomGroup=" + dataroomGroup + ", dataroomSequence=" + dataroomSequence + ", dataroomIsReply="
-				+ dataroomIsReply + ", dataroomCommCnt=" + dataroomCommCnt + ", dataroomUserId=" + dataroomUserId + "]";
+				+ dataroomIsReply + ", dataroomCommCnt=" + dataroomCommCnt + ", dataroomUserId=" + dataroomUserId
+				+ ", files=" + Arrays.toString(files) + "]";
 	}
 }

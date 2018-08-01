@@ -25,4 +25,5 @@ public interface DataroomDAO {
 	public void updateCommCnt(int dataroomId, int amount) throws Exception;
 	public void updateHit(int dataroomId) throws Exception;
 	public void updateLike(int dataroomId) throws Exception;
+	public void addAttach(String fullName) throws Exception;
 }

@@ -130,5 +130,10 @@ public class DataroomDAOImpl implements DataroomDAO {
 		session.update(namespace + ".updateLike", dataroomId);
 	}
 
+	@Override
+	public void addAttach(String fullName) throws Exception {
+		session.insert(namespace + ".addAttach", fullName);
+	}
+
 
 }

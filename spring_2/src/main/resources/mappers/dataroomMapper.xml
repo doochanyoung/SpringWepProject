@@ -100,4 +100,7 @@
 	<update id="updateLike">
 		update tbl_dataroom set dataroomLike = dataroomLike + 1 where dataroomId = #{dataroomId}
 	</update>
+	<insert id="addAttach">
+		insert into tbl_dataroom_attach(dataroomAttachFullname, dataroomAttachBoardId) values (#{fullName}, LAST_INSERT_ID())
+	</insert>
 </mapper>

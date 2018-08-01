@@ -5,8 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.java.domain.BoardVO;
 import com.java.domain.DataroomVO;
 import com.java.domain.PageHandler;
 import com.java.domain.SearchPageHandler;
@@ -18,9 +18,15 @@ public class DataroomServiceImpl implements DataroomService{
 	@Inject
 	private DataroomDAO dao;
 
+	@Transactional
 	@Override
 	public void regist(DataroomVO vo, int maxGroup) throws Exception {
 		dao.create(vo, maxGroup);
+		String[] files = vo.getFiles();
+		if(files == null) {return;}
+		for(String fileName : files) {
+			dao.addAttach(fileName);
+		}
 	}
 
 	@Override
