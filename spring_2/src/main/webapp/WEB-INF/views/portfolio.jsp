@@ -58,8 +58,10 @@
 
 			<nav id="nav-menu-container">
 				<ul class="nav-menu">
-					<li class="menu-active"><a href="<c:url value='/'/>">Home</a></li>
-					<li><a href="#">Portfolio</a></li>
+					<li>
+					<a href="<c:url value='/'/>">Home</a>
+					</li>
+					<li class="menu-active"><a href="#">Portfolio</a></li>
 					<li><a href="#studies">Study</a></li>
 					<li><a href="#communities">Comuunity</a></li>
 					<li class="menu-has-children"><a href="">로그인을 하세요</a>
@@ -81,21 +83,31 @@
 			<!-- #nav-menu-container -->
 		</div>
 	</header>
-	<!-- #header -->
-	<nav>
-	asdfsdafsfdsfjflsalfksa
-	jfkllfjsaflsdlfksalffjsalskd
 	
-	sdfklsfl;fjsklflsflsjfl
 	
-	</nav>
+	
+	<aside id="aside">
+		<div class="container">
+			<nav>
+				<ul class="anside-nav-menu">
+					<li><a href="#">김태훈 (GaeTaeng)</a></li>
+					<li><a href="#">두찬영 (DooDoo)</a></li>
+					<li><a href="#">이화섭 (Chungma)</a></li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+	
+	
+	
+	
 	
 
 	<footer id="footer">
 		<div class="footer-top">
 			<div class="container"></div>
 		</div>
-
+ 
 		<div class="container">
 			<div class="row">
 				<div class="col-6">
