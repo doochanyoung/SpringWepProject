@@ -218,7 +218,7 @@
   		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
   		<div class=	"mailbox-attachment-info">
 			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-			<a href="{{fullName}}"  class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
 			</span>
  	 	</div>
 	</li>                
@@ -269,7 +269,13 @@
 					   valid = false;
 				}
 			    if(valid){
-			    	 document.getElementById("formBoard").submit();
+					var that = $(this);
+					var str = "";
+					$(".uploadedList .delbtn").each(function(index){
+						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+					});
+					that.append(str);
+					that.get(0).submit();
 			    }
 			  });
 		});
@@ -279,7 +285,6 @@
 		$(".fileDrop").on("dragenter dragover", function(event){ //파일을 드래그 했을때 화면에 사진 뜨는거  방지
 			event.preventDefault();
 		});
-		
 		$(".fileDrop").on("drop", function(event) {
 			event.preventDefault();
 			var files = event.originalEvent.dataTransfer.files;
@@ -299,6 +304,21 @@
 					$(".uploadedList").append(html);
 				}
 			});
+		});
+		$("#dataroomSave").submit(function(event){
+			event.preventDefault();
+			var that = $(this);
+			var str = "";
+			$(".uploadedList .delbtn").each(function(index){
+				str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+			});
+			that.append(str);
+			that.get(0).submit();
+		});
+		$(".uploadedList").on("click", ".delbtn", function(event) {
+			event.preventDefault();
+			var that = $(this);
+			that.closest("li").remove();
 		});
 		function getOriginalName(fileName){
 			if(checkImageType(fileName)){

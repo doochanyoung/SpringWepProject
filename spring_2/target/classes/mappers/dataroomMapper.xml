@@ -103,4 +103,13 @@
 	<insert id="addAttach">
 		insert into tbl_dataroom_attach(dataroomAttachFullname, dataroomAttachBoardId) values (#{fullName}, LAST_INSERT_ID())
 	</insert>
+	<select id="getAttach" resultType="string">
+		select dataroomAttachFullname from tbl_dataroom_attach where dataroomAttachBoardId = #{dataroomId} order by dataroomAttachRegdate;
+	</select>
+	<delete id="deleteAttach">
+		delete from tbl_dataroom_attach where dataroomAttachBoardId = #{dataroomId}
+	</delete>
+	<insert id="replaceAttach">
+		insert into tbl_dataroom_attach(dataroomAttachFullname, dataroomAttachBoardId) values (#{fullName}, #{dataroomId})
+	</insert>
 </mapper>

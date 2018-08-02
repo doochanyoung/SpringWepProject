@@ -26,4 +26,7 @@ public interface DataroomDAO {
 	public void updateHit(int dataroomId) throws Exception;
 	public void updateLike(int dataroomId) throws Exception;
 	public void addAttach(String fullName) throws Exception;
+	public List<String> getAttach(int dataroomId) throws Exception;
+	public void deleteAttach(int dataroomId) throws Exception;
+	public void replaceAttach(String fullName, int dataroomId) throws Exception;
 }

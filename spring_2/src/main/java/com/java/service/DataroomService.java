@@ -24,4 +24,5 @@ public interface DataroomService {
 	public int searchCountPaging(SearchPageHandler handler) throws Exception;
 	public void updateHit(int dataroomId) throws Exception;
 	public void updateLike(int dataroomId) throws Exception;
+	public List<String> getAttach(int dataroomId) throws Exception;
 }

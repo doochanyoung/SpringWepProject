@@ -22,5 +22,7 @@ function getFileInfo(fullName){
 		getLink = "/displayFile?fileName="+fullName;
 	}
 	fileName = fileLink.substr(fileLink.indexOf("_")+1);
+	console.log(fileName);
+	console.log(imgsrc);
 	return {fileName: fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
 }

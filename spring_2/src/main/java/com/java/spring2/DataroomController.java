@@ -15,9 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.domain.DataroomVO;
@@ -68,7 +70,7 @@ private static final Logger logger = LoggerFactory.getLogger(DataroomController.
 			service.updateHit(dataroomId);
 		}
 		model.addAttribute("dataroomVO", service.read(dataroomId));
-		System.out.println("¾¾¹ß = " +service.read(dataroomId));
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ = " +service.read(dataroomId));
 		return "/dataroom/dataroomRead";
 	}
 	
@@ -133,4 +135,10 @@ private static final Logger logger = LoggerFactory.getLogger(DataroomController.
 		+ "&searchType=" + pageHandler.getSearchType() + "&keyword=" + pageHandler.getKeyword();
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getAttach/{dataroomId}")
+	public List<String> getAttach(@PathVariable("dataroomId") int dataroomId) throws Exception{
+		logger.info("/getAttach/" + dataroomId);
+		return service.getAttach(dataroomId);
+	}
 }

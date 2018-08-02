@@ -38,6 +38,8 @@
 
 <script src="../ckeditor/ckeditor.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <!-- =======================================================
     Theme Name: Regna
     Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
@@ -127,7 +129,11 @@
 											<textarea class="form-control"
 												placeholder="write content please......" id="dataroomContent"
 												maxlength="40" name="dataroomContent">${dataroomVO.dataroomContent }</textarea>
-										</div>								
+										</div>
+										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
+										<ul class="mailbox-attachments clearfix uploadedList">
+										
+										</ul>
 										<div class="row">
 											<div class="col-4">
 												<span><strong>조회수</strong> : ${dataroomVO.dataroomHit }</span>
@@ -220,6 +226,18 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+			</span>
+ 	 	</div>
+	</li>                
+	</script>
 
 	<script>
 		CKEDITOR.replace('dataroomContent', {
@@ -256,9 +274,54 @@
 					   valid = false;
 				}
 			    if(valid){
-			    	 document.getElementById("formBoard").submit();
+			    	var that = $(this);
+					var str = "";
+					$(".uploadedList .delbtn").each(function(index){
+						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+					});
+					var arr = [];
+					$(".uploadedList li").each(function(index){
+						arr.push($(this).attr("data-src"));
+					});
+					if(arr.length > 0){
+						$.post("/deleteAllFiles",{files:arr}, function(){});
+					}
+					that.append(str);
+					that.get(0).submit();
 			    }
 			  });
+		});
+		var dataroomId = $('#dataroomId').val();
+		var templateAttach = Handlebars.compile($("#templateAttach").html());
+		$.getJSON("/dataroom/getAttach/"+dataroomId, function(list){
+			$(list).each(function(){
+				var fileInfo = getFileInfo(this);
+				var html = templateAttach(fileInfo);
+				$(".uploadedList").append(html);
+			});
+		});
+		$(".fileDrop").on("dragenter dragover", function(event){ //파일을 드래그 했을때 화면에 사진 뜨는거  방지
+			event.preventDefault();
+		});
+		$(".fileDrop").on("drop", function(event) {
+			event.preventDefault();
+			var files = event.originalEvent.dataTransfer.files;
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			$.ajax({
+				url : '/uploadAjax',
+				data : formData,
+				dataType : 'text',
+				processData : false,
+				contentType : false,
+				type : 'POST',
+				success : function(data) {
+					var fileInfo = getFileInfo(data);
+					var html = templateAttach(fileInfo);
+					$(".uploadedList").append(html);
+				}
+			});
 		});
 		$(document).ready(function(){
 			var formObj = $("form[role='form']");
@@ -274,6 +337,11 @@
 				self.location = "/dataroom/dataroomRead?dataroomId=" + dataroomId +"&page=" + page + "&perPageNum=" + perPageNum
 						+"&searchType=" + searchType + "&keyword=" + keyword;
 			});
+		});
+		$(".uploadedList").on("click", ".delbtn", function(event) {
+			event.preventDefault();
+			var that = $(this);
+			that.closest("li").remove();
 		});
 	</script>
 

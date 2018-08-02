@@ -48,20 +48,23 @@ public class UploadController {
 		try {
 			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 
-			MediaType mType = MediaUtils.getMediaType(formatName); // ÀÌ¹ÌÁö Å¸ÀÔ ÆÄÀÏÀÎ°æ¿ì ÀûÀýÇÑ MIMEÅ¸ÀÔÀ» ÁöÁ¤
+			MediaType mType = MediaUtils.getMediaType(formatName); // ï¿½Ì¹ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MIMEÅ¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 			HttpHeaders headers = new HttpHeaders();
 
 			in = new FileInputStream(uploadPath + fileName);
-			System.out.println("°æ·Î : " + uploadPath + fileName);
-			if (mType != null) {
+			/*if (mType != null) {
 				headers.setContentType(mType);
 			} else {
 				fileName = fileName.substring(fileName.indexOf("_") + 1);
 				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 				headers.add("Content-Disposition",
 						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-			}
+			}*/
+			fileName = fileName.substring(fileName.indexOf("_") + 1);
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.add("Content-Disposition",
+					"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();

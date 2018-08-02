@@ -135,5 +135,23 @@ public class DataroomDAOImpl implements DataroomDAO {
 		session.insert(namespace + ".addAttach", fullName);
 	}
 
+	@Override
+	public List<String> getAttach(int dataroomId) throws Exception {
+		return session.selectList(namespace + ".getAttach", dataroomId);
+	}
+
+	@Override
+	public void deleteAttach(int dataroomId) throws Exception {
+		session.delete(namespace + ".deleteAttach", dataroomId);
+	}
+
+	@Override
+	public void replaceAttach(String fullName, int dataroomId) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("dataroomId", dataroomId);
+		paramMap.put("fullName", fullName);
+		session.update(namespace + ".replaceAttach", paramMap);
+	}
+
 
 }

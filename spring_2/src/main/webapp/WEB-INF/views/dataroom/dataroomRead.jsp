@@ -151,6 +151,10 @@
 										</div>
 									</div>
 									<hr>
+									<ul class="mailbox-attachments clearfix uploadedList">
+										
+									</ul>
+									<hr>
 									<div class="row">
 									<c:if test="${loginId == dataroomVO.dataroomUserId}">
 										<button class="btn btn-default btn-sm ml-3" id="dataroomModify"
@@ -330,11 +334,9 @@
 	<script src="../lib/superfish/hoverIntent.js"></script>
 	<script src="../lib/superfish/superfish.min.js"></script>
 
-	<!-- Contact Form JavaScript File -->
-	<script src="../contactform/contactform.js"></script>
-
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
 
 	<script>
 		CKEDITOR.replace('dataroomContent', {
@@ -352,6 +354,13 @@
 			$("#dataroomRemove").on("click", function() {
 				var bool = confirm("정말 삭제 하시겠습니까?");
 				if (bool) {
+					var arr = [];
+					$(".uploadedList li").each(function(index){
+						arr.push($(this).attr("data-src"));
+					});
+					if(arr.length > 0){
+						$.post("/deleteAllFiles",{files:arr}, function(){});
+					}
 					formObj.attr("action", "/dataroom/dataroomDelete");
 					formObj.submit();
 				}
@@ -367,6 +376,16 @@
 				formObj.submit();
 			});
 		});
+	</script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li data-src='{{fullName}}'>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+			</span>
+ 	 	</div>
+	</li>                
 	</script>
 
 	<script id="templateList" type="text/x-handlebars-template">
@@ -435,7 +454,7 @@
 			var year = dateObj.getFullYear();
 			var month = dateObj.getMonth() + 1;
 			var date = dateObj.getDate();
-			return year + "/" + month + "/" + date;
+			return year + " / " + month + " / " + date;
 		});
 		var printData = function(commentArr, target, templateObject) {
 			console.log(commentArr);
@@ -446,6 +465,14 @@
 		}
 		var dataroomId = ${dataroomVO.dataroomId};
 		var replyPage = 1;
+		var templateAttach = Handlebars.compile($("#templateAttach").html());
+		$.getJSON("/dataroom/getAttach/"+dataroomId, function(list){
+			$(list).each(function(){
+				var fileInfo = getFileInfo(this);
+				var html = templateAttach(fileInfo);
+				$(".uploadedList").append(html);
+			});
+		});
 		function getPage(pageInfo) {
 			$.getJSON(pageInfo, function(data) {
 				printData(data.list, $("#commentlists"), $("#templateList"));

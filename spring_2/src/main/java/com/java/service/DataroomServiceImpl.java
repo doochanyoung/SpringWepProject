@@ -39,13 +39,23 @@ public class DataroomServiceImpl implements DataroomService{
 		return dao.read(dataroomId);
 	}
 
+	@Transactional
 	@Override
 	public void modify(DataroomVO vo) throws Exception {
 		dao.update(vo);
+		int dataroomId = vo.getDataroomId();
+		dao.deleteAttach(dataroomId);
+		String[] files = vo.getFiles();
+		if(files == null) {return;}
+		for(String fileName : files) {
+			dao.replaceAttach(fileName, dataroomId);
+		}
 	}
 
+	@Transactional
 	@Override
 	public void remove(int dataroomId) throws Exception {
+		dao.deleteAttach(dataroomId);
 		dao.delete(dataroomId);
 	}
 
@@ -103,6 +113,11 @@ public class DataroomServiceImpl implements DataroomService{
 	@Override
 	public void updateLike(int dataroomId) throws Exception {
 		dao.updateLike(dataroomId);
+	}
+
+	@Override
+	public List<String> getAttach(int dataroomId) throws Exception {
+		return dao.getAttach(dataroomId);
 	}
 
 }
