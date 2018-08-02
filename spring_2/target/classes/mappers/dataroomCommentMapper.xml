@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.DataroomCommentMapper">
+	<select id="list" resultType="com.java.domain.DataroomCommentVO">
+		select * from tbl_dataroom_comment
+		where dataroomCommentBoardId = #{dataroomId}
+	</select>
+	<select id="listPage" resultType="com.java.domain.DataroomCommentVO">
+		select * from tbl_dataroom_comment where dataroomCommentBoardId =
+		#{dataroomId} order by dataroomCommentGroup desc, dataroomCommentSequence limit #{pageStart}, #{perPageNum}
+	</select>
+	<select id="count" resultType="int">
+		select count(dataroomCommentBoardId) from
+		tbl_dataroom_comment where dataroomCommentBoardId = #{dataroomId}
+	</select>
+	<select id="maxGroup" resultType="int">
+		select max(dataroomCommentGroup) from
+		tbl_dataroom_comment where dataroomCommentBoardId = #{dataroomId}
+	</select>
+	<select id="maxSequence" resultType="int">
+		select max(dataroomCommentSequence) from
+		tbl_dataroom_comment where dataroomCommentGroup = #{dataroomCommentGroup}
+	</select>
+	<select id="getGroup" resultType="int">
+		select dataroomCommentGroup from tbl_dataroom_comment
+		where dataroomCommentId = #{dataroomCommentId}
+	</select>
+	<insert id="create">
+		insert into tbl_dataroom_comment(dataroomCommentContent,
+		dataroomCommentlike, dataroomCommentGroup, dataroomCommentSequence, dataroomCommentIsReply,
+		dataroomCommentRegdate, dataroomCommentBoardId, dataroomCommentUserId)
+		values(#{content}, 0, #{maxGroup}, 0, false,
+		now(), #{dataroomId}, #{userId})
+	</insert>
+	<insert id="createReply">
+		insert into tbl_dataroom_comment(dataroomCommentContent,
+		dataroomCommentlike, dataroomCommentGroup, dataroomCommentSequence, dataroomCommentIsReply,
+		dataroomCommentRegdate, dataroomCommentBoardId, dataroomCommentUserId)
+		values(#{content}, 0, #{group}, #{sequence}, true,
+		now(), #{dataroomId}, #{userId})
+	</insert>
+	<update id="update">
+		update tbl_dataroom_comment set dataroomCommentContent = #{dataroomCommentContent},
+		dataroomCommentUpdatedate = now() where dataroomCommentId = #{dataroomCommentId}
+	</update>
+	<delete id="delete">
+		delete from tbl_dataroom_comment where dataroomCommentId = #{dataroomCommentId}
+	</delete>
+	<select id="getBoardId" resultType="int">
+		select dataroomCommentBoardId from tbl_dataroom_comment where dataroomCommentId = #{dataroomCommentId}
+	</select>
+</mapper>

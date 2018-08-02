@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.registerMapper">
+	
+	<select id="registerCheck" resultType="integer" parameterType="com.java.login.LoginVO">
+		select count(*) from tbl_user
+		where userId = #{userId}
+	</select>
+	
+	<select id="register" resultType="integer" parameterType="com.java.login.LoginVO">
+		INSERT INTO tbl_user (userId, userName, userNickname, userPassword, userEmail, userPhone, userAdmin)
+			VALUES (#{userId}, #{userName}, #{userNickname}, #{userPassword},#{userEmail}, #{userPhone}, 1);
+	</select>
+	
+</mapper>

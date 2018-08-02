@@ -3,6 +3,7 @@ package com.java.login;
 public class LoginVO {
 	private String userId;
 	private String userPassword;
+	private String userName;
 	private String userNickname;
 	private String userEmail;
 	private String userPhone;
@@ -18,6 +19,12 @@ public class LoginVO {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getUserNickname() {
 		return userNickname;

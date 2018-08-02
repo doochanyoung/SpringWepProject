@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.BoardMapper">
+	<insert id="create">
+		insert into tbl_board(boardTitle, boardContent,
+		boardRegdate, boardHit, boardLike, boardGroup, boardSequence,
+		boardIsReply, boardCommcnt, boardUserId) values(#{title}, #{content}, now(), 0, 0,
+		#{maxGroup}, 0, false, 0, #{userId})
+	</insert>
+	<insert id="createReply">
+		insert into tbl_board(boardTitle, boardContent,
+		boardRegdate, boardHit, boardLike, boardGroup, boardSequence,
+		boardIsReply, boardCommcnt, boardUserId) values(#{title}, #{content}, now(), 0, 0,
+		#{group}, #{sequence}, true, 0, #{userId})
+	</insert>
+	<select id="maxGroup" resultType="int">
+		select max(boardGroup) from
+		tbl_board
+	</select>
+	<select id="listAll" resultType="com.java.domain.BoardVO">
+		<![CDATA[
+			select *
+			from tbl_board
+			where boardId > 0
+			order by boardGroup desc, boardSequence
+		]]>
+	</select>
+	<select id="read" resultType="com.java.domain.BoardVO">
+		select *
+		from tbl_board
+		where boardId
+		= #{boardId}
+	</select>
+	<delete id="delete">
+		delete from tbl_board where boardId = #{boardId}
+	</delete>
+	<update id="update">
+		update tbl_board set boardTitle = #{title}, boardContent =
+		#{content}, boardUpdatedate = now() where boardId = #{boardId}
+	</update>
+	<select id="getGroup" resultType="int">
+		select boardGroup from tbl_board
+		where boardId = #{boardId}
+	</select>
+	<select id="maxSequence" resultType="int">
+		select max(boardSequence) from
+		tbl_board where boardGroup = #{boardGroup}
+	</select>
+	<select id="listPage" resultType="com.java.domain.BoardVO">
+		<![CDATA[
+			select * from tbl_board where boardId > 0 order by boardGroup desc, boardSequence limit #{page}, 30
+		]]>
+	</select>
+	<select id="listPageHandler"
+		resultType="com.java.domain.BoardVO">
+		<![CDATA[
+			select * from tbl_board where boardId > 0 order by boardGroup desc, boardSequence limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			select count(boardId) from tbl_board where boardId > 0
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'title'.toString()">
+				and boardTitle like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'writer'.toString()">
+				and boardUserId like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'content'.toString()">
+				and boardContent like concat('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="com.java.domain.BoardVO">
+		<![CDATA[
+			select * from tbl_board where boardId > 0 
+		]]>
+		<include refid="search" />
+		<![CDATA[
+			order by boardGroup desc, boardSequence limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			select count(boardId) from tbl_board where boardId > 0
+		]]>
+		<include refid="search" />
+	</select>
+	<update id="updateCommCnt">
+		update tbl_board set boardCommCnt = boardCommCnt + #{amount} where boardId = #{boardId}
+	</update>
+	<update id="updateHit">
+		update tbl_board set boardHit = boardHit + 1 where boardId = #{boardId}
+	</update>
+	<update id="updateLike">
+		update tbl_board set boardLike = boardLike + 1 where boardId = #{boardId}
+	</update>
+</mapper>

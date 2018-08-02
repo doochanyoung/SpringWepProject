@@ -92,62 +92,7 @@
 										<h3 class="login-title">Register</h3>
 									</div>
 									<div class="card-body">
-										<form class="form" role="form" autocomplete="off" action="<%=request.getContextPath()%>/login/registerCheck"
-											id="formRegister" method="post">
-											<div class="form-group">
-												<label for="ID" class="login-text">ID</label> <input
-													type="text" class="form-control form-control-lg"
-													name="userId" id="userId" placeholder="Write ID">
-												<div class="validation"></div>
-											</div>
-											<div class="form-group" >
-												<label class="login-text">Password</label> <input
-													type="password" class="form-control form-control-lg"
-													name="userPassword" id="userPassword"
-													placeholder="Write Password">
-												<div class="invalid-feedback">Enter your password too!</div>
-												<div class="validation"></div>
-											</div>
-											<div class="form-group" >
-												<label for="Name" class="login-text">Name</label> <input
-													type="text" class="form-control form-control-lg"
-													name="userNickname" id="userNickname"
-													placeholder="Write Nickname">
-												<div class="validation"></div>
-											</div>
-											<div class="form-group" >
-												<label for="Nickname" class="login-text">Nickname</label> <input
-													type="text" class="form-control form-control-lg"
-													name="userNickname" id="userNickname"
-													placeholder="Write Nickname">
-												<div class="validation"></div>
-											</div>
-											<div class="form-group">
-												<label for="Email" class="login-text">Email</label> <input
-													type="email" class="form-control form-control-lg"
-													name="userEmail" id="userEmail" placeholder="Write Email">
-												<div class="validation"></div>
-											</div>
-											<div class="form-group">
-												<label for="Phone Number" class="login-text">Phone Number</label> <input
-													type="text" class="form-control form-control-lg"
-													name="userPhone" id="userPhone"
-													placeholder="Write Phone Number">
-												<div class="validation"></div>
-											</div>
-											<div class="form-group">
-												<label for="Introduction" class="login-text">Introduction</label>
-												<textarea class="form-control" name="userIntro" rows="5"
-													data-rule="required"
-													data-msg="Please write something for us"
-													placeholder="introduce yourself...."></textarea>
-												<div class="validation"></div>
-											</div>
-											<div class="text-center">
-												<button class="btn btn-default btn-sm btn-block"
-													type="submit">Submit</button>
-											</div>
-										</form>
+										<h5 class="login-title">가입이 완료되었습니다.<br>로그인후 이용하여 주세요.</h5>
 									</div>
 									<!--/card-block-->
 								</div>

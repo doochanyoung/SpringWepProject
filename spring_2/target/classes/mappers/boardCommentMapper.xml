@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.BoardCommentMapper">
+	<select id="list" resultType="com.java.domain.BoardCommentVO">
+		select * from tbl_board_comment
+		where boardCommentBoardId = #{boardId}
+	</select>
+	<select id="listPage" resultType="com.java.domain.BoardCommentVO">
+		select * from tbl_board_comment where boardCommentBoardId =
+		#{boardId} order by boardCommentGroup desc, boardCommentSequence limit #{pageStart}, #{perPageNum}
+	</select>
+	<select id="count" resultType="int">
+		select count(boardCommentBoardId) from
+		tbl_board_comment where boardCommentBoardId = #{boardId}
+	</select>
+	<select id="maxGroup" resultType="int">
+		select max(boardCommentGroup) from
+		tbl_board_comment where boardCommentBoardId = #{boardId}
+	</select>
+	<select id="maxSequence" resultType="int">
+		select max(boardCommentSequence) from
+		tbl_board_comment where boardCommentGroup = #{boardCommentGroup}
+	</select>
+	<select id="getGroup" resultType="int">
+		select boardCommentGroup from tbl_board_comment
+		where boardCommentId = #{boardCommentId}
+	</select>
+	<insert id="create">
+		insert into tbl_board_comment(boardCommentContent,
+		boardCommentlike, boardCommentGroup, boardCommentSequence, boardCommentIsReply,
+		boardCommentRegdate, boardCommentBoardId, boardCommentUserId)
+		values(#{content}, 0, #{maxGroup}, 0, false,
+		now(), #{boardId}, #{userId})
+	</insert>
+	<insert id="createReply">
+		insert into tbl_board_comment(boardCommentContent,
+		boardCommentlike, boardCommentGroup, boardCommentSequence, boardCommentIsReply,
+		boardCommentRegdate, boardCommentBoardId, boardCommentUserId)
+		values(#{content}, 0, #{group}, #{sequence}, true,
+		now(), #{boardId}, #{userId})
+	</insert>
+	<update id="update">
+		update tbl_board_comment set boardCommentContent = #{boardCommentContent},
+		boardCommentUpdatedate = now() where boardCommentId = #{boardCommentId}
+	</update>
+	<delete id="delete">
+		delete from tbl_board_comment where boardCommentId = #{boardCommentId}
+	</delete>
+	<select id="getBoardId" resultType="int">
+		select boardCommentBoardId from tbl_board_comment where boardCommentId = #{boardCommentId}
+	</select>
+</mapper>
