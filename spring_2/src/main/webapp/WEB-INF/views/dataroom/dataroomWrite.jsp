@@ -215,13 +215,12 @@
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
 	<li>
-  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment">
+		<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a></span>
   		<div class=	"mailbox-attachment-info">
 			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-			</span>
  	 	</div>
-	</li>                
+	</li>              
 	</script>
 
 	<script>
