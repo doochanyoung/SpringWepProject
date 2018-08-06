@@ -50,4 +50,7 @@
 	<select id="getBoardId" resultType="int">
 		select boardCommentBoardId from tbl_board_comment where boardCommentId = #{boardCommentId}
 	</select>
+	<delete id="deleteComment">
+		delete from tbl_board_comment where boardCommentBoardId = #{boardCommentBoardId}
+	</delete>
 </mapper>

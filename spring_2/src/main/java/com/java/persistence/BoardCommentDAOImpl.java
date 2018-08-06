@@ -96,5 +96,10 @@ public class BoardCommentDAOImpl implements BoardCommentDAO {
 		return session.selectOne(namespace + ".getBoardId", boardCommentId);
 	}
 
+	@Override
+	public void deleteComment(int boardCommentBoardId) throws Exception {
+		session.delete(namespace + ".deleteComment", boardCommentBoardId);
+	}
+
 
 }

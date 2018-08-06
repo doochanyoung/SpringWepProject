@@ -50,4 +50,7 @@
 	<select id="getBoardId" resultType="int">
 		select dataroomCommentBoardId from tbl_dataroom_comment where dataroomCommentId = #{dataroomCommentId}
 	</select>
+	<delete id="deleteComment">
+		delete from tbl_dataroom_comment where dataroomCommentBoardId = #{dataroomCommentBoardId}
+	</delete>
 </mapper>

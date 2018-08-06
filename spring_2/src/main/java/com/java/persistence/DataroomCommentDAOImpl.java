@@ -97,5 +97,10 @@ public class DataroomCommentDAOImpl implements DataroomCommentDAO {
 		return session.selectOne(namespace + ".getBoardId", dataroomCommentId);
 	}
 
+	@Override
+	public void deleteComment(int dataroomCommentBoardId) throws Exception {
+		session.delete(namespace + ".deleteComment", dataroomCommentBoardId);
+	}
+
 
 }

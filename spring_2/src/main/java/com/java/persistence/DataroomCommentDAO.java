@@ -17,5 +17,6 @@ public interface DataroomCommentDAO {
 	public int getGroup(int dataroomCommentId) throws Exception;
 	public int maxSequence(int dataroomCommentGroup) throws Exception;
 	public int getBoardId(int dataroomCommentId) throws Exception;
+	public void deleteComment(int dataroomCommentBoardId) throws Exception;
 }
 
