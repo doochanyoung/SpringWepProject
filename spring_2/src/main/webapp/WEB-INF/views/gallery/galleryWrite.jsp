@@ -1,10 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page pageEncoding="utf-8" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
 <title>GAE & Doo & CHUNG WEPPAGE</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
@@ -38,6 +39,9 @@
 
 <script src="../ckeditor/ckeditor.js"></script>
 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <!-- =======================================================
     Theme Name: Regna
     Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
@@ -54,7 +58,7 @@
   ============================-->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand nav-menu" href="/board/boardList">Community&nbsp;</a>
+			<a class="navbar-brand nav-menu" href="/gallery/galleryList">Community&nbsp;</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -65,10 +69,9 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
-					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item"><a href="/dataroom/dataroomList">Data
-							Room</a></li>
-					<li class="nav-item"><a href="/gallery/galleryList">Gallery</a></li>
+					<li class="nav-item"><a href="/gallery/galleryList">Board</a></li>
+					<li class="nav-item"><a href="/dataroom/dataroomList">Data Room</a></li>
+					<li class="nav-item menu-active"><a href="/gallery/galleryList">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
 						<ul class="navbar-nav">
 							<li class="nav-item"><a href="<c:url value='/login'/>">로그인</a></li>
@@ -91,7 +94,7 @@
 
 
 	<!--==========================
-      boards Section
+      gallerys Section
     ============================-->
 
 	<section id="boards">
@@ -106,29 +109,27 @@
 									<h3 class="title">Write</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" action="/board/boardWrite"
+									<form class="form" action="/gallery/galleryWrite"
 										autocomplete="off" id="formBoard" method="POST"
 										class="contactForm" role="form">
 										<div class="form-group">
 											<label for="title" class="text">Title</label>
 											<input type="text" class="form-control form-control-lg"
-												name="boardTitle" id="boardTitle" placeholder="write Title">
+												name="galleryTitle" id="galleryTitle" placeholder="write Title">
 											<div class="validation"></div>
 										</div>
 										<div class="form-group">
 											<input type="hidden" class="form-control form-control-lg"
-												name="boardUserId" id="boardUserId" value="${loginId }">
+												name="galleryUserId" id="galleryUserId" value="${loginId }">
 											<div class="validation"></div>
 										</div>
-										<div class="form-group">
-											<label for="content" class="text">Content</label>
-											<textarea class="form-control"
-												 id="boardContent" name="boardContent" placeholder="write content please......"></textarea>
-											<div class="validation"></div>
-										</div>
-										<div class="text-center">
+										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
+										<ul class="mailbox-attachments clearfix uploadedList">
+										
+										</ul>
+										<div class="text-center mt-2">
 											<button class="btn btn-default btn-sm btn-block"
-												id="boardSave" type="submit">Submit</button>
+												id="gallerySave" type="submit">Submit</button>
 										</div>
 									</form>
 								</div>
@@ -145,7 +146,7 @@
 		</div>
 		<!--/container-->
 	</section>
-	<!-- #boards -->
+	<!-- #gallerys -->
 
 	<footer id="footer">
 		<div class="footer-top">
@@ -200,24 +201,27 @@
 	<script src="../lib/counterup/counterup.min.js"></script>
 	<script src="../lib/superfish/hoverIntent.js"></script>
 	<script src="../lib/superfish/superfish.min.js"></script>
-
-	<!-- Contact Form JavaScript File -->
-	<script src="../contactform/contactform.js"></script>
-
+	
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment">
+		<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+ 	 	</div>
+	</li>              
+	</script>
 
 	<script>
-		CKEDITOR.replace('boardContent', {
-			 height: '600px',
-			 resize_enabled: false
-		});
-
 		/* window.onload = function() {
-			CKEDITOR.instances.boardContent.on('key', function() {
-				var str = CKEDITOR.instances.boardContent.getData();
+			CKEDITOR.instances.galleryContent.on('key', function() {
+				var str = CKEDITOR.instances.galleryContent.getData();
 				if (str.length >= 4096) {
-					CKEDITOR.instances.boardContent.setData(str.substring(0, 4090));
+					CKEDITOR.instances.galleryContent.setData(str.substring(0, 4090));
 					alert('최대 4096글자까지 등록 가능합니다');
 				}
 			});
@@ -225,38 +229,83 @@
 		$(document).ready(function() {
 			  $('#formBoard').submit(function(e) {
 				e.preventDefault();
-			    var boardTitle = $('#boardTitle').val();
-			    var boardContent = CKEDITOR.instances.boardContent.getData();
-			    var boardUserId = $('#boardUserId').val();
+			    var galleryTitle = $('#galleryTitle').val();
+			    var galleryUserId = $('#galleryUserId').val();
 			    $(".error").remove();
 			    var valid = true;
-			    if (boardTitle.length < 1) {
-			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (galleryTitle.length < 1) {
+			      $('#galleryTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardTitle.length > 45) {
-				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (galleryTitle.length > 45) {
+				      $('#galleryTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
-			    if (boardUserId.length < 1) {
-			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (galleryUserId.length < 1) {
+			      $('#galleryUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardUserId.length > 45) {
-				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (galleryUserId.length > 45) {
+				      $('#galleryUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
-				}
-			    if (boardContent.length < 1) {
-				      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-				      valid = false;
-			 	}  else if (boardContent.length > 4096) {
-					   $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
-					   valid = false;
 				}
 			    if(valid){
-			    	 document.getElementById("formBoard").submit();
+					var that = $(this);
+					var str = "";
+					$(".uploadedList .delbtn").each(function(index){
+						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+					});
+					that.append(str);
+					that.get(0).submit();
 			    }
 			  });
 		});
 	</script>
-
+	<script>
+		var template = Handlebars.compile($("#templateAttach").html());
+		$(".fileDrop").on("dragenter dragover", function(event){ //파일을 드래그 했을때 화면에 사진 뜨는거  방지
+			event.preventDefault();
+		});
+		$(".fileDrop").on("drop", function(event) {
+			event.preventDefault();
+			var files = event.originalEvent.dataTransfer.files;
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			$.ajax({
+				url : '/uploadAjax',
+				data : formData,
+				dataType : 'text',
+				processData : false,
+				contentType : false,
+				type : 'POST',
+				success : function(data) {
+					var fileInfo = getFileInfo(data);
+					var html = template(fileInfo);
+					$(".uploadedList").append(html);
+				}
+			});
+		});
+		$("#gallerySave").submit(function(event){
+			event.preventDefault();
+			var that = $(this);
+			var str = "";
+			$(".uploadedList .delbtn").each(function(index){
+				str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+			});
+			that.append(str);
+			that.get(0).submit();
+		});
+		$(".uploadedList").on("click", ".delbtn", function(event) {
+			event.preventDefault();
+			var that = $(this);
+			that.closest("li").remove();
+		});
+		function getOriginalName(fileName){
+			if(checkImageType(fileName)){
+				return;
+			}
+			var idx = fileName.indexOf("_") + 1;
+			return fileName.substr(idx);
+		}
+	</script>
 </body>
 </html>

@@ -36,15 +36,12 @@
 	integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
 	crossorigin="anonymous">
 
-<script src="../ckeditor/ckeditor.js"></script>
-
 <!-- =======================================================
     Theme Name: Regna
     Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
-
 </head>
 
 <body>
@@ -65,10 +62,9 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
-					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item"><a href="/dataroom/dataroomList">Data
-							Room</a></li>
-					<li class="nav-item"><a href="/gallery/galleryList">Gallery</a></li>
+					<li class="nav-item"><a href="/board/boardList">Board</a></li>
+					<li class="nav-item"><a href="/dataroom/dataroomList">Data Room</a></li>
+					<li class="nav-item  menu-active"><a href="/gallery/galleryList">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
 						<ul class="navbar-nav">
 							<li class="nav-item"><a href="<c:url value='/login'/>">로그인</a></li>
@@ -91,61 +87,92 @@
 
 
 	<!--==========================
-      boards Section
+      Services Section
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
-			<div class="row">
-				<div class="col-md-12">
+		<div class="container">
+			<div class="section-header m-5">
+				<h3 class="section-title">갤러리</h3>
+				<p class="section-description">갤러리를 활용하여 많은 사진을 구경해 보세요.</p>
+			</div>
+			<div class="card m-4">
+				<div class="card-header">Search</div>
+				<div class="card-body">
 					<div class="row">
-						<div class="col-md-10 mx-auto">
-							<!-- form card login -->
-							<div class="card">
-								<div class="card-header">
-									<h3 class="title">Write</h3>
-								</div>
-								<div class="card-body">
-									<form class="form" action="/board/boardWrite"
-										autocomplete="off" id="formBoard" method="POST"
-										class="contactForm" role="form">
-										<div class="form-group">
-											<label for="title" class="text">Title</label>
-											<input type="text" class="form-control form-control-lg"
-												name="boardTitle" id="boardTitle" placeholder="write Title">
-											<div class="validation"></div>
-										</div>
-										<div class="form-group">
-											<input type="hidden" class="form-control form-control-lg"
-												name="boardUserId" id="boardUserId" value="${loginId }">
-											<div class="validation"></div>
-										</div>
-										<div class="form-group">
-											<label for="content" class="text">Content</label>
-											<textarea class="form-control"
-												 id="boardContent" name="boardContent" placeholder="write content please......"></textarea>
-											<div class="validation"></div>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-default btn-sm btn-block"
-												id="boardSave" type="submit">Submit</button>
-										</div>
-									</form>
-								</div>
-								<!--/card-block-->
+						<div class="col-7">
+							<div class="form-group">
+								<input type="text" class="form-control"
+									id="keyword" name="keyword" placeholder="search...." value="${pageHandler.keyword }">
 							</div>
-							<!-- /form card login -->
+						</div>
+						<div class="col-2">
+							<select class="custom-select" id="searchType" name="searchType">
+								<option value="none" id="select" <c:out value="${pageHandler.searchType == null ? 'selected':'' }" />>-------</option>
+								<option value="title" id="select" <c:out value="${pageHandler.searchType eq 'title' ? 'selected':'' }" />>제목</option>
+								<option value="writer" id="select" <c:out value="${pageHandler.searchType eq 'writer' ? 'selected':'' }" />>작성자</option>
+							</select>
+						</div>
+						<div class="col-1">
+							<div class="text-center">
+								<button class="btn btn-default float-left" id="searchButton" type="button">검색</button>
+							</div>
 						</div>
 					</div>
-					<!--/row-->
 				</div>
-				<!--/col-->
 			</div>
-			<!--/row-->
+			<hr class="my-4">
+			<div class="row">
+				<table class="table table-striped table-sm"
+					style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th class="mobile" scope="col">id</th>
+							<th scope="col">제목</th>
+							<th class="mobile" scope="col">작성자</th>
+							<th class="mobile" scope="col">작성일</th>
+							<th class="mobile" scope="col">조회수</th>
+							<th class="mobile" scope="col">좋아요</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="galleryVO">
+							<tr>
+								<th class="mobile" scope="row">${galleryVO.galleryId }</th>
+								<td><a href='/gallery/galleryRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&galleryId=${galleryVO.galleryId}'><c:if test="${galleryVO.galleryIsReply }"><i class="fab fa-replyd"></i></c:if>${galleryVO.galleryTitle } <strong>[${galleryVO.galleryCommCnt}]</strong></a></td>
+								<td class="mobile">${galleryVO.galleryUserId }</td>
+								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${galleryVO.galleryRegdate }"/></td>
+								<td class="mobile">${galleryVO.galleryHit }</td>
+								<td class="mobile">${galleryVO.galleryLike }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div class="text-center">
+					<c:if test="${not empty loginId}">
+					<button class="btn btn-default float-right m-2" type="button" id="galleryWrite">글 작성</button>
+					</c:if>
+				</div>
+			</div>
 		</div>
-		<!--/container-->
+		<nav>
+			<ul class="pagination pagination-info justify-content-center">
+				<c:if test="${pageMaker.prev }">
+				<li class="page-item"><a class="page-link" href="galleryList${pageMaker.makeSearch(pageMaker.startPage - 1) }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span></a></li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+					<li class = "page-item <c:out value="${pageMaker.pageHandler.page == idx ? 'active' : ''}" />">
+					<a class="page-link" href="galleryList${pageMaker.makeSearch(idx)}">${idx }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+				<li class="page-item"><a class="page-link" href="galleryList${pageMaker.makeSearch(pageMaker.endPage + 1) }" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+						class="sr-only">Next</span></a></li>
+				</c:if>
+			</ul>
+		</nav>
 	</section>
-	<!-- #boards -->
 
 	<footer id="footer">
 		<div class="footer-top">
@@ -206,57 +233,17 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
-
+	
 	<script>
-		CKEDITOR.replace('boardContent', {
-			 height: '600px',
-			 resize_enabled: false
-		});
-
-		/* window.onload = function() {
-			CKEDITOR.instances.boardContent.on('key', function() {
-				var str = CKEDITOR.instances.boardContent.getData();
-				if (str.length >= 4096) {
-					CKEDITOR.instances.boardContent.setData(str.substring(0, 4090));
-					alert('최대 4096글자까지 등록 가능합니다');
-				}
-			});
-		}; */
 		$(document).ready(function() {
-			  $('#formBoard').submit(function(e) {
-				e.preventDefault();
-			    var boardTitle = $('#boardTitle').val();
-			    var boardContent = CKEDITOR.instances.boardContent.getData();
-			    var boardUserId = $('#boardUserId').val();
-			    $(".error").remove();
-			    var valid = true;
-			    if (boardTitle.length < 1) {
-			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-			      valid = false;
-			    } else if (boardTitle.length > 45) {
-				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
-				      valid = false;
-				}
-			    if (boardUserId.length < 1) {
-			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-			      valid = false;
-			    } else if (boardUserId.length > 45) {
-				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
-				      valid = false;
-				}
-			    if (boardContent.length < 1) {
-				      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-				      valid = false;
-			 	}  else if (boardContent.length > 4096) {
-					   $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
-					   valid = false;
-				}
-			    if(valid){
-			    	 document.getElementById("formBoard").submit();
-			    }
-			  });
+			$('#galleryWrite').on("click", function(ext) {
+				self.location = "galleryWrite";
+			});
+			$("#searchButton").on("click", function(event){
+				self.location = "galleryList" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("#searchType option:selected").val()
+				+ "&keyword=" + encodeURIComponent($('#keyword').val());
+			});
 		});
 	</script>
-
 </body>
 </html>

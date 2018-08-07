@@ -68,7 +68,7 @@
 					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
 					<li class="nav-item"><a href="/dataroom/dataroomList">Data
 							Room</a></li>
-					<li class="nav-item"><a href="#">Gallery</a></li>
+					<li class="nav-item"><a href="/gallery/galleryList">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
 						<ul class="navbar-nav">
 							<li class="nav-item"><a href="<c:url value='/login'/>">로그인</a></li>

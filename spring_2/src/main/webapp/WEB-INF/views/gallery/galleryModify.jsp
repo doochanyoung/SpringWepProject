@@ -38,6 +38,8 @@
 
 <script src="../ckeditor/ckeditor.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <!-- =======================================================
     Theme Name: Regna
     Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
@@ -65,10 +67,9 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
-					<li class="nav-item menu-active"><a href="/board/boardList">Board</a></li>
-					<li class="nav-item"><a href="/dataroom/dataroomList">Data
-							Room</a></li>
-					<li class="nav-item"><a href="/gallery/galleryList">Gallery</a></li>
+					<li class="nav-item"><a href="/board/boardList">Board</a></li>
+					<li class="nav-item"><a href="/dataroom/dataroomList">Data Room</a></li>
+					<li class="nav-item  menu-active"><a href="/gallery/galleryList">Gallery</a></li>
 					<li class="nav-item menu-has-children"><a href="">로그인을 하세요</a>
 						<ul class="navbar-nav">
 							<li class="nav-item"><a href="<c:url value='/login'/>">로그인</a></li>
@@ -103,32 +104,44 @@
 							<!-- form card login -->
 							<div class="card">
 								<div class="card-header">
-									<h3 class="title">Write</h3>
+									<h3 class="title">Modify</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" action="/board/boardWrite"
-										autocomplete="off" id="formBoard" method="POST"
-										class="contactForm" role="form">
+									<form class="form" action="/gallery/galleryModify" role="form" method="post" id="formBoard">
+										<input type="hidden" name="galleryId" id="galleryId" value="${galleryVO.galleryId }">
+										<input type="hidden" name="page" id="page" value="${pageHandler.page }">
+										<input type="hidden" name="perPageNum" id="perPageNum" value="${pageHandler.perPageNum }">
+										<input type="hidden" name="searchType" id="searchType" value="${pageHandler.searchType }">
+										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
 										<div class="form-group">
-											<label for="title" class="text">Title</label>
-											<input type="text" class="form-control form-control-lg"
-												name="boardTitle" id="boardTitle" placeholder="write Title">
-											<div class="validation"></div>
+											<label for="title" class="text">Title</label> <input
+												type="text" class="form-control form-control-lg"
+												name="galleryTitle" id="galleryTitle" placeholder="write Title" value="${galleryVO.galleryTitle }">
 										</div>
 										<div class="form-group">
-											<input type="hidden" class="form-control form-control-lg"
-												name="boardUserId" id="boardUserId" value="${loginId }">
-											<div class="validation"></div>
+											<label for="writer" class="text">Writer</label> <input
+												type="text" class="form-control form-control-lg"
+												name="galleryUserId" id="galleryUserId" readonly="readonly" value="${galleryVO.galleryUserId }">
 										</div>
-										<div class="form-group">
-											<label for="content" class="text">Content</label>
-											<textarea class="form-control"
-												 id="boardContent" name="boardContent" placeholder="write content please......"></textarea>
-											<div class="validation"></div>
+										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
+										<ul class="mailbox-attachments clearfix uploadedList">
+										
+										</ul>
+										<div class="row">
+											<div class="col-4">
+												<span><strong>조회수</strong> : ${galleryVO.galleryHit }</span>
+											</div>
+											<div class="col-4">
+												<span><strong>좋아요</strong> : ${galleryVO.galleryLike }</span>
+											</div>
+											<div class="col-4">
+												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${galleryVO.galleryRegdate }"/></span>
+											</div>
 										</div>
-										<div class="text-center">
-											<button class="btn btn-default btn-sm btn-block"
-												id="boardSave" type="submit">Submit</button>
+										<hr>
+										<div class="row">									
+											<button class="btn btn-default btn-sm ml-3" id="gallerySave" type="button" style="background:#5AAEFF">Save</button>
+											<button class="btn btn-default btn-sm ml-3" id="galleryCancel" type="button" style="background:#FF6C6C;">Cancel</button>
 										</div>
 									</form>
 								</div>
@@ -206,55 +219,109 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+ 	 	</div>
+	</li>                
+	</script>
 
 	<script>
-		CKEDITOR.replace('boardContent', {
-			 height: '600px',
-			 resize_enabled: false
-		});
-
-		/* window.onload = function() {
-			CKEDITOR.instances.boardContent.on('key', function() {
-				var str = CKEDITOR.instances.boardContent.getData();
-				if (str.length >= 4096) {
-					CKEDITOR.instances.boardContent.setData(str.substring(0, 4090));
-					alert('최대 4096글자까지 등록 가능합니다');
-				}
-			});
-		}; */
 		$(document).ready(function() {
 			  $('#formBoard').submit(function(e) {
 				e.preventDefault();
-			    var boardTitle = $('#boardTitle').val();
-			    var boardContent = CKEDITOR.instances.boardContent.getData();
-			    var boardUserId = $('#boardUserId').val();
+			    var galleryTitle = $('#galleryTitle').val();
+			    var galleryUserId = $('#galleryUserId').val();
 			    $(".error").remove();
 			    var valid = true;
-			    if (boardTitle.length < 1) {
-			      $('#boardTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (galleryTitle.length < 1) {
+			      $('#galleryTitle').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardTitle.length > 45) {
-				      $('#boardTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (galleryTitle.length > 45) {
+				      $('#galleryTitle').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
-			    if (boardUserId.length < 1) {
-			      $('#boardUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+			    if (galleryUserId.length < 1) {
+			      $('#galleryUserId').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
-			    } else if (boardUserId.length > 45) {
-				      $('#boardUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
+			    } else if (galleryUserId.length > 45) {
+				      $('#galleryUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
-				}
-			    if (boardContent.length < 1) {
-				      $('#boardContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-				      valid = false;
-			 	}  else if (boardContent.length > 4096) {
-					   $('#boardContent').after('<span class="error" style="color:red;"><small>please write less than 4096 charactors...</small></span>');
-					   valid = false;
 				}
 			    if(valid){
-			    	 document.getElementById("formBoard").submit();
+			    	var that = $(this);
+					var str = "";
+					$(".uploadedList .delbtn").each(function(index){
+						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+					});
+					var arr = [];
+					$(".uploadedList li").each(function(index){
+						arr.push($(this).attr("data-src"));
+					});
+					if(arr.length > 0){
+						$.post("/deleteAllFiles",{files:arr}, function(){});
+					}
+					that.append(str);
+					that.get(0).submit();
 			    }
 			  });
+		});
+		var galleryId = $('#galleryId').val();
+		var templateAttach = Handlebars.compile($("#templateAttach").html());
+		$.getJSON("/gallery/getAttach/"+galleryId, function(list){
+			$(list).each(function(){
+				var fileInfo = getFileInfo(this);
+				var html = templateAttach(fileInfo);
+				$(".uploadedList").append(html);
+			});
+		});
+		$(".fileDrop").on("dragenter dragover", function(event){ //파일을 드래그 했을때 화면에 사진 뜨는거  방지
+			event.preventDefault();
+		});
+		$(".fileDrop").on("drop", function(event) {
+			event.preventDefault();
+			var files = event.originalEvent.dataTransfer.files;
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			$.ajax({
+				url : '/uploadAjax',
+				data : formData,
+				dataType : 'text',
+				processData : false,
+				contentType : false,
+				type : 'POST',
+				success : function(data) {
+					var fileInfo = getFileInfo(data);
+					var html = templateAttach(fileInfo);
+					$(".uploadedList").append(html);
+				}
+			});
+		});
+		$(document).ready(function(){
+			var formObj = $("form[role='form']");
+			var galleryId = $('#galleryId').val();
+			var page = $('#page').val();
+			var perPageNum = $('#perPageNum').val();
+			var searchType = $('#searchType').val();
+			var keyword = $('#keyword').val();
+			$("#gallerySave").on("click", function(){
+				formObj.submit();
+			});
+			$("#galleryCancel").on("click", function(){
+				self.location = "/gallery/galleryRead?galleryId=" + galleryId +"&page=" + page + "&perPageNum=" + perPageNum
+						+"&searchType=" + searchType + "&keyword=" + keyword;
+			});
+		});
+		$(".uploadedList").on("click", ".delbtn", function(event) {
+			event.preventDefault();
+			var that = $(this);
+			that.closest("li").remove();
 		});
 	</script>
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.GalleryMapper">
+	<insert id="create">
+		insert into tbl_gallery(galleryTitle, galleryLike, galleryHit, galleryRegdate, galleryUserId) 
+		values(#{title}, 0, 0, now(), #{userId})
+	</insert>
+	<select id="listAll" resultType="com.java.domain.DataroomVO">
+		<![CDATA[
+			select *
+			from tbl_gallery
+			where galleryId > 0
+			order by galleryRegdate
+		]]>
+	</select>
+	<select id="read" resultType="com.java.domain.DataroomVO">
+		select *
+		from tbl_gallery
+		where galleryId
+		= #{galleryId}
+	</select>
+	<delete id="delete">
+		delete from tbl_gallery where galleryId = #{galleryId}
+	</delete>
+	<update id="update">
+		update tbl_gallery set galleryTitle = #{title}, galleryContent =
+		#{content}, galleryUpdatedate = now() where galleryId = #{galleryId}
+	</update>
+	<select id="listPage" resultType="com.java.domain.DataroomVO">
+		<![CDATA[
+			select * from tbl_gallery where galleryId > 0 order by galleryRegdate limit #{page}, 30
+		]]>
+	</select>
+	<select id="listPageHandler"
+		resultType="com.java.domain.BoardVO">
+		<![CDATA[
+			select * from tbl_gallery where galleryId > 0 order by galleryRegdate limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			select count(galleryId) from tbl_gallery where galleryId > 0
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'title'.toString()">
+				and galleryTitle like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'writer'.toString()">
+				and galleryUserId like concat('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="com.java.domain.DataroomVO">
+		<![CDATA[
+			select * from tbl_gallery where galleryId > 0 
+		]]>
+		<include refid="search" />
+		<![CDATA[
+			order by galleryRegdate limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			select count(galleryId) from tbl_gallery where galleryId > 0
+		]]>
+		<include refid="search" />
+	</select>
+	<update id="updateCommCnt">
+		update tbl_gallery set galleryCommCnt = galleryCommCnt + #{amount} where galleryId = #{galleryId}
+	</update>
+	<update id="updateHit">
+		update tbl_gallery set galleryHit = galleryHit + 1 where galleryId = #{galleryId}
+	</update>
+	<update id="updateLike">
+		update tbl_gallery set galleryLike = galleryLike + 1 where galleryId = #{galleryId}
+	</update>
+	<insert id="addAttach">
+		insert into tbl_gallery_attach(galleryAttachFullname, galleryAttachGalleryId) values (#{fullName}, LAST_INSERT_ID())
+	</insert>
+	<select id="getAttach" resultType="string">
+		select galleryAttachFullname from tbl_gallery_attach where galleryAttachGalleryId = #{galleryId} order by galleryAttachRegdate;
+	</select>
+	<delete id="deleteAttach">
+		delete from tbl_gallery_attach where galleryAttachGalleryId = #{galleryId}
+	</delete>
+	<insert id="replaceAttach">
+		insert into tbl_gallery_attach(galleryAttachFullname, galleryAttachGalleryId) values (#{fullName}, #{galleryId})
+	</insert>
+</mapper>
