@@ -26,7 +26,7 @@
 <link href="lib/animate/animate.min.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
+<link href="css/style.css?ver=20180807-14" rel="stylesheet">
 
 <!-- Bootstrap Icon Library -->
 <link rel="stylesheet"
@@ -83,25 +83,59 @@
 			<!-- #nav-menu-container -->
 		</div>
 	</header>
+	<script>
+	function DooOver() {
+		bodycheck = 1;
+		bodyValue = "두찬영";
+	}
+	function GaeOver() {
+		bodycheck = 2;
+		bodyValue = "김태훈";
+	}
+	function ChungOver() {
+		bodycheck = 3;
+		bodyValue = "이화섭";
+	}
+	function PortfolioOn() {
+
+		document.getElementById("Doo").innerHTML="두찬영 (DooDoo)";
+		document.getElementById("Gae").innerHTML="김태훈 (GaeTaeng)";
+		document.getElementById("Chung").innerHTML="이화섭 (ChungMa)";
+			document.getElementById("Doo").style.fontSize = "16px";
+			document.getElementById("Gae").style.fontSize = "16px";
+			document.getElementById("Chung").style.fontSize = "16px";
+			
+	}
+	function PortfolioOut() { 
+		document.getElementById("Doo").innerHTML="";
+		document.getElementById("Gae").innerHTML="";
+		document.getElementById("Chung").innerHTML="";
+			document.getElementById("Doo").style.fontsize = "0px";
+			document.getElementById("Gae").style.fontSize = "0px";
+			document.getElementById("Chung").style.fontSize = "0px";
+
+	}
+	</script>
 	
-	
-	
-	<aside id="aside">
+	<aside id="aside" onmouseover="PortfolioOn()" onmouseout="PortfolioOut()">
 		<div class="container">
 			<nav>
 				<ul class="anside-nav-menu">
-					<li><a href="#">김태훈 (GaeTaeng)</a></li>
-					<li><a href="#">두찬영 (DooDoo)</a></li>
-					<li><a href="#">이화섭 (Chungma)</a></li>
+					<li onclick="DooOver()"><a id = "Doo" href="#" ></a></li>
+					<li onclick="GaeOver()"><a id = "Gae" href="#"></a></li>
+					<li onclick="ChungOver()"><a id = "Chung" href="#"></a></li>
 				</ul>
 			</nav>
 		</div>
 	</aside>
 	
+	<div id="div-body">
+	</div>
 	
 	
-	
-	
+	<section id="hero">
+		
+	</section>
 
 	<footer id="footer">
 		<div class="footer-top">

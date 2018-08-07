@@ -379,7 +379,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="member">
 						<div class="pic">
-							<img src="img/gaetang.jpg" alt="">
+							<img src="img/gaetaeng.jpg" alt="">
 						</div>
 						<h4>김태훈</h4>
 						<span>Programming Web Developer</span>

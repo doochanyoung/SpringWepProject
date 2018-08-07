@@ -83,40 +83,52 @@ h1, h2, h3, h4, h5, h6 {
 # aside << 개탱 수정부분입니다 css 수정할 때 확인 바래요 >> << 혹시나 싶어 메모 남깁니다. >>
 --------------------------------------------------------------*/
 #aside {
-  background: rgba(52, 59, 64, 0.9);
+	margin:72px 0 0 0;
+	
+	background: rgba(52, 59, 64, 0.9);
 	padding: 30px 0 0 0;
-	margin: 120px 0 0 0;
-	width: 230px;
+
+	width: 50px;
 	height:100%;
 	position: fixed;
 	left: 0;
 	top: 0;
 	right: 0;
 	transition: all 0.5s;
-	z-index: 996;
+	z-index: 998;
 }
 #aside:hover {
 	width:280px;
+	
+}
+.anside-nav-menu {
+	margin: 72px 0 0 0;
 }
 .anside-nav-menu a {
-  padding: 0 8px 10px 8px;
+  padding: 0 5px 20px 0;
   text-decoration: none;
   display: block;
   color: #fff;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  text-transform: uppercase;
-  font-size: 13px;
+  /*text-transform: uppercase; 전부다 대문자로 바까줌.*/
+  font-size: 0px;
   outline: none;
-}.anside-nav-menu a:hover {
-  color: #0f0;
-  font-size: 16px;
+	transition: all 1.0s;
+  
+}
+.anside-nav-menu a:hover {
+	color: #0f0;
+	
+	text-transform: uppercase;
 }
 .anside-nav-menu > li {
   margin-top: 10px;
 }
 
-
+#div-body {
+	margin:
+}
 
 /*--------------------------------------------------------------
 # Header
@@ -1349,53 +1361,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 .instagram, .instagram:hover{ background-color: #517fa4; border: 2px solid #517fa4; color:#fff; } 
 .tumblr, .tumblr:hover { background-color: #32506d; border: 2px solid #32506d; color:#fff; }
 .naver, .naver:hover { background-color: #32506d; border: 2px solid #32506d; color:#fff; }
-
-/*--------------------------------------------------------------
-# Mailbox
---------------------------------------------------------------*/
-.mailbox-messages>.table{margin:0}
-.mailbox-controls{padding:5px}
-.mailbox-controls.with-border{border-bottom:1px solid #f4f4f4}
-.mailbox-read-info{border-bottom:1px solid #f4f4f4;padding:10px}
-.mailbox-read-info h3{font-size:20px;margin:0}
-.mailbox-read-info h5{margin:0;padding:5px 0 0 0}
-.mailbox-read-time{color:#999;font-size:13px}
-.mailbox-read-message{padding:10px}
-.mailbox-attachments li{
-	float:left;width:180px;
-	border:1px solid #eee;
-	margin-bottom:10px;
-	margin-right:10px;
-	list-style:none
-}
-.mailbox-attachment-name{
-	font-weight:bold;
-	color:#666;
-	font-size: 10px
-}
-.mailbox-attachment-icon,.mailbox-attachment-info,.mailbox-attachment-size{
-	display:block
-}
-.mailbox-attachment-info{
-	padding:10px;
-	background:#f4f4f4
-}
-.mailbox-attachment-size{
-	color:#999;font-size:12px
-}
-.mailbox-attachment-icon{
-	text-align:center;
-	font-size:30px;
-	color:#666;
-	padding:20px 10px
-}
-.mailbox-attachment-icon.has-img{
-	padding:0
-}
-.mailbox-attachment-icon.has-img>img{
-	max-width:80%;
-	height:auto
-}
 
 /*--------------------------------------------------------------
 # Footer
