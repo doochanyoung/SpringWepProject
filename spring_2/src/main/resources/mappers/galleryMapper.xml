@@ -3,15 +3,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.GalleryMapper">
 	<insert id="create">
-		insert into tbl_gallery(galleryTitle, galleryLike, galleryHit, galleryRegdate, galleryUserId) 
-		values(#{title}, 0, 0, now(), #{userId})
+		insert into tbl_gallery(galleryTitle, galleryLike, galleryHit, galleryRegdate, galleryAttachName, galleryUserId) 
+		values(#{title}, 0, 0, now(), #{attachName}, #{userId})
 	</insert>
 	<select id="listAll" resultType="com.java.domain.GalleryVO">
 		<![CDATA[
 			select *
 			from tbl_gallery
 			where galleryId > 0
-			order by galleryRegdate
+			order by galleryRegdate desc
 		]]>
 	</select>
 	<select id="read" resultType="com.java.domain.GalleryVO">
@@ -29,13 +29,13 @@
 	</update>
 	<select id="listPage" resultType="com.java.domain.GalleryVO">
 		<![CDATA[
-			select * from tbl_gallery where galleryId > 0 order by galleryRegdate limit #{page}, 30
+			select * from tbl_gallery where galleryId > 0 order by galleryRegdate desc limit #{page}, 30
 		]]>
 	</select>
 	<select id="listPageHandler"
 		resultType="com.java.domain.GalleryVO">
 		<![CDATA[
-			select * from tbl_gallery where galleryId > 0 order by galleryRegdate limit #{pageStart}, #{perPageNum}
+			select * from tbl_gallery where galleryId > 0 order by galleryRegdate desc limit #{pageStart}, #{perPageNum}
 		]]>
 	</select>
 	<select id="countPaging" resultType="int">
@@ -59,7 +59,7 @@
 		]]>
 		<include refid="search" />
 		<![CDATA[
-			order by galleryRegdate limit #{pageStart}, #{perPageNum}
+			order by galleryRegdate desc limit #{pageStart}, #{perPageNum}
 		]]>
 	</select>
 	<select id="listSearchCount" resultType="int">

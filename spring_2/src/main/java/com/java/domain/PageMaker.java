@@ -105,6 +105,12 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 	
+	public String getOriginalFile(String fullName) {
+		String front = fullName.substring(0, 12); // /2018/00/00
+		String end = fullName.substring(14);
+		return "/displayFile?fileName=" + front + end;
+	}
+	
 	private String encoding(String keyword) {
 		if(keyword == null || keyword.trim().length() == 0) {
 			return "";

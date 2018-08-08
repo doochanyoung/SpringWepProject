@@ -11,6 +11,7 @@ public class GalleryVO {
 	private Date galleryRegdate;
 	private Date galleryUpdatedate;
 	private String galleryUserId;
+	private String galleryAttachName;
 	private String[] files;
 	public int getGalleryId() {
 		return galleryId;
@@ -53,6 +54,12 @@ public class GalleryVO {
 	}
 	public void setGalleryUserId(String galleryUserId) {
 		this.galleryUserId = galleryUserId;
+	}
+	public String getGalleryAttachName() {
+		return galleryAttachName;
+	}
+	public void setGalleryAttachName(String galleryAttachName) {
+		this.galleryAttachName = galleryAttachName;
 	}
 	public String[] getFiles() {
 		return files;

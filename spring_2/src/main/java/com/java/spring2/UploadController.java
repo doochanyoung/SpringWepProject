@@ -80,7 +80,6 @@ public class UploadController {
 	public ResponseEntity<byte[]> displayFile2(String fileName) throws Exception {
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null;
-		logger.info("FILE NAME : " + fileName);
 		try {
 			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 

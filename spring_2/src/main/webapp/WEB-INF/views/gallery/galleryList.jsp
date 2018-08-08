@@ -122,35 +122,21 @@
 				</div>
 			</div>
 			<hr class="my-4">
-			<div class="row">
-				<table class="table table-striped table-sm"
-					style="text-align: center; border: 1px solid #dddddd">
-					<thead>
-						<tr>
-							<th class="mobile" scope="col">id</th>
-							<th scope="col">제목</th>
-							<th class="mobile" scope="col">작성자</th>
-							<th class="mobile" scope="col">작성일</th>
-							<th class="mobile" scope="col">조회수</th>
-							<th class="mobile" scope="col">좋아요</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list}" var="galleryVO">
-							<tr>
-								<th class="mobile" scope="row">${galleryVO.galleryId }</th>
-								<td><a href='/gallery/galleryRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&galleryId=${galleryVO.galleryId}'>${galleryVO.galleryTitle }</a></td>
-								<td class="mobile">${galleryVO.galleryUserId }</td>
-								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${galleryVO.galleryRegdate }"/></td>
-								<td class="mobile">${galleryVO.galleryHit }</td>
-								<td class="mobile">${galleryVO.galleryLike }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+			<div class="card-columns">
+				<c:forEach items="${list}" var="galleryVO">
+					<div class="card" style="width: 18rem;">
+					  <img class="card-img-top" src="${pageMaker.getOriginalFile(galleryVO.galleryAttachName) }" alt="Card image cap">
+					  <div class="card-body">
+					    <h5 class="card-title"> <a href='/gallery/galleryRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&galleryId=${galleryVO.galleryId}'>${galleryVO.galleryTitle}</a></h5>
+					    <p class="card-text"><small class="text-muted">${galleryVO.galleryRegdate}</small></p>
+					  </div>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="row m-2">
 				<div class="text-center">
 					<c:if test="${not empty loginId}">
-					<button class="btn btn-default float-right m-2" type="button" id="galleryWrite">글 작성</button>
+					<button class="btn btn-default float-right m-2" type="button" id="galleryWrite">사진 올리기</button>
 					</c:if>
 				</div>
 			</div>

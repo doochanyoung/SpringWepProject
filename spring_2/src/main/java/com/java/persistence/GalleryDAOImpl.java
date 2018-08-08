@@ -26,6 +26,7 @@ public class GalleryDAOImpl implements GalleryDAO {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("title", vo.getGalleryTitle());
 		paramMap.put("userId", vo.getGalleryUserId());
+		paramMap.put("attachName", vo.getGalleryAttachName());
 		session.insert(namespace + ".create", paramMap);
 	}
 

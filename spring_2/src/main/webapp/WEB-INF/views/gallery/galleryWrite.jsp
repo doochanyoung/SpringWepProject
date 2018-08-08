@@ -124,7 +124,8 @@
 											<div class="validation"></div>
 										</div>
 										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
-										<ul class="mailbox-attachments clearfix uploadedList">
+										<hr>
+										<ul class="mailbox-attachments clearfix uploadedList" style="list-style:none;">
 										
 										</ul>
 										<div class="text-center mt-2">
@@ -208,12 +209,10 @@
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
 	<li>
-  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment">
+  		<span class="mailbox-attachment-icon has-img"><img src="{{getLink}}" alt="Attachment">
 		<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a></span>
-  		<div class=	"mailbox-attachment-info">
-			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
- 	 	</div>
-	</li>              
+	</li>
+	<hr>
 	</script>
 
 	<script>
@@ -242,6 +241,9 @@
 					var that = $(this);
 					var str = "";
 					$(".uploadedList .delbtn").each(function(index){
+						if(str == ""){
+							str += "<input type='hidden' name=galleryAttachName value='" + $(this).attr("href") + "'> ";
+						}
 						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
 					});
 					that.append(str);
@@ -269,7 +271,7 @@
 				contentType : false,
 				type : 'POST',
 				success : function(data) {
-					var fileInfo = getFileInfo2(data);
+					var fileInfo = getFileInfo(data);
 					var html = template(fileInfo);
 					$(".uploadedList").append(html);
 				}
@@ -286,29 +288,6 @@
 			}
 			var idx = fileName.indexOf("_") + 1;
 			return fileName.substr(idx);
-		}
-		function getFileInfo2(fullName){
-			var fileName, imgsrc, getLink;
-			var fileLink;
-			
-			if(checkImageType(fullName)){
-				imgsrc = "/displayFile2?fileName="+fullName;
-				console.log(imgsrc);
-				fileLink = fullName.substr(14);
-				
-				var front = fullName.substr(0, 12); // /2018/00/00
-				var end = fullName.substr(14);
-				getLink = "/displayFile2?fileName=" + front + end;
-				console.log(getLink);
-			}else{
-				imgsrc = "/resources/img/file.png";
-				fileLink = fullName.substr(12);
-				getLink = "/displayFile2?fileName="+fullName;
-			}
-			fileName = fileLink.substr(fileLink.indexOf("_")+1);
-			console.log(fileName);
-			console.log(imgsrc);
-			return {fileName: fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
 		}
 	</script>
 </body>

@@ -144,7 +144,7 @@
 										</div>
 									</div>
 									<hr>
-									<ul class="mailbox-attachments clearfix uploadedList">
+									<ul class="mailbox-attachments clearfix uploadedList" style="list-style:none;">
 										
 									</ul>
 									<hr>
@@ -268,11 +268,9 @@
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
 	<li data-src='{{fullName}}'>
-  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  		<div class=	"mailbox-attachment-info">
-			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
- 	 	</div>
-	</li>                
+  		<span class="mailbox-attachment-icon has-img"><img src="{{getLink}}" alt="Attachment"></span>
+	</li>
+	<hr>          
 	</script>
 	<script>
 		$.ajaxSetup({cache : false});
@@ -281,12 +279,11 @@
 		var templateAttach = Handlebars.compile($("#templateAttach").html());
 		$.getJSON("/gallery/getAttach/"+galleryId, function(list){
 			$(list).each(function(){
-				var fileInfo = getFileInfo2(this);
+				var fileInfo = getFileInfo(this);
 				var html = templateAttach(fileInfo);
 				$(".uploadedList").append(html);
 			});
 		});
 	</script>
-	
 </body>
 </html>
