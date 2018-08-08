@@ -217,15 +217,6 @@
 	</script>
 
 	<script>
-		/* window.onload = function() {
-			CKEDITOR.instances.galleryContent.on('key', function() {
-				var str = CKEDITOR.instances.galleryContent.getData();
-				if (str.length >= 4096) {
-					CKEDITOR.instances.galleryContent.setData(str.substring(0, 4090));
-					alert('최대 4096글자까지 등록 가능합니다');
-				}
-			});
-		}; */
 		$(document).ready(function() {
 			  $('#formBoard').submit(function(e) {
 				e.preventDefault();
@@ -278,21 +269,11 @@
 				contentType : false,
 				type : 'POST',
 				success : function(data) {
-					var fileInfo = getFileInfo(data);
+					var fileInfo = getFileInfo2(data);
 					var html = template(fileInfo);
 					$(".uploadedList").append(html);
 				}
 			});
-		});
-		$("#gallerySave").submit(function(event){
-			event.preventDefault();
-			var that = $(this);
-			var str = "";
-			$(".uploadedList .delbtn").each(function(index){
-				str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
-			});
-			that.append(str);
-			that.get(0).submit();
 		});
 		$(".uploadedList").on("click", ".delbtn", function(event) {
 			event.preventDefault();
@@ -305,6 +286,29 @@
 			}
 			var idx = fileName.indexOf("_") + 1;
 			return fileName.substr(idx);
+		}
+		function getFileInfo2(fullName){
+			var fileName, imgsrc, getLink;
+			var fileLink;
+			
+			if(checkImageType(fullName)){
+				imgsrc = "/displayFile2?fileName="+fullName;
+				console.log(imgsrc);
+				fileLink = fullName.substr(14);
+				
+				var front = fullName.substr(0, 12); // /2018/00/00
+				var end = fullName.substr(14);
+				getLink = "/displayFile2?fileName=" + front + end;
+				console.log(getLink);
+			}else{
+				imgsrc = "/resources/img/file.png";
+				fileLink = fullName.substr(12);
+				getLink = "/displayFile2?fileName="+fullName;
+			}
+			fileName = fileLink.substr(fileLink.indexOf("_")+1);
+			console.log(fileName);
+			console.log(imgsrc);
+			return {fileName: fileName, imgsrc:imgsrc, getLink:getLink, fullName:fullName};
 		}
 	</script>
 </body>

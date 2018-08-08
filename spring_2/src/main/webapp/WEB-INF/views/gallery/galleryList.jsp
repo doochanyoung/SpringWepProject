@@ -139,7 +139,7 @@
 						<c:forEach items="${list}" var="galleryVO">
 							<tr>
 								<th class="mobile" scope="row">${galleryVO.galleryId }</th>
-								<td><a href='/gallery/galleryRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&galleryId=${galleryVO.galleryId}'><c:if test="${galleryVO.galleryIsReply }"><i class="fab fa-replyd"></i></c:if>${galleryVO.galleryTitle } <strong>[${galleryVO.galleryCommCnt}]</strong></a></td>
+								<td><a href='/gallery/galleryRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&galleryId=${galleryVO.galleryId}'>${galleryVO.galleryTitle }</a></td>
 								<td class="mobile">${galleryVO.galleryUserId }</td>
 								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${galleryVO.galleryRegdate }"/></td>
 								<td class="mobile">${galleryVO.galleryHit }</td>

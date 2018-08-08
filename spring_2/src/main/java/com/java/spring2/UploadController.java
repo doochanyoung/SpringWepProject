@@ -74,6 +74,35 @@ public class UploadController {
 		}
 		return entity;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/displayFile2")
+	public ResponseEntity<byte[]> displayFile2(String fileName) throws Exception {
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		logger.info("FILE NAME : " + fileName);
+		try {
+			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+			MediaType mType = MediaUtils.getMediaType(formatName); // �̹��� Ÿ�� �����ΰ�� ������ MIMEŸ���� ����
+
+			HttpHeaders headers = new HttpHeaders();
+
+			in = new FileInputStream(uploadPath + fileName);
+			if (mType != null) {
+				headers.setContentType(mType);
+				entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+			} else {
+				entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/deleteFile", method = RequestMethod.POST)

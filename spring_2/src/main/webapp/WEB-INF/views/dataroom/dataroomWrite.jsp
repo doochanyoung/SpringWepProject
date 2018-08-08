@@ -304,16 +304,6 @@
 				}
 			});
 		});
-		$("#dataroomSave").submit(function(event){
-			event.preventDefault();
-			var that = $(this);
-			var str = "";
-			$(".uploadedList .delbtn").each(function(index){
-				str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
-			});
-			that.append(str);
-			that.get(0).submit();
-		});
 		$(".uploadedList").on("click", ".delbtn", function(event) {
 			event.preventDefault();
 			var that = $(this);

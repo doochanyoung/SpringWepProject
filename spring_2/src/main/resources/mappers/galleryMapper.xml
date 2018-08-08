@@ -6,7 +6,7 @@
 		insert into tbl_gallery(galleryTitle, galleryLike, galleryHit, galleryRegdate, galleryUserId) 
 		values(#{title}, 0, 0, now(), #{userId})
 	</insert>
-	<select id="listAll" resultType="com.java.domain.DataroomVO">
+	<select id="listAll" resultType="com.java.domain.GalleryVO">
 		<![CDATA[
 			select *
 			from tbl_gallery
@@ -14,7 +14,7 @@
 			order by galleryRegdate
 		]]>
 	</select>
-	<select id="read" resultType="com.java.domain.DataroomVO">
+	<select id="read" resultType="com.java.domain.GalleryVO">
 		select *
 		from tbl_gallery
 		where galleryId
@@ -27,13 +27,13 @@
 		update tbl_gallery set galleryTitle = #{title}, galleryContent =
 		#{content}, galleryUpdatedate = now() where galleryId = #{galleryId}
 	</update>
-	<select id="listPage" resultType="com.java.domain.DataroomVO">
+	<select id="listPage" resultType="com.java.domain.GalleryVO">
 		<![CDATA[
 			select * from tbl_gallery where galleryId > 0 order by galleryRegdate limit #{page}, 30
 		]]>
 	</select>
 	<select id="listPageHandler"
-		resultType="com.java.domain.BoardVO">
+		resultType="com.java.domain.GalleryVO">
 		<![CDATA[
 			select * from tbl_gallery where galleryId > 0 order by galleryRegdate limit #{pageStart}, #{perPageNum}
 		]]>
@@ -53,7 +53,7 @@
 			</if>
 		</if>
 	</sql>
-	<select id="listSearch" resultType="com.java.domain.DataroomVO">
+	<select id="listSearch" resultType="com.java.domain.GalleryVO">
 		<![CDATA[
 			select * from tbl_gallery where galleryId > 0 
 		]]>

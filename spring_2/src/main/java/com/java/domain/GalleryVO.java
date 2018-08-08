@@ -10,7 +10,7 @@ public class GalleryVO {
 	private int galleryHit;
 	private Date galleryRegdate;
 	private Date galleryUpdatedate;
-	private int galleryUserId;
+	private String galleryUserId;
 	private String[] files;
 	public int getGalleryId() {
 		return galleryId;
@@ -48,10 +48,10 @@ public class GalleryVO {
 	public void setGalleryUpdatedate(Date galleryUpdatedate) {
 		this.galleryUpdatedate = galleryUpdatedate;
 	}
-	public int getGalleryUserId() {
+	public String getGalleryUserId() {
 		return galleryUserId;
 	}
-	public void setGalleryUserId(int galleryUserId) {
+	public void setGalleryUserId(String galleryUserId) {
 		this.galleryUserId = galleryUserId;
 	}
 	public String[] getFiles() {

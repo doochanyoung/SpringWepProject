@@ -281,7 +281,7 @@
 		var templateAttach = Handlebars.compile($("#templateAttach").html());
 		$.getJSON("/gallery/getAttach/"+galleryId, function(list){
 			$(list).each(function(){
-				var fileInfo = getFileInfo(this);
+				var fileInfo = getFileInfo2(this);
 				var html = templateAttach(fileInfo);
 				$(".uploadedList").append(html);
 			});

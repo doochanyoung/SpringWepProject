@@ -20,15 +20,15 @@ public class UploadFileUtils {
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception{
 		UUID uid = UUID.randomUUID();
 		
-		String savedName = uid.toString() + "_" + originalName; //uid¸¦ ÀÌ¿ëÇØ °íÀ¯ÇÑ ÆÄÀÏÀÌ¸§À» ¾òÀ½
+		String savedName = uid.toString() + "_" + originalName; //uidï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
-		String savedPath = calcPath(uploadPath); //°æ·Î °è»ê
+		String savedPath = calcPath(uploadPath); //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		
-		File target = new File(uploadPath + savedPath, savedName); //ÇØ´çÇÏ´Â °æ·Î¿¡ ÆÄÀÏ»ý¼º
+		File target = new File(uploadPath + savedPath, savedName); //ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½
 		
-		FileCopyUtils.copy(fileData, target); //ÆÄÀÏ µ¥ÀÌÅÍ º¹»ç
+		FileCopyUtils.copy(fileData, target); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
-		String formatName = originalName.substring(originalName.lastIndexOf(".")+1); //È®ÀåÀÚ ¾ò±â
+		String formatName = originalName.substring(originalName.lastIndexOf(".")+1); //È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		
 		String uploadedFileName = null;
 		
@@ -40,7 +40,7 @@ public class UploadFileUtils {
 		return uploadedFileName;
 	}
 	
-	private static String calcPath(String uploadPath) { // ³â/¿ù/ÀÏ·Î ¸¸µé¾îÁø °æ·Î¸¦ Ã£¾Æ°¨
+	private static String calcPath(String uploadPath) { // ï¿½ï¿½/ï¿½ï¿½/ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ Ã£ï¿½Æ°ï¿½
 		Calendar cal = Calendar.getInstance();
 		
 		String yearPath = File.separator + cal.get(Calendar.YEAR);
@@ -56,7 +56,7 @@ public class UploadFileUtils {
 		return datePath;
 	}
 	
-	private static void makeDir(String uploadPath, String... paths) { // ³â/¿ù/ÀÏ·Î ¸¸µé¾îÁø °æ·Î¸¦ ¸¸µë
+	private static void makeDir(String uploadPath, String... paths) { // ï¿½ï¿½/ï¿½ï¿½/ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if(new File(uploadPath + paths[paths.length - 1]).exists()) {
 			return;
 		}
