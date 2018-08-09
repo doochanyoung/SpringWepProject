@@ -125,7 +125,7 @@
 										</div>
 										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
 										<hr>
-										<ul class="mailbox-attachments clearfix uploadedList" style="list-style:none;">
+										<ul class="clearfix uploadedList" style="list-style:none;">
 										
 										</ul>
 										<div class="text-center mt-2">
@@ -209,7 +209,7 @@
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
 	<li>
-  		<span class="mailbox-attachment-icon has-img"><img src="{{getLink}}" alt="Attachment">
+  		<span><img src="{{getLink}}" alt="Attachment">
 		<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a></span>
 	</li>
 	<hr>
@@ -236,6 +236,10 @@
 			    } else if (galleryUserId.length > 45) {
 				      $('#galleryUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
+				}
+			    if ($(".uploadedList li").size() < 1) {
+			    	 $('.uploadedList').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+					valid = false;
 				}
 			    if(valid){
 					var that = $(this);

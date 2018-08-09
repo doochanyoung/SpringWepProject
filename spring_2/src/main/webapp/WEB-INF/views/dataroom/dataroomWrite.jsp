@@ -29,7 +29,7 @@
 <link href="../lib/animate/animate.min.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="../css/style.css" rel="stylesheet">
+<link href="../css/style.css?ver=1" rel="stylesheet">
 
 <!-- Bootstrap Icon Library -->
 <link rel="stylesheet"

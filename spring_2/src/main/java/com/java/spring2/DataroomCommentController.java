@@ -32,6 +32,7 @@ public class DataroomCommentController {
 		ResponseEntity<String> entity = null;
 		try {
 			int maxGroup = service.getMaxGroup(vo.getDataroomCommentBoardId());
+			vo.setDataroomCommentContent(vo.getDataroomCommentContent());
 			service.addComment(vo, maxGroup);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {

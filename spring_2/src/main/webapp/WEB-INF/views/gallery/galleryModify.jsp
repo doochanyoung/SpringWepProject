@@ -124,7 +124,7 @@
 												name="galleryUserId" id="galleryUserId" readonly="readonly" value="${galleryVO.galleryUserId }">
 										</div>
 										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
-										<ul class="mailbox-attachments clearfix uploadedList">
+										<ul class="mailbox-attachments clearfix uploadedList" style="list-style:none;">
 										
 										</ul>
 										<div class="row">
@@ -223,9 +223,8 @@
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
 	<li>
-  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  		<div class=	"mailbox-attachment-info">
-			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+  		<span><img src="{{getLink}}" alt="Attachment"></span>
+  		<div>
 			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
  	 	</div>
 	</li>                
@@ -253,6 +252,10 @@
 				      $('#galleryUserId').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 				      valid = false;
 				}
+			    if ($(".uploadedList li").size() < 1) {
+			    	 $('.uploadedList').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
+					valid = false;
+				}
 			    if(valid){
 			    	var that = $(this);
 					var str = "";
@@ -275,7 +278,7 @@
 		var templateAttach = Handlebars.compile($("#templateAttach").html());
 		$.getJSON("/gallery/getAttach/"+galleryId, function(list){
 			$(list).each(function(){
-				var fileInfo = getFileInfo2(this);
+				var fileInfo = getFileInfo(this);
 				var html = templateAttach(fileInfo);
 				$(".uploadedList").append(html);
 			});

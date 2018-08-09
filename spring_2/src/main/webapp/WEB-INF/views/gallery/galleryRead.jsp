@@ -268,7 +268,7 @@
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
 	<li data-src='{{fullName}}'>
-  		<span class="mailbox-attachment-icon has-img"><img src="{{getLink}}" alt="Attachment"></span>
+  		<span><img src="{{getLink}}" alt="Attachment"></span>
 	</li>
 	<hr>          
 	</script>

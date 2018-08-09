@@ -31,6 +31,7 @@ public class BoardCommentController {
 		ResponseEntity<String> entity = null;
 		try {
 			int maxGroup = service.getMaxGroup(vo.getBoardCommentBoardId());
+			vo.setBoardCommentContent(vo.getBoardCommentContent());
 			service.addComment(vo, maxGroup);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
