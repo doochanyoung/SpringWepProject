@@ -270,8 +270,16 @@
 			    if(valid){
 					var that = $(this);
 					var str = "";
+					var last = 0;
 					$(".uploadedList .delbtn").each(function(index){
 						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+						alert(index);
+						last = index;
+					});
+					last++;
+					$(".dataroomContent img").each(function(index){
+						alert(index+last);
+						str += "<input type='hidden' name='files["+(index+last)+"]' value='" + $(this).attr("src").substr(22) + "'> ";
 					});
 					that.append(str);
 					that.get(0).submit();

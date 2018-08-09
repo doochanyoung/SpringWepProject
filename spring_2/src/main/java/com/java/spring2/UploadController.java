@@ -2,9 +2,14 @@ package com.java.spring2;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -14,12 +19,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java.domain.FileUploadVO;
 import com.java.util.MediaUtils;
 import com.java.util.UploadFileUtils;
 
@@ -35,7 +43,8 @@ public class UploadController {
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
 		logger.info("originalName:" + file.getOriginalFilename());
-		return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
+		return new ResponseEntity<String>(
+				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
 				HttpStatus.CREATED);
 	}
 
@@ -53,14 +62,13 @@ public class UploadController {
 			HttpHeaders headers = new HttpHeaders();
 
 			in = new FileInputStream(uploadPath + fileName);
-			/*if (mType != null) {
-				headers.setContentType(mType);
-			} else {
-				fileName = fileName.substring(fileName.indexOf("_") + 1);
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Disposition",
-						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-			}*/
+			/*
+			 * if (mType != null) { headers.setContentType(mType); } else { fileName =
+			 * fileName.substring(fileName.indexOf("_") + 1);
+			 * headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			 * headers.add("Content-Disposition", "attachment; filename=\"" + new
+			 * String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\""); }
+			 */
 			fileName = fileName.substring(fileName.indexOf("_") + 1);
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			headers.add("Content-Disposition",
@@ -74,7 +82,7 @@ public class UploadController {
 		}
 		return entity;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/displayFile2")
 	public ResponseEntity<byte[]> displayFile2(String fileName) throws Exception {
@@ -138,5 +146,43 @@ public class UploadController {
 		}
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
-}
 
+	@RequestMapping(value = "/ckeditorupload3", method = RequestMethod.POST)
+	public void fileUpload(@ModelAttribute("fileUploadVO") FileUploadVO fileUploadVO, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		PrintWriter printWriter = null;
+		printWriter = response.getWriter();
+		response.setContentType("text/html; charset=UTF-8");
+		MultipartFile upload = fileUploadVO.getUpload();
+		String CKEditorFuncNum = "";
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString() + "_" + upload.getOriginalFilename(); 
+		String savedPath = UploadFileUtils.calcPath(uploadPath);
+		String formatName = savedName.substring(savedName.lastIndexOf(".") + 1);
+		if(MediaUtils.getMediaType(formatName) == null) {
+			printWriter.println("<script type='text/javascript'>alert('you can only select JPG JIF PNG file.');</script>");
+			printWriter.flush();
+			return;
+		}
+		if (upload != null) {
+			fileUploadVO.setFilename(savedName);
+			CKEditorFuncNum = fileUploadVO.getCKEditorFuncNum();
+			try {
+				File file = new File(uploadPath + savedPath, savedName); 
+				upload.transferTo(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		String finalPath = savedPath + File.separator + savedName;
+		System.out.println("/displayFile?fileName=" + finalPath);
+		finalPath = finalPath.replaceAll(File.separator + File.separator, "/");
+		finalPath = "/displayFile?fileName=" + finalPath;
+		printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+               + CKEditorFuncNum
+               + ",'"
+               + finalPath
+               + "','upload Success!'"
+               + ")</script>");
+		printWriter.flush();
+	}
+}

@@ -40,7 +40,7 @@ public class UploadFileUtils {
 		return uploadedFileName;
 	}
 	
-	private static String calcPath(String uploadPath) { // ��/��/�Ϸ� ������� ��θ� ã�ư�
+	public static String calcPath(String uploadPath) { // ��/��/�Ϸ� ������� ��θ� ã�ư�
 		Calendar cal = Calendar.getInstance();
 		
 		String yearPath = File.separator + cal.get(Calendar.YEAR);
@@ -68,7 +68,7 @@ public class UploadFileUtils {
 		}
 	}
 	
-	private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
+	public static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
 		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
 		System.out.println("sourceImg :" + sourceImg);
 		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);

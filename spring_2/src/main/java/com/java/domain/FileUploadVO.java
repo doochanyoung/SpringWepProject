@@ -3,27 +3,27 @@ package com.java.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadVO {
-	private String imageUrl; 
-	private MultipartFile upload; 
-	private String filename; 
-	private String CKEditorFuncNum;
-	public String getImageUrl() {
-		return imageUrl;
+	private String attachPath; //이미지가 저장될 경로
+    private String Filename; //파일이름
+    private MultipartFile upload;
+    private String CKEditorFuncNum;
+	public String getAttachPath() {
+		return attachPath;
 	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setAttachPath(String attachPath) {
+		this.attachPath = attachPath;
+	}
+	public String getFilename() {
+		return Filename;
+	}
+	public void setFilename(String filename) {
+		Filename = filename;
 	}
 	public MultipartFile getUpload() {
 		return upload;
 	}
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
-	}
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
 	}
 	public String getCKEditorFuncNum() {
 		return CKEditorFuncNum;
@@ -33,7 +33,7 @@ public class FileUploadVO {
 	}
 	@Override
 	public String toString() {
-		return "FileUploadVO [imageUrl=" + imageUrl + ", upload=" + upload + ", filename=" + filename
+		return "FileUploadVO [attachPath=" + attachPath + ", Filename=" + Filename + ", upload=" + upload
 				+ ", CKEditorFuncNum=" + CKEditorFuncNum + "]";
 	}
 }
