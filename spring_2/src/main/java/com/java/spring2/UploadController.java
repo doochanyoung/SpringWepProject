@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.java.domain.FileUploadVO;
+import com.java.service.BoardService;
 import com.java.util.MediaUtils;
 import com.java.util.UploadFileUtils;
 
@@ -47,6 +49,21 @@ public class UploadController {
 				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
 				HttpStatus.CREATED);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/uploadAjax2", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public ResponseEntity<String> uploadAjax2(MultipartFile file) throws Exception {
+		logger.info("originalName:" + file.getOriginalFilename());
+		String formatName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+		MediaType mType = MediaUtils.getMediaType(formatName);
+		if (mType == null) {
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<String>(
+				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
+				HttpStatus.CREATED);
+	}
+
 
 	@ResponseBody
 	@RequestMapping("/displayFile")

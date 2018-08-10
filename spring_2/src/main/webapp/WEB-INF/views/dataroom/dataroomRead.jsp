@@ -98,7 +98,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -209,7 +209,7 @@
 										<textarea class="form-control"
 											placeholder="write comment please......"
 											id="dataroomCommentContent" maxlength="1024"
-											name="dataroomCommentContent" rows="5"></textarea>
+											name="dataroomCommentContent" rows="5" style="overflow:auto;"></textarea>
 									</div>
 									<hr>
 									<div class="row">
@@ -340,7 +340,7 @@
 
 	<script>
 		CKEDITOR.replace('dataroomContent', {
-			height : '600px',
+			height : '1000px',
 			resize_enabled : false
 		});
 		$(document).ready(function() {

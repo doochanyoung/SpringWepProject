@@ -252,7 +252,21 @@
 					   valid = false;
 				}
 			    if(valid){
-			    	 document.getElementById("formBoard").submit();
+			    	var that = $(this);
+					var str = "";
+					var last = 0;
+					$(boardContent).each(function (index, p) {
+					    if ($(p).find('img').length > 0) {
+					        $(p).find('img').each(function (index, img) {
+					            var at = $(img).attr('src');
+					            at = ''+at;
+					            str += "<input type='hidden' name='files["+last+"]' value='" + at.substr(22) + "'> ";
+					            last++;
+					        });
+					    }
+					});
+					that.append(str);
+					that.get(0).submit();
 			    }
 			  });
 		});

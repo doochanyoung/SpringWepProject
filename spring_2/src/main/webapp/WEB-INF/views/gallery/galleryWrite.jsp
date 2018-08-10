@@ -98,7 +98,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -208,7 +208,7 @@
 	<script src="../js/upload.js"></script>
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
-	<li>
+	<li style="overflow: auto; text-align: center">
   		<span><img src="{{getLink}}" alt="Attachment">
 		<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a></span>
 	</li>
@@ -268,7 +268,7 @@
 			var formData = new FormData();
 			formData.append("file", file);
 			$.ajax({
-				url : '/uploadAjax',
+				url : '/uploadAjax2',
 				data : formData,
 				dataType : 'text',
 				processData : false,

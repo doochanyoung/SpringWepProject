@@ -97,7 +97,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -144,7 +144,7 @@
 										</div>
 									</div>
 									<hr>
-									<ul class="mailbox-attachments clearfix uploadedList" style="list-style:none;">
+									<ul class="clearfix uploadedList" style="list-style:none;">
 										
 									</ul>
 									<hr>
@@ -267,7 +267,7 @@
 	</script>
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
-	<li data-src='{{fullName}}'>
+	<li data-src='{{fullName}}' style="overflow: auto; text-align: center">
   		<span><img src="{{getLink}}" alt="Attachment"></span>
 	</li>
 	<hr>          

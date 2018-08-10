@@ -99,7 +99,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -222,13 +222,12 @@
  	 	</div>
 	</li>              
 	</script>
-
+	
 	<script>
 		CKEDITOR.replace('dataroomContent', {
-			 height: '600px',
+			 height: '1000px',
 			 resize_enabled: false
 		});
-
 		/* window.onload = function() {
 			CKEDITOR.instances.dataroomContent.on('key', function() {
 				var str = CKEDITOR.instances.dataroomContent.getData();
@@ -274,12 +273,17 @@
 					$(".uploadedList .delbtn").each(function(index){
 						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
 						alert(index);
-						last = index;
+						last = index + 1;
 					});
-					last++;
-					$(".dataroomContent img").each(function(index){
-						alert(index+last);
-						str += "<input type='hidden' name='files["+(index+last)+"]' value='" + $(this).attr("src").substr(22) + "'> ";
+					$(dataroomContent).each(function (index, p) {
+					    if ($(p).find('img').length > 0) {
+					        $(p).find('img').each(function (index, img) {
+					            var at = $(img).attr('src');
+					            at = ''+at;
+					            str += "<input type='hidden' name='files["+last+"]' value='" + at.substr(22) + "'> ";
+					            last++;
+					        });
+					    }
 					});
 					that.append(str);
 					that.get(0).submit();

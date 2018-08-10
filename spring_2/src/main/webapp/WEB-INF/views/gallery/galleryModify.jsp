@@ -96,7 +96,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -124,7 +124,7 @@
 												name="galleryUserId" id="galleryUserId" readonly="readonly" value="${galleryVO.galleryUserId }">
 										</div>
 										<div class="fileDrop" style="border: 1px dotted blue; height:100px; text-align:center;">drag file</div>
-										<ul class="mailbox-attachments clearfix uploadedList" style="list-style:none;">
+										<ul class="clearfix uploadedList" style="list-style:none;">
 										
 										</ul>
 										<div class="row">
@@ -222,7 +222,7 @@
 	<script src="../js/upload.js"></script>
 	
 	<script id="templateAttach" type="text/x-handlebars-template">
-	<li>
+	<li style="overflow: auto; text-align: center">
   		<span><img src="{{getLink}}" alt="Attachment"></span>
   		<div>
 			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
@@ -293,7 +293,7 @@
 			var formData = new FormData();
 			formData.append("file", file);
 			$.ajax({
-				url : '/uploadAjax',
+				url : '/uploadAjax2',
 				data : formData,
 				dataType : 'text',
 				processData : false,
