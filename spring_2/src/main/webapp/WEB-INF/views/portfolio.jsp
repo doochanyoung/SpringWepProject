@@ -89,7 +89,7 @@
 		bodyValue = "두찬영";
 	}
 	function GaeOver() {
-		bodycheck = 2;
+		bodycheck = 2; 
 		bodyValue = "김태훈";
 	}
 	function ChungOver() {
