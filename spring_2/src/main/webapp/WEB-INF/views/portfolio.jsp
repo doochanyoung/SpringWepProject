@@ -26,7 +26,7 @@
 <link href="lib/animate/animate.min.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css?ver=20180807-14" rel="stylesheet">
+<link href="css/style.css?ver=20180811-9" rel="stylesheet">
 
 <!-- Bootstrap Icon Library -->
 <link rel="stylesheet"
@@ -83,21 +83,24 @@
 			<!-- #nav-menu-container -->
 		</div>
 	</header>
+	
 	<script>
 	function DooOver() {
 		bodycheck = 1;
 		bodyValue = "두찬영";
+		document.getElementById("profileimg").src="img/(badge)Doo.png";
 	}
 	function GaeOver() {
-		bodycheck = 2; 
+		bodycheck = 2;
 		bodyValue = "김태훈";
+		document.getElementById("profileimg").src="img/(badge)GaeTaeng.png";
 	}
 	function ChungOver() {
 		bodycheck = 3;
 		bodyValue = "이화섭";
+		document.getElementById("profileimg").src="img/(badge)Chung.png";
 	}
 	function PortfolioOn() {
-
 		document.getElementById("Doo").innerHTML="두찬영 (DooDoo)";
 		document.getElementById("Gae").innerHTML="김태훈 (GaeTaeng)";
 		document.getElementById("Chung").innerHTML="이화섭 (ChungMa)";
@@ -110,10 +113,11 @@
 		document.getElementById("Doo").innerHTML="";
 		document.getElementById("Gae").innerHTML="";
 		document.getElementById("Chung").innerHTML="";
-			document.getElementById("Doo").style.fontsize = "0px";
-			document.getElementById("Gae").style.fontSize = "0px";
-			document.getElementById("Chung").style.fontSize = "0px";
-
+		document.getElementById("Doo").style.fontsize = "0px";
+		document.getElementById("Gae").style.fontSize = "0px";
+		document.getElementById("Chung").style.fontSize = "0px";
+		
+		document.getElementById("profileimg").src="";
 	}
 	</script>
 	
@@ -121,9 +125,9 @@
 		<div class="container">
 			<nav>
 				<ul class="anside-nav-menu">
-					<li onclick="DooOver()"><a id = "Doo" href="#" ></a></li>
-					<li onclick="GaeOver()"><a id = "Gae" href="#"></a></li>
-					<li onclick="ChungOver()"><a id = "Chung" href="#"></a></li>
+					<li><a id = "Doo" href="javascript:DooOver()" ></a></li>
+					<li><a id = "Gae" href="javascript:GaeOver()" ></a></li>
+					<li><a id = "Chung" href="javascript:ChungOver()" ></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -134,7 +138,14 @@
 	
 	
 	<section id="hero">
-		
+	<form>
+		<img id = "profileimg" src="" alt=""> 
+		<div>
+			<h2 style="margin : 0 0 0 280px">이름 : </h2><span id="name"></span><br/>
+			<h2 style="margin : 0 0 0 280px">학교 : </h2><span id="school"></span><br/>
+			<h2 style="margin : 0 0 0 280px">경력 : </h2><span id="specification"></span><br/>
+		</div>
+	</form>
 	</section>
 
 	<footer id="footer">

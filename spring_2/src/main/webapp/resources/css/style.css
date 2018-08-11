@@ -130,6 +130,16 @@ h1, h2, h3, h4, h5, h6 {
 	margin:
 }
 
+form #profileimg {
+	margin : 120px 0 0 280px;
+	display : inline-block;
+}
+form h2 {
+	margin : 120px 0 0 280px;
+	display : inline-block;
+	
+  color: #000;
+}
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -1392,7 +1402,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #fff;
   font-size: 10px;
 }
- 
+
 #footer .copyright {
   text-align: center;
 }
