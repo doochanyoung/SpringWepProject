@@ -1,5 +1,6 @@
 package com.java.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardVO {
@@ -15,6 +16,7 @@ public class BoardVO {
 	private boolean boardIsReply;
 	private int boardCommCnt;
 	private String boardUserId;
+	private String[] files;
 	public int getBoardId() {
 		return boardId;
 	}
@@ -87,12 +89,18 @@ public class BoardVO {
 	public void setBoardUserId(String boardUserId) {
 		this.boardUserId = boardUserId;
 	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [boardId=" + boardId + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", boardRegdate=" + boardRegdate + ", boardUpdatedate=" + boardUpdatedate + ", boardHit=" + boardHit
 				+ ", boardLike=" + boardLike + ", boardGroup=" + boardGroup + ", boardSequence=" + boardSequence
 				+ ", boardIsReply=" + boardIsReply + ", boardCommCnt=" + boardCommCnt + ", boardUserId=" + boardUserId
-				+ "]";
+				+ ", files=" + Arrays.toString(files) + "]";
 	}
 }

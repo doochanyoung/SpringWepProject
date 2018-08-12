@@ -95,7 +95,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -206,10 +206,11 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
 
 	<script>
 		CKEDITOR.replace('boardContent', {
-			 height: '600px',
+			 height: '1000px',
 			 resize_enabled: false
 		});
 
@@ -258,9 +259,13 @@
 					$(boardContent).each(function (index, p) {
 					    if ($(p).find('img').length > 0) {
 					        $(p).find('img').each(function (index, img) {
-					            var at = $(img).attr('src');
+					        	var at = $(img).attr('src');
 					            at = ''+at;
-					            str += "<input type='hidden' name='files["+last+"]' value='" + at.substr(22) + "'> ";
+					            var date = at.substring(22, 34);
+					            at = at.substr(34);
+					            at = date + "_s" + at;
+					            str += "<input type='hidden' name='files["+last+"]' value='" + at + "'> ";
+					            alert(str);
 					            last++;
 					        });
 					    }
@@ -270,6 +275,18 @@
 			    }
 			  });
 		});
+		$(".uploadedList").on("click", ".delbtn", function(event) {
+			event.preventDefault();
+			var that = $(this);
+			that.closest("li").remove();
+		});
+		function getOriginalName(fileName){
+			if(checkImageType(fileName)){
+				return;
+			}
+			var idx = fileName.indexOf("_") + 1;
+			return fileName.substr(idx);
+		}
 	</script>
 
 </body>

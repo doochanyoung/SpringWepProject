@@ -358,6 +358,18 @@
 					$(".uploadedList li").each(function(index){
 						arr.push($(this).attr("data-src"));
 					});
+					$(dataroomContent).each(function (index, p) {
+					    if ($(p).find('img').length > 0) {
+					        $(p).find('img').each(function (index, img) {
+					        	var at = $(img).attr('src');
+					            at = ''+at;
+					            var date = at.substring(22, 34);
+					            at = at.substr(34);
+					            at = date + "_s" + at;
+					            arr.push(at);
+					        });
+					    }
+					});
 					if(arr.length > 0){
 						$.post("/deleteAllFiles",{files:arr}, function(){});
 					}

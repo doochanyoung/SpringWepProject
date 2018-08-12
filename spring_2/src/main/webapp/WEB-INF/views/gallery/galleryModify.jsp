@@ -260,6 +260,9 @@
 			    	var that = $(this);
 					var str = "";
 					$(".uploadedList .delbtn").each(function(index){
+						if(str == ""){
+							str += "<input type='hidden' name=galleryAttachName value='" + $(this).attr("href") + "'> ";
+						}
 						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
 					});
 					var arr = [];

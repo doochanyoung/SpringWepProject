@@ -22,9 +22,15 @@ public class BoardServiceImpl implements BoardService{
 	@Inject
 	private BoardCommentDAO boardCommentDao;
 
+	@Transactional
 	@Override
 	public void regist(BoardVO vo, int maxGroup) throws Exception {
 		boardDao.create(vo, maxGroup);
+		String[] files = vo.getFiles();
+		if(files == null) {return;}
+		for(String fileName : files) {
+			boardDao.addAttach(fileName);
+		}
 	}
 
 	@Override
@@ -40,6 +46,13 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void modify(BoardVO vo) throws Exception {
 		boardDao.update(vo);
+		int boardId = vo.getBoardId();
+		boardDao.deleteAttach(boardId);
+		String[] files = vo.getFiles();
+		if(files == null) {return;}
+		for(String fileName : files) {
+			boardDao.replaceAttach(fileName, boardId);
+		}
 	}
 
 	@Transactional
@@ -47,6 +60,7 @@ public class BoardServiceImpl implements BoardService{
 	public void remove(int boardId) throws Exception {
 		boardDao.delete(boardId);
 		boardCommentDao.deleteComment(boardId);
+		boardDao.deleteAttach(boardId);
 	}
 
 	@Override
@@ -103,6 +117,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void updateLike(int boardId) throws Exception {
 		boardDao.updateLike(boardId);
+	}
+
+	@Override
+	public List<String> getAttach(int boardId) throws Exception {
+		return boardDao.getAttach(boardId);
 	}
 
 }

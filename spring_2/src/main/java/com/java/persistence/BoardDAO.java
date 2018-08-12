@@ -24,4 +24,8 @@ public interface BoardDAO {
 	public void updateCommCnt(int boardId, int amount) throws Exception;
 	public void updateHit(int boardId) throws Exception;
 	public void updateLike(int boardId) throws Exception;
+	public void addAttach(String fullName) throws Exception;
+	public List<String> getAttach(int boardId) throws Exception;
+	public void deleteAttach(int boardId) throws Exception;
+	public void replaceAttach(String fullName, int boardId) throws Exception;
 }

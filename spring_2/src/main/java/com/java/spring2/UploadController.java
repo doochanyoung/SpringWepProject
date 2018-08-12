@@ -21,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -170,6 +171,7 @@ public class UploadController {
 		printWriter = response.getWriter();
 		response.setContentType("text/html; charset=UTF-8");
 		MultipartFile upload = fileUploadVO.getUpload();
+		byte[] fileData = upload.getBytes();
 		String CKEditorFuncNum = "";
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString() + "_" + upload.getOriginalFilename(); 
@@ -180,24 +182,29 @@ public class UploadController {
 			printWriter.flush();
 			return;
 		}
+		String realFileName = "";
 		if (upload != null) {
-			fileUploadVO.setFilename(savedName);
 			CKEditorFuncNum = fileUploadVO.getCKEditorFuncNum();
 			try {
 				File file = new File(uploadPath + savedPath, savedName); 
+				FileCopyUtils.copy(fileData, file);
+				savedName = UploadFileUtils.makeThumbnail(uploadPath, savedPath, savedName);
+				realFileName = savedName.substring(14);
+				System.out.println("realFileName :" + realFileName);
+				System.out.println("debug : " + savedName);
+				fileUploadVO.setFilename(savedName);
 				upload.transferTo(file);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		String finalPath = savedPath + File.separator + savedName;
-		System.out.println("/displayFile?fileName=" + finalPath);
-		finalPath = finalPath.replaceAll(File.separator + File.separator, "/");
-		finalPath = "/displayFile?fileName=" + finalPath;
+		savedName = savedName.replaceAll(File.separator + File.separator, "/");
+		System.out.println("debug : " + savedName);
+		savedName = "/displayFile?fileName=" + savedName.substring(0, 11) + "/" + realFileName;
 		printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
                + CKEditorFuncNum
                + ",'"
-               + finalPath
+               + savedName
                + "','upload Success!'"
                + ")</script>");
 		printWriter.flush();

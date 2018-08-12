@@ -98,7 +98,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -150,6 +150,10 @@
 													pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }" /></span>
 										</div>
 									</div>
+									<hr>
+									<ul class="mailbox-attachments clearfix uploadedList">
+										
+									</ul>
 									<hr>
 									<div class="row">
 									<c:if test="${loginId == boardVO.boardUserId}">
@@ -335,10 +339,11 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
 
 	<script>
 		CKEDITOR.replace('boardContent', {
-			height : '600px',
+			height : '1000px',
 			resize_enabled : false
 		});
 		$(document).ready(function() {
@@ -352,6 +357,22 @@
 			$("#boardRemove").on("click", function() {
 				var bool = confirm("정말 삭제 하시겠습니까?");
 				if (bool) {
+					var arr = [];
+					$(boardContent).each(function (index, p) {
+					    if ($(p).find('img').length > 0) {
+					        $(p).find('img').each(function (index, img) {
+					        	var at = $(img).attr('src');
+					            at = ''+at;
+					            var date = at.substring(22, 34);
+					            at = at.substr(34);
+					            at = date + "_s" + at;
+					            arr.push(at);
+					        });
+					    }
+					});
+					if(arr.length > 0){
+						$.post("/deleteAllFiles",{files:arr}, function(){});
+					}
 					formObj.attr("action", "/board/boardDelete");
 					formObj.submit();
 				}
@@ -406,6 +427,15 @@
 		</div>
 		{{/each}}
 	</script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+ 	 	</div>
+	</li>              
+	</script>
 
 	<script>
 		$.ajaxSetup({cache : false});
@@ -455,6 +485,14 @@
 				$("#commentCnt").html("["+data.pageMaker.totalCount+"]");
 			});
 		}
+		var templateAttach = Handlebars.compile($("#templateAttach").html());
+		$.getJSON("/board/getAttach/"+boardId, function(list){
+			$(list).each(function(){
+				var fileInfo = getFileInfo(this);
+				var html = templateAttach(fileInfo);
+				$(".uploadedList").append(html);
+			});
+		});
 		var printPaging = function(pageMaker, target) {
 			var str = "";
 			if (pageMaker.prev) {

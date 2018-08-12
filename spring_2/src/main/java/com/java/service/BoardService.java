@@ -23,4 +23,5 @@ public interface BoardService {
 	public int searchCountPaging(SearchPageHandler handler) throws Exception;
 	public void updateHit(int boardId) throws Exception;
 	public void updateLike(int boardId) throws Exception;
+	public List<String> getAttach(int boardId) throws Exception;
 }

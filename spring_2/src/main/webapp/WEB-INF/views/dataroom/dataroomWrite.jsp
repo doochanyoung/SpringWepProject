@@ -272,7 +272,6 @@
 					var last = 0;
 					$(".uploadedList .delbtn").each(function(index){
 						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
-						alert(index);
 						last = index + 1;
 					});
 					$(dataroomContent).each(function (index, p) {
@@ -280,7 +279,10 @@
 					        $(p).find('img').each(function (index, img) {
 					            var at = $(img).attr('src');
 					            at = ''+at;
-					            str += "<input type='hidden' name='files["+last+"]' value='" + at.substr(22) + "'> ";
+					            var date = at.substring(22, 34);
+					            at = at.substr(34);
+					            at = date + "_s" + at;
+					            str += "<input type='hidden' name='files["+last+"]' value='" + at + "'> ";
 					            last++;
 					        });
 					    }

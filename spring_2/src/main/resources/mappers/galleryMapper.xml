@@ -24,8 +24,7 @@
 		delete from tbl_gallery where galleryId = #{galleryId}
 	</delete>
 	<update id="update">
-		update tbl_gallery set galleryTitle = #{title}, galleryContent =
-		#{content}, galleryUpdatedate = now() where galleryId = #{galleryId}
+		update tbl_gallery set galleryTitle = #{title}, galleryUpdatedate = now(), galleryAttachName = #{attachName} where galleryId = #{galleryId}
 	</update>
 	<select id="listPage" resultType="com.java.domain.GalleryVO">
 		<![CDATA[

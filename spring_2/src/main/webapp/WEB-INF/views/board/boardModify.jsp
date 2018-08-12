@@ -37,6 +37,8 @@
 	crossorigin="anonymous">
 
 <script src="../ckeditor/ckeditor.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <!-- =======================================================
     Theme Name: Regna
@@ -95,7 +97,7 @@
     ============================-->
 
 	<section id="boards">
-		<div class="container py-5">
+		<div class="fluid-container py-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row">
@@ -139,6 +141,10 @@
 												<span><strong>작성일</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></span>
 											</div>
 										</div>
+										<hr>
+										<ul class="mailbox-attachments clearfix uploadedList">
+											
+										</ul>
 										<hr>
 										<div class="row">									
 											<button class="btn btn-default btn-sm ml-3" id="boardSave" type="button" style="background:#5AAEFF">Save</button>
@@ -220,10 +226,22 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
+	
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment">
+		<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+ 	 	</div>
+	</li>              
+	</script>
 
 	<script>
 		CKEDITOR.replace('boardContent', {
-			 height: '600px',
+			 height: '1000px',
 			 resize_enabled: false
 		});
 		$(document).ready(function() {
@@ -256,7 +274,24 @@
 					   valid = false;
 				}
 			    if(valid){
-			    	 document.getElementById("formBoard").submit();
+			    	var that = $(this);
+					var str = "";
+					var last = 0;
+					$(boardContent).each(function (index, p) {
+					    if ($(p).find('img').length > 0) {
+					        $(p).find('img').each(function (index, img) {
+					        	var at = $(img).attr('src');
+					            at = ''+at;
+					            var date = at.substring(22, 34);
+					            at = at.substr(34);
+					            at = date + "_s" + at;
+					            str += "<input type='hidden' name='files["+last+"]' value='" + at + "'> ";
+					            last++;
+					        });
+					    }
+					});
+					that.append(str);
+					that.get(0).submit();
 			    }
 			  });
 		});
@@ -273,6 +308,15 @@
 			$("#boardCancel").on("click", function(){
 				self.location = "/board/boardRead?boardId=" + boardId +"&page=" + page + "&perPageNum=" + perPageNum
 						+"&searchType=" + searchType + "&keyword=" + keyword;
+			});
+		});
+		var boardId = ${boardVO.boardId};
+		var templateAttach = Handlebars.compile($("#templateAttach").html());
+		$.getJSON("/board/getAttach/"+boardId, function(list){
+			$(list).each(function(){
+				var fileInfo = getFileInfo(this);
+				var html = templateAttach(fileInfo);
+				$(".uploadedList").append(html);
 			});
 		});
 	</script>

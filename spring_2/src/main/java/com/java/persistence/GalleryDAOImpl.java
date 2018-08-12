@@ -40,6 +40,7 @@ public class GalleryDAOImpl implements GalleryDAO {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("title", vo.getGalleryTitle());
 		paramMap.put("galleryId", vo.getGalleryId());
+		paramMap.put("attachName", vo.getGalleryAttachName());
 		session.update(namespace + ".update", paramMap);
 	}
 

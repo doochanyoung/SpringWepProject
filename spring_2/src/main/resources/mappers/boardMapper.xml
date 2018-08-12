@@ -100,4 +100,16 @@
 	<update id="updateLike">
 		update tbl_board set boardLike = boardLike + 1 where boardId = #{boardId}
 	</update>
+		<insert id="addAttach">
+		insert into tbl_board_attach(boardAttachFullname, boardAttachBoardId) values (#{fullName}, LAST_INSERT_ID())
+	</insert>
+	<select id="getAttach" resultType="string">
+		select boardAttachFullname from tbl_board_attach where boardAttachBoardId = #{boardId} order by boardAttachRegdate;
+	</select>
+	<delete id="deleteAttach">
+		delete from tbl_board_attach where boardAttachBoardId = #{boardId}
+	</delete>
+	<insert id="replaceAttach">
+		insert into tbl_board_attach(boardAttachFullname, boardAttachBoardId) values (#{fullName}, #{boardId})
+	</insert>
 </mapper>

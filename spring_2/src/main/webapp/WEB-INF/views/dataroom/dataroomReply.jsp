@@ -211,10 +211,21 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="../js/main.js"></script>
+	<script src="../js/upload.js"></script>
+	
+	<script id="templateAttach" type="text/x-handlebars-template">
+	<li>
+  		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment">
+		<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a></span>
+  		<div class=	"mailbox-attachment-info">
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+ 	 	</div>
+	</li>              
+	</script>
 
 	<script>
 		CKEDITOR.replace('dataroomContent', {
-			 height: '600px',
+			 height: '1000px',
 			 resize_enabled: false
 		});
 
@@ -257,11 +268,72 @@
 					   valid = false;
 				}
 			    if(valid){
-			    	 document.getElementById("formBoard").submit();
+			    	var that = $(this);
+					var str = "";
+					var last = 0;
+					$(".uploadedList .delbtn").each(function(index){
+						str += "<input type='hidden' name='files["+index+"]' value='" + $(this).attr("href") + "'> ";
+						alert(index);
+						last = index + 1;
+					});
+					$(dataroomContent).each(function (index, p) {
+					    if ($(p).find('img').length > 0) {
+					        $(p).find('img').each(function (index, img) {
+					            var at = $(img).attr('src');
+					            at = ''+at;
+					            var date = at.substring(22, 34);
+					            at = at.substr(34);
+					            at = date + "_s" + at;
+					            str += "<input type='hidden' name='files["+last+"]' value='" + at + "'> ";
+					            last++;
+					        });
+					    }
+					});
+					that.append(str);
+					that.get(0).submit();
 			    }
 			  });
 		});
 	</script>
 
+	<script>
+		var template = Handlebars.compile($("#templateAttach").html());
+		$(".fileDrop").on("dragenter dragover", function(event){ //파일을 드래그 했을때 화면에 사진 뜨는거  방지
+			event.preventDefault();
+		});
+		$(".fileDrop").on("drop", function(event) {
+			event.preventDefault();
+			var files = event.originalEvent.dataTransfer.files;
+			var file = files[0];
+			var formData = new FormData();
+			formData.append("file", file);
+			$.ajax({
+				url : '/uploadAjax',
+				data : formData,
+				dataType : 'text',
+				processData : false,
+				contentType : false,
+				type : 'POST',
+				success : function(data) {
+					var fileInfo = getFileInfo(data);
+					var html = template(fileInfo);
+					$(".uploadedList").append(html);
+				}
+			});
+		});
+		$(".uploadedList").on("click", ".delbtn", function(event) {
+			event.preventDefault();
+			var that = $(this);
+			that.closest("li").remove();
+		});
+		function getOriginalName(fileName){
+			if(checkImageType(fileName)){
+				return;
+			}
+			var idx = fileName.indexOf("_") + 1;
+			return fileName.substr(idx);
+		}
+	</script>
+	
 </body>
 </html>
