@@ -65,7 +65,13 @@
 					<c:choose>
 						<c:when test="${not empty sessionScope.loginId}">
 							<li>${sessionScope.loginId}님 반갑습니다.</li>
-							<li><a href="/login/logout" class="btn btn-default btn-logout">로그아웃</a></li>
+							<li class="menu-has-children"><a href="#">회원 정보</a>
+								<ul>
+									<li><a href="/login/logout">로그아웃</a></li>
+									<li><a href="/user/userModify">정보 수정</a></li>
+									<li><a href="/user/userProfile">프로필</a></li>
+								</ul>
+							</li>
 						</c:when>
 							
 						<c:otherwise>
