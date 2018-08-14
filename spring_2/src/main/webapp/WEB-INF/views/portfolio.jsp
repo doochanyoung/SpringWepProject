@@ -103,7 +103,7 @@
 		document.getElementById("profileimg").src="img/(badge)Doo.png";
 		document.getElementById("name").innerHTML="두찬영 1993.08.12";
 		document.getElementById("school").innerHTML="<br/>송정초등학교<br/>화봉중학교<br/>성신고등학교(이과)<br/>부산외국어대학교(컴퓨터공학과)";
-		document.getElementById("specification").innerHTML="<br/>육군병장만기전역(2015)<br/>한국사능력검정 2급 (2017.08.29)<br/>교내캡스톤디자인 도전상 (2017.12.22)<br/>교내캡스톤디자인 인기상 (2017.12.22)교내캡스톤디자인 확장상 (2018.06.08)<br/>";
+		document.getElementById("specification").innerHTML="<br/>육군병장만기전역(2015)<br/>한국사능력검정 2급 (2017.08.29)<br/>교내캡스톤디자인 도전상 (2017.12.22)<br/>교내캡스톤디자인 인기상 (2017.12.22)<br/>알고리즘분석개발실장(2018)<br/>교내캡스톤디자인 확장상 (2018.06.08)<br/>";
 	}
 	function GaeOver() {
 		OverFun();
@@ -112,7 +112,7 @@
 		document.getElementById("profileimg").src="img/(badge)GaeTaeng.png";
 		document.getElementById("name").innerHTML="김태훈 1994.10.21";
 		document.getElementById("school").innerHTML="<br/>연서초등학교<br/>연산중학교<br/>이사벨고등학교(이과)<br/>부산외국어대학교(컴퓨터공학과)";
-		document.getElementById("specification").innerHTML="<br/>육군병장만기전역(2016)<br/>정보처리기능사 (-년)<br/>워드프로세서2급 (-년)<br/>컴퓨터활용능력2급 (-년)";
+		document.getElementById("specification").innerHTML="<br/>정보처리기능사 (-년)<br/>워드프로세서2급 (-년)<br/>컴퓨터활용능력2급 (-년)<br/>학과 1학년 대표(2013)<br/>육군병장만기전역(2016)";
 	
 	}
 	function ChungOver() {
