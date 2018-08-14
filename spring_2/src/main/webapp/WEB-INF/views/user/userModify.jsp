@@ -82,7 +82,7 @@
       datarooms Section
     ============================-->
 
-	<section id="hero">
+	<section id="boards" style="background: url(../img/hero-bg.jpg) top center;">
 		<div class="container py-5">
 			<div class="row">
 				<div class="col-md-12">
@@ -90,60 +90,57 @@
 						<div class="col-md-6 mx-auto">
 							<!-- form card login -->
 							<div class="card" >
-								<div class="card-header">
-									<h3 class="login-title">user modify</h3>
-								</div>
+								<div class="card-header"><h3 class="title">user modify</h3></div>
 								<div class="card-body">
 									<form class="form" role="form" autocomplete="off" action="/user/userModify"
 										id="formRegister" method="post">
-										<div class="form-group row">
-											<div class="col-2"><label class="login-text text-center">ID</label> </div>
-											<div class="col-10"><input type="text" class="form-control form-control-lg"
+										<div class="form-group">
+											<label class="text">ID</label>
+											<input type="text" class="form-control form-control-lg"
 												name="userId" id="userId" readonly="readonly" value="${userVO.userId }">
-											</div>
 										</div>
-										<div class="form-group row">
-											<div class="col-2"><label class="login-text">Password</label></div> 
-											<div class="col-10"><input
+										<div class="form-group">
+											<label class="text">Password</label>
+											<input
 												type="password" class="form-control form-control-lg"
 												name="userPassword" id="userPassword"
 												placeholder="Write Password">
-											</div>
 										</div>
-										<div class="form-group row">
-											<div class="col-2"><label for="Name" class="login-text">Name</label></div> 
-											<div class="col-10"><input
+										<div class="form-group">
+											<label class="text">Password Check</label>
+											<input
+												type="password" class="form-control form-control-lg"
+												name="userPassword" id="userPasswordCheck"
+												placeholder="Write PasswordCheck">
+										</div>
+										<div class="form-group">
+											<label for="Name" class="text">Name</label>
+											<input
 												type="text" class="form-control form-control-lg"
 												name="userName" id="userName"
 												placeholder="Write Nickname" value="${userVO.userName }">
-											</div>
 										</div>
-										<div class="form-group row">
-											<div class="col-2"><label for="Nickname" class="login-text">Nickname</label></div> 
-											<div class="col-10"><input
+										<div class="form-group">
+											<label for="Nickname" class="text">Nickname</label>
+											<input
 												type="text" class="form-control form-control-lg"
 												name="userNickname" id="userNickname"
 												placeholder="Write Nickname" value="${userVO.userNickname }">
-											</div>
-										</div>
-										<div class="form-group row">
-											<div class="col-2"><label for="Email" class="login-text">Email</label></div> 
-											<div class="col-10"><input
-												type="email" class="form-control form-control-lg"
-												name="userEmail" id="userEmail"
-												placeholder="Write Email" value="${userVO.userEmail }">
-											</div>
-										</div>
-										<div class="form-group row">
-											<div class="col-2"><label for="Phone Number" class="login-text">Phone Number</label></div> 
-											<div class="col-10"><input
-												type="text" class="form-control form-control-lg"
-												name="userPhone" id="userPhone"
-												placeholder="Write Phone Number" value="${userVO.userPhone }">
-											</div>
 										</div>
 										<div class="form-group">
-											<label for="Introduction" class="login-text">Introduction</label>
+											<label for="Email" class="text">Email</label> 
+											<input
+												type="text" class="form-control form-control-lg"
+												name="userEmail" id="userEmail"
+												placeholder="Write Email" value="${userVO.userEmail }">
+										</div>
+										<div class="form-group">
+											<label for="Phone Number" class="text">Phone Number</label>
+											<input type="text" class="form-control form-control-lg"
+												name="userPhone" id="userPhone" placeholder="Write Phone Number" value="${userVO.userPhone }">
+										</div>
+										<div class="form-group">
+											<label for="Introduction" class="text">Introduction</label>
 											<textarea class="form-control" name="userIntro" rows="5" id="userIntro"
 												data-rule="required"
 												data-msg="Please write something for us"
@@ -255,6 +252,10 @@
 					      $('#userPassword').after('<span class="error" style="color:red;"><small>please write less than 45 charactors...</small></span>');
 					      valid = false;
 					}
+			    if($('#userPassword').val() != $('#userPasswordCheck').val()){
+			    	 $('#userPassword').after('<span class="error" style="color:red;"><small>Password and PasswordCheck is not matched.</small></span>');
+			    	 valid = false;
+			    }
 			    if ($('#userEmail').val().length < 1) {
 			      $('#userEmail').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
 			      valid = false;
