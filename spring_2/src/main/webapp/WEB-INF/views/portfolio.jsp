@@ -26,7 +26,7 @@
 <link href="lib/animate/animate.min.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css?ver=20180811-9" rel="stylesheet">
+<link href="css/style.css?ver=20180814-1" rel="stylesheet">
 
 <!-- Bootstrap Icon Library -->
 <link rel="stylesheet"
@@ -85,21 +85,48 @@
 	</header>
 	
 	<script>
+	function OverFun() {
+		document.getElementById("profilecontents").style.fontSize = "24px"
+		document.getElementById("portfolioForm").style.background="rgba(0,0,0,0.5)";
+		document.getElementById("name").style.fontSize = "18px"
+			document.getElementById("school").style.fontSize = "18px"
+			document.getElementById("specification").style.fontSize= "18px"
+				document.getElementById("name").style.color =  "gray"
+					document.getElementById("school").style.color=  "gray"
+					document.getElementById("specification").style.color= "gray"
+
+	}
 	function DooOver() {
+		OverFun();
 		bodycheck = 1;
 		bodyValue = "두찬영";
 		document.getElementById("profileimg").src="img/(badge)Doo.png";
+		document.getElementById("name").innerHTML="두찬영 1993.08.12";
+		document.getElementById("school").innerHTML="<br/>송정초등학교<br/>화봉중학교<br/>성신고등학교(이과)<br/>부산외국어대학교(컴퓨터공학과)";
+		document.getElementById("specification").innerHTML="<br/>육군병장만기전역(2015)<br/>한국사능력검정 2급 (2017.08.29)<br/>교내캡스톤디자인 도전상 (2017.12.22)<br/>교내캡스톤디자인 인기상 (2017.12.22)교내캡스톤디자인 확장상 (2018.06.08)<br/>";
 	}
 	function GaeOver() {
+		OverFun();
 		bodycheck = 2;
 		bodyValue = "김태훈";
 		document.getElementById("profileimg").src="img/(badge)GaeTaeng.png";
+		document.getElementById("name").innerHTML="김태훈 1994.10.21";
+		document.getElementById("school").innerHTML="<br/>연서초등학교<br/>연산중학교<br/>이사벨고등학교(이과)<br/>부산외국어대학교(컴퓨터공학과)";
+		document.getElementById("specification").innerHTML="<br/>육군병장만기전역(2016)<br/>정보처리기능사 (-년)<br/>워드프로세서2급 (-년)<br/>컴퓨터활용능력2급 (-년)";
+	
 	}
 	function ChungOver() {
+		OverFun();
 		bodycheck = 3;
 		bodyValue = "이화섭";
 		document.getElementById("profileimg").src="img/(badge)Chung.png";
+		document.getElementById("name").innerHTML="이화섭 1994.11.15";
+		document.getElementById("school").innerHTML="<br/>명륜초등학교<br/>동래중학교<br/>부산용인고등학교(이과)<br/>부산외국어대학교(컴퓨터공학과)";
+		document.getElementById("specification").innerHTML="<br/>-";
+	
 	}
+	
+	
 	function PortfolioOn() {
 		document.getElementById("Doo").innerHTML="두찬영 (DooDoo)";
 		document.getElementById("Gae").innerHTML="김태훈 (GaeTaeng)";
@@ -107,17 +134,28 @@
 			document.getElementById("Doo").style.fontSize = "16px";
 			document.getElementById("Gae").style.fontSize = "16px";
 			document.getElementById("Chung").style.fontSize = "16px";
-			
+			document.getElementById("portfolioForm").style.width="80%";
+			document.getElementById("portfolioForm").style.height="80%";
 	}
 	function PortfolioOut() { 
 		document.getElementById("Doo").innerHTML="";
 		document.getElementById("Gae").innerHTML="";
 		document.getElementById("Chung").innerHTML="";
-		document.getElementById("Doo").style.fontsize = "0px";
+		document.getElementById("Doo").style.fontSize = "0px";
 		document.getElementById("Gae").style.fontSize = "0px";
 		document.getElementById("Chung").style.fontSize = "0px";
 		
 		document.getElementById("profileimg").src="";
+		document.getElementById("portfolioForm").style.background="rgba(0,0,0,0)";
+		document.getElementById("portfolioForm").style.width="0%";
+		document.getElementById("portfolioForm").style.height="0%";
+
+		document.getElementById("profilecontents").style.fontSize = "0px";
+		
+
+		document.getElementById("name").style.fontSize = "0px"
+			document.getElementById("school").style.fontSize = "0px"
+			document.getElementById("specification").style.fontSize= "0px"
 	}
 	</script>
 	
@@ -138,16 +176,22 @@
 	
 	
 	<section id="hero">
-	<form>
-		<img id = "profileimg" src="" alt=""> 
-		<div>
-			<h2 style="margin : 0 0 0 280px">이름 : </h2><span id="name"></span><br/>
-			<h2 style="margin : 0 0 0 280px">학교 : </h2><span id="school"></span><br/>
-			<h2 style="margin : 0 0 0 280px">경력 : </h2><span id="specification"></span><br/>
-		</div>
-	</form>
+		
+		<form id = "portfolioForm">
+			<img id = "profileimg" src="" alt="">
+			<br/>
+			<div>
+				<h2 id = "profilecontents" style = "font-size:0px">
+				이름 : <span id="name"></span><br/>
+				학교<span id="school"></span><br/>
+				경력 : <span id="specification"></span><br/>
+				</h2>
+			</div>
+		</form>
 	</section>
-
+	
+		
+		
 	<footer id="footer">
 		<div class="footer-top">
 			<div class="container"></div>

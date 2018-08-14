@@ -129,16 +129,35 @@ h1, h2, h3, h4, h5, h6 {
 #div-body {
 	margin:
 }
-
-form #profileimg {
-	margin : 120px 0 0 280px;
-	display : inline-block;
+#portfolioForm {
+	position : fixed;
+	margin: 15vh 0 0 35vh;
+	width:0%;
+	height:0%;
+	background : rgba(0, 0, 0, 0);
+	
+	transition: all 1.0s;
 }
-form h2 {
-	margin : 120px 0 0 280px;
-	display : inline-block;
+form #profileimg {
+	width:30vh;
+	height:30vh;
+	position : fixed;
+	margin : 5vh 0 0 5vh;
+	display : block;
+	transition: all 1.0s;
+}
+form div {
+	position : fixed;
+	margin : 35vh 0 0 5vh;
+	display :block;
 	
   color: #000;
+}
+#profilecontents {
+	font-size : 0px;
+}
+#profilecontents span {
+	font-size : 0px;
 }
 /*--------------------------------------------------------------
 # Header
