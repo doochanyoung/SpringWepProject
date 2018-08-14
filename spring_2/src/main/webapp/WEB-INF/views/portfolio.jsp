@@ -103,7 +103,7 @@
 		document.getElementById("profileimg").src="img/(badge)Doo.png";
 		document.getElementById("name").innerHTML="두찬영 1993.08.12";
 		document.getElementById("school").innerHTML="<br/>송정초등학교<br/>화봉중학교<br/>성신고등학교(이과)<br/>부산외국어대학교(컴퓨터공학과)";
-		document.getElementById("specification").innerHTML="<br/>육군병장만기전역(2015)<br/>한국사능력검정 2급 (2017.08.29)<br/>교내캡스톤디자인 도전상 (2017.12.22)<br/>교내캡스톤디자인 인기상 (2017.12.22)<br/>알고리즘분석개발실장(2018)<br/>교내캡스톤디자인 확장상 (2018.06.08)<br/>";
+		document.getElementById("specification").innerHTML="<br/>육군병장만기전역(2015)<br/>학술동아리 그린비 부회장(2016)<br/>학술동아리 그린비 회장(2017)<br/>한국사능력검정 2급 (2017.08.29)<br/>교내캡스톤디자인 도전상 (2017.12.22)<br/>교내캡스톤디자인 인기상 (2017.12.22)<br/>학술동아리 그린비 회장(2018)<br/>알고리즘분석개발실장(2018)<br/>교내캡스톤디자인 확장상 (2018.06.08)<br/>";
 	}
 	function GaeOver() {
 		OverFun();
