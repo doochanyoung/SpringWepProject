@@ -37,5 +37,16 @@ public class UserController {
 		return "redirect:/home";
 	}
 	
+	@RequestMapping(value = "/userProfile", method = RequestMethod.GET)
+	public void userProfileGET(Model model, HttpSession session) {
+		logger.info("userModify : GET");
+	}
+	
+	@RequestMapping(value = "/messageList", method = RequestMethod.GET)
+	public void messageListGET(Model model, HttpSession session) {
+		logger.info("userModify : GET");
+	}
+	
+	
 	
 }

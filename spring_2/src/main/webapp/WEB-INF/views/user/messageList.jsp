@@ -69,9 +69,9 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav nav-menu">
 					<li class="nav-item"><a href="<c:url value='/'/>">Home</a></li>
-					<li class="nav-item menu-active"><a href="/user/userModify">modify</a></li>
+					<li class="nav-item"><a href="/user/userModify">modify</a></li>
 					<li class="nav-item"><a href="/user/userProfile">profile</a></li>
-					<li class="nav-item"><a href="/user/userProfile">message</a></li>
+					<li class="nav-item menu-active"><a href="/user/userProfile">message</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -84,86 +84,7 @@
     ============================-->
 
 	<section id="boards" style="background: url(../img/hero-bg.jpg) top center;">
-		<div class="container py-5">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-6 mx-auto">
-							<!-- form card login -->
-							<div class="card" >
-								<div class="card-header"><h3 class="title">user modify</h3></div>
-								<div class="card-body">
-									<form class="form" role="form" autocomplete="off" action="/user/userModify"
-										id="formRegister" method="post">
-										<div class="form-group">
-											<label class="text">ID</label>
-											<input type="text" class="form-control form-control-lg"
-												name="userId" id="userId" readonly="readonly" value="${userVO.userId }">
-										</div>
-										<div class="form-group">
-											<label class="text">Password</label>
-											<input
-												type="password" class="form-control form-control-lg"
-												name="userPassword" id="userPassword"
-												placeholder="Write Password">
-										</div>
-										<div class="form-group">
-											<label class="text">Password Check</label>
-											<input
-												type="password" class="form-control form-control-lg"
-												name="userPassword" id="userPasswordCheck"
-												placeholder="Write PasswordCheck">
-										</div>
-										<div class="form-group">
-											<label for="Name" class="text">Name</label>
-											<input
-												type="text" class="form-control form-control-lg"
-												name="userName" id="userName"
-												placeholder="Write Nickname" value="${userVO.userName }">
-										</div>
-										<div class="form-group">
-											<label for="Nickname" class="text">Nickname</label>
-											<input
-												type="text" class="form-control form-control-lg"
-												name="userNickname" id="userNickname"
-												placeholder="Write Nickname" value="${userVO.userNickname }">
-										</div>
-										<div class="form-group">
-											<label for="Email" class="text">Email</label> 
-											<input
-												type="text" class="form-control form-control-lg"
-												name="userEmail" id="userEmail"
-												placeholder="Write Email" value="${userVO.userEmail }">
-										</div>
-										<div class="form-group">
-											<label for="Phone Number" class="text">Phone Number</label>
-											<input type="text" class="form-control form-control-lg"
-												name="userPhone" id="userPhone" placeholder="Write Phone Number" value="${userVO.userPhone }">
-										</div>
-										<div class="form-group">
-											<label for="Introduction" class="text">Introduction</label>
-											<textarea class="form-control" name="userIntro" rows="5" id="userIntro"
-												data-rule="required"
-												data-msg="Please write something for us"
-												placeholder="introduce yourself....">${userVO.userIntro }</textarea>
-										</div>
-										<div class="text-center">
-											<button class="btn btn-default btn-sm btn-block"
-												type="submit">Submit</button>
-										</div>
-									</form>
-								</div>
-								<!--/card-block-->
-							</div>
-							<!-- /form card login -->
-						</div>
-					</div>
-					<!--/row-->
-				</div>
-				<!--/col-->
-			</div>
-			<!--/row-->
-		</div>
+		
 	</section>
 
 

@@ -70,6 +70,7 @@
 									<li><a href="/login/logout">로그아웃</a></li>
 									<li><a href="/user/userModify">정보 수정</a></li>
 									<li><a href="/user/userProfile">프로필</a></li>
+									<li><a href="/user/messageList">메세지함</a></li>
 								</ul>
 							</li>
 						</c:when>
