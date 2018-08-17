@@ -20,7 +20,7 @@ public class MessageDAOImpl implements MessageDAO {
     // 메시지 열람
     @Override
     public MessageVO readMessage(int mid) {
-
+    	
         return null;
     }
     // 메시지 열람시간 갱신
@@ -28,5 +28,4 @@ public class MessageDAOImpl implements MessageDAO {
     public void updateMessage(int mid) {
 
     }
-
 }
