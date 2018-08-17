@@ -127,7 +127,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #div-body {
-	margin:
 }
 #portfolioForm {
 	position : fixed;
@@ -138,22 +137,20 @@ h1, h2, h3, h4, h5, h6 {
 	
 	transition: all 1.0s;
 }
-form #profileimg {
+#portfolioForm #divSpec #profileimg {
 	width:30vh;
 	height:30vh;
-	position : fixed;
-	margin : 5vh 0 0 5vh;
-	display : block;
+	display : inline-block;
 	transition: all 1.0s;
 }
-/* 로그인, 회원가입, 회원 정보 수정 페이지 card가 깨져서 주석처리
-form div {
-	position : fixed;
-	margin : 35vh 0 0 5vh;
-	display :block;
+#portfolioForm #divSpec h2{
+	display :inline-block;
+}
+
+#portfolioForm #portfolioDiv {
+	display :inline-block;
   color: #000;
 }
-*/
 #profilecontents {
 	font-size : 0px;
 }

@@ -26,7 +26,7 @@
 <link href="lib/animate/animate.min.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css?ver=20180814-3" rel="stylesheet">
+<link href="css/style.css?ver=20180817-3" rel="stylesheet">
 
 <!-- Bootstrap Icon Library -->
 <link rel="stylesheet"
@@ -86,7 +86,8 @@
 	
 	<script>
 	function OverFun() {
-		document.getElementById("profilecontents").style.fontSize = "24px"
+		document.getElementById("profilecontents1").style.fontSize = "24px"
+			document.getElementById("profilecontents2").style.fontSize = "24px"
 		document.getElementById("portfolioForm").style.background="rgba(0,0,0,0.5)";
 		document.getElementById("name").style.fontSize = "18px"
 			document.getElementById("school").style.fontSize = "18px"
@@ -150,7 +151,8 @@
 		document.getElementById("portfolioForm").style.width="0%";
 		document.getElementById("portfolioForm").style.height="0%";
 
-		document.getElementById("profilecontents").style.fontSize = "0px";
+		document.getElementById("profilecontents1").style.fontSize = "0px";
+		document.getElementById("profilecontents2").style.fontSize = "0px";
 		
 
 		document.getElementById("name").style.fontSize = "0px"
@@ -176,18 +178,28 @@
 	
 	
 	<section id="hero">
-		
-		<form id = "portfolioForm">
-			<img id = "profileimg" src="" alt="">
-			<br/>
-			<div>
-				<h2 id = "profilecontents" style = "font-size:0px">
-				이름 : <span id="name"></span><br/>
+		<table id = "portfolioForm" border="3">
+		<tbody>
+			<tr id="divSpec">
+				<td style="width:35vh; height:35vh">
+					<img id = "profileimg" src="" alt=""></td>
+				<td>
+					<h2 id = "profilecontents1" style = "font-size:0px">
+						경력
+					</h2>
+					<span id="specification"></span><br/>
+					
+				</td>
+			</tr>
+			<tr id = "portfolioDiv">
+				<td><h2 id = "profilecontents2" style = "font-size:0px">
+				이름 : <span id="name"></span><br/><br/>
 				학교<span id="school"></span><br/>
-				경력 : <span id="specification"></span><br/>
-				</h2>
-			</div>
-		</form>
+				</h2></td> <td> </td>
+			</tr>
+			</tbody>
+		</table>
+		
 	</section>
 	
 		
