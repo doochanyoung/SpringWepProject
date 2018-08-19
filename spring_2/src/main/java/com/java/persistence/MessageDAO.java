@@ -1,4 +1,4 @@
-package com.java.message;
+package com.java.persistence;
 
 import com.java.domain.MessageVO;
 

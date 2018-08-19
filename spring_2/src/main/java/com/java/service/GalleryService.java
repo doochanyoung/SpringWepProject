@@ -2,7 +2,6 @@ package com.java.service;
 
 import java.util.List;
 
-import com.java.domain.BoardVO;
 import com.java.domain.GalleryVO;
 import com.java.domain.PageHandler;
 import com.java.domain.SearchPageHandler;

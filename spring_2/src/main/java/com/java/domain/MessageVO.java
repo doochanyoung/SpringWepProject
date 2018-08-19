@@ -3,12 +3,12 @@ package com.java.domain;
 import java.sql.Date;
 
 public class MessageVO {
-	int messageId;
-	String messageContent;
-	Date messageOpendate;
-	Date messageSendDate;
-	String messageSender;
-	String messageReceiver;
+	private int messageId;
+	private String messageContent;
+	private Date messageOpendate;
+	private Date messageSendDate;
+	private String messageSender;
+	private String messageReceiver;
 	
 	public int getMessageId() {
 		return messageId;

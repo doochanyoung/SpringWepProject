@@ -1,4 +1,4 @@
-package com.java.message;
+package com.java.persistence;
 
 import javax.inject.Inject;
 
@@ -10,22 +10,24 @@ import com.java.domain.MessageVO;
 @Repository
 public class MessageDAOImpl implements MessageDAO {
     @Inject
-    SqlSession sqlSession;
+    private SqlSession sqlSession;
+    
+    private static String namespace = "com.java.mapper.messageMapper";
 
     // 메시지 작성
     @Override
-    public void create(MessageVO vo) {
-        sqlSession.insert("message.create", vo);
+    public void create(MessageVO vo){
+        sqlSession.insert(namespace+".create", vo);
     }
     // 메시지 열람
     @Override
-    public MessageVO readMessage(int mid) {
-    	
+    public MessageVO readMessage(int mid){
+    	//sqlSession.select("message.read", mid);
         return null;
     }
     // 메시지 열람시간 갱신
     @Override
-    public void updateMessage(int mid) {
+    public void updateMessage(int mid){
 
     }
 }
