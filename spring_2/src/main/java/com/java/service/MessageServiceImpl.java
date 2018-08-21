@@ -1,12 +1,17 @@
 package com.java.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.java.domain.BoardVO;
 import com.java.domain.MessageVO;
+import com.java.domain.PageHandler;
+import com.java.domain.SearchPageHandler;
 import com.java.persistence.MessageDAO;
 import com.java.spring2.HomeController;
 
@@ -34,4 +39,19 @@ public class MessageServiceImpl implements MessageService {
 
         return null;
     }
+    
+    @Override
+	public List<MessageVO> listPageHandler(PageHandler handler) throws Exception {
+		return dao.listPageHandler(handler);
+	}
+    
+    @Override
+	public List<MessageVO> listSearchPageHandler(SearchPageHandler handler) throws Exception {
+		return dao.listSearch(handler);
+	}
+    
+    @Override
+	public int searchCountPaging(SearchPageHandler handler) throws Exception {
+		return dao.listSearchCount(handler);
+	}
 }

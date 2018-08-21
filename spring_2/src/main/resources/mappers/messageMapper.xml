@@ -15,4 +15,11 @@
 		where messageId
 		= #{messageId}
 	</select>
+	
+	<select id="listall" resultType="com.java.domain.MessageVO">
+		select *
+		from tbl_message
+		where receiverId
+		= #{receiverId}
+	</select>
 </mapper>

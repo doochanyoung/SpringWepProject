@@ -7,11 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.java.domain.MessageVO;
+import com.java.domain.PageMaker;
+import com.java.domain.SearchPageHandler;
 import com.java.service.MessageService;
 
 @Controller
@@ -37,4 +41,16 @@ public class MessageController {
         }
         return entity;
     }
+    
+    @RequestMapping(value = "/messageList", method = RequestMethod.GET)
+	public void message(@ModelAttribute("pageHandler") SearchPageHandler pageHandler, Model model) throws Exception {
+		logger.info("get : /messageList");
+		model.addAttribute("list", service.listSearchPageHandler(pageHandler));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPageHandler(pageHandler);
+		logger.info(pageHandler.toString());
+		pageMaker.setTotalCount(service.searchCountPaging(pageHandler));
+		logger.info(pageMaker.toString());
+		model.addAttribute("pageMaker", pageMaker);
+	}
 }

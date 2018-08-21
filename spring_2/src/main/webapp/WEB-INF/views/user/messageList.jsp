@@ -83,8 +83,89 @@
       datarooms Section
     ============================-->
 
-	<section id="boards" style="background: url(../img/hero-bg.jpg) top center;">
-		
+	<section id="messages">
+		<div class="container">
+			<div class="section-header m-5">
+				<h3 class="section-title">자유게시판</h3>
+				<p class="section-description">자유 게시판을 활용하여 많은 사람들과 소통해보세요.</p>
+			</div>
+			<div class="card m-4">
+				<div class="card-header">Search</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-7">
+							<div class="form-group">
+								<input type="text" class="form-control"
+									id="keyword" name="keyword" placeholder="search...." value="${pageHandler.keyword }">
+							</div>
+						</div>
+						<div class="col-2">
+							<select class="custom-select" id="searchType" name="searchType">
+								<option value="none" id="select" <c:out value="${pageHandler.searchType == null ? 'selected':'' }" />>-------</option>
+								<option value="title" id="select" <c:out value="${pageHandler.searchType eq 'title' ? 'selected':'' }" />>제목</option>
+								<option value="writer" id="select" <c:out value="${pageHandler.searchType eq 'writer' ? 'selected':'' }" />>작성자</option>
+								<option value="content" id="select" <c:out value="${pageHandler.searchType eq 'content' ? 'selected':'' }" />>내용</option>
+							</select>
+						</div>
+						<div class="col-1">
+							<div class="text-center">
+								<button class="btn btn-default float-left" id="searchButton" type="button">검색</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="my-4">
+			<div class="row">
+				<table class="table table-striped table-sm"
+					style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th class="mobile" scope="col">id</th>
+							<th scope="col">제목</th>
+							<th class="mobile" scope="col">작성자</th>
+							<th class="mobile" scope="col">작성일</th>
+							<th class="mobile" scope="col">조회수</th>
+							<th class="mobile" scope="col">좋아요</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="boardVO">
+							<tr>
+								<th class="mobile" scope="row">${boardVO.boardId }</th>
+								<td><a href='/board/boardRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i></c:if>${boardVO.boardTitle } <strong>[${boardVO.boardCommCnt}]</strong></a></td>
+								<td class="mobile">${boardVO.boardUserId }</td>
+								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></td>
+								<td class="mobile">${boardVO.boardHit }</td>
+								<td class="mobile">${boardVO.boardLike }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div class="text-center">
+					<c:if test="${not empty loginId}">
+					<button class="btn btn-default float-right m-2" type="button" id="boardWrite">글 작성</button>
+					</c:if>
+				</div>
+			</div>
+		</div>
+		<nav>
+			<ul class="pagination pagination-info justify-content-center">
+				<c:if test="${pageMaker.prev }">
+				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeSearch(pageMaker.startPage - 1) }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span></a></li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+					<li class = "page-item <c:out value="${pageMaker.pageHandler.page == idx ? 'active' : ''}" />">
+					<a class="page-link" href="boardList${pageMaker.makeSearch(idx)}">${idx }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeSearch(pageMaker.endPage + 1) }" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+						class="sr-only">Next</span></a></li>
+				</c:if>
+			</ul>
+		</nav>
 	</section>
 
 
