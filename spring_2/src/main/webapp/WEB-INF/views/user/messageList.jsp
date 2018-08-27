@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
-<title>GAE & Doo & CHUNG WEPPAGE</title>
+<title> Doo & GAE & CHUNG WEPPAGE</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -103,7 +103,7 @@
 							<select class="custom-select" id="searchType" name="searchType">
 								<option value="none" id="select" <c:out value="${pageHandler.searchType == null ? 'selected':'' }" />>-------</option>
 								<option value="title" id="select" <c:out value="${pageHandler.searchType eq 'title' ? 'selected':'' }" />>제목</option>
-								<option value="writer" id="select" <c:out value="${pageHandler.searchType eq 'writer' ? 'selected':'' }" />>작성자</option>
+								<option value="sender" id="select" <c:out value="${pageHandler.searchType eq 'sender' ? 'selected':'' }" />>보낸자</option>
 								<option value="content" id="select" <c:out value="${pageHandler.searchType eq 'content' ? 'selected':'' }" />>내용</option>
 							</select>
 						</div>
@@ -123,10 +123,8 @@
 						<tr>
 							<th class="mobile" scope="col">id</th>
 							<th scope="col">제목</th>
-							<th class="mobile" scope="col">작성자</th>
-							<th class="mobile" scope="col">작성일</th>
-							<th class="mobile" scope="col">조회수</th>
-							<th class="mobile" scope="col">좋아요</th>
+							<th class="mobile" scope="col">보낸자</th>
+							<th class="mobile" scope="col">보낸일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -150,26 +148,21 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="text-center">
-					<c:if test="${not empty loginId}">
-					<button class="btn btn-default float-right m-2" type="button" id="boardWrite">글 작성</button>
-					</c:if>
-				</div>
 			</div>
 		</div>
 		<nav>
 			<ul class="pagination pagination-info justify-content-center">
 				<c:if test="${pageMaker.prev }">
-				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeSearch(pageMaker.startPage - 1) }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				<li class="page-item"><a class="page-link" href="messageList${pageMaker.makeSearch(pageMaker.startPage - 1) }" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">Previous</span></a></li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 					<li class = "page-item <c:out value="${pageMaker.pageHandler.page == idx ? 'active' : ''}" />">
-					<a class="page-link" href="boardList${pageMaker.makeSearch(idx)}">${idx }</a>
+					<a class="page-link" href="messageList${pageMaker.makeSearch(idx)}">${idx }</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li class="page-item"><a class="page-link" href="boardList${pageMaker.makeSearch(pageMaker.endPage + 1) }" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+				<li class="page-item"><a class="page-link" href="messageList${pageMaker.makeSearch(pageMaker.endPage + 1) }" aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 						class="sr-only">Next</span></a></li>
 				</c:if>
 			</ul>
