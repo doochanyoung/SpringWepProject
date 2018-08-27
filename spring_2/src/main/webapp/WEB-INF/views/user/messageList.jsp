@@ -86,8 +86,8 @@
 	<section id="messages">
 		<div class="container">
 			<div class="section-header m-5">
-				<h3 class="section-title">자유게시판</h3>
-				<p class="section-description">자유 게시판을 활용하여 많은 사람들과 소통해보세요.</p>
+				<h3 class="section-title">메세지 보관함</h3>
+				<p class="section-description">메시지를 확인하세요!</p>
 			</div>
 			<div class="card m-4">
 				<div class="card-header">Search</div>
@@ -130,14 +130,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${list}" var="boardVO">
+						<c:forEach items="${list}" var="messageVO">
 							<tr>
-								<th class="mobile" scope="row">${boardVO.boardId }</th>
-								<td><a href='/board/boardRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&boardId=${boardVO.boardId}'><c:if test="${boardVO.boardIsReply }"><i class="fab fa-replyd"></i></c:if>${boardVO.boardTitle } <strong>[${boardVO.boardCommCnt}]</strong></a></td>
-								<td class="mobile">${boardVO.boardUserId }</td>
-								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate }"/></td>
-								<td class="mobile">${boardVO.boardHit }</td>
-								<td class="mobile">${boardVO.boardLike }</td>
+								<th class="mobile" scope="row">${messageVO.messageId }</th>
+								<!--==========================
+								      수정필요
+								    ============================-->
+								<td>
+									<a href='/user/messageRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&messageId=${messageVO.messageId}'>
+										<c:if test="${messageVO.messageSendDate }"><i class="fab fa-replyd"></i></c:if>
+										${messageVO.messageOpendate } <strong>[${messageVO.messageContent}]</strong>
+									</a>
+								</td>
+								<td class="mobile">${messageVO.messageId }</td>
+								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageSendDate }"/></td>
+								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageOpendate }"/></td>
+								<td class="mobile">${messageVO.messageContent }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
