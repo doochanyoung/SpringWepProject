@@ -83,26 +83,26 @@ h1, h2, h3, h4, h5, h6 {
 # aside << 개탱 수정부분입니다 css 수정할 때 확인 바래요 >> << 혹시나 싶어 메모 남깁니다. >>
 --------------------------------------------------------------*/
 #aside {
-   margin:72px 0 0 0;
-   
-   background: rgba(52, 59, 64, 0.9);
-   padding: 30px 0 0 0;
+	margin:72px 0 0 0;
+	
+	background: rgba(52, 59, 64, 0.9);
+	padding: 30px 0 0 0;
 
-   width: 50px;
-   height:100%;
-   position: fixed;
-   left: 0;
-   top: 0;
-   right: 0;
-   transition: all 0.5s;
-   z-index: 998;
+	width: 50px;
+	height:100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	transition: all 0.5s;
+	z-index: 998;
 }
 #aside:hover {
-   width:30vh;
-   
+	width:280px;
+	
 }
 .anside-nav-menu {
-   margin: 72px 0 0 0;
+	margin: 72px 0 0 0;
 }
 .anside-nav-menu a {
   padding: 0 5px 20px 0;
@@ -114,13 +114,13 @@ h1, h2, h3, h4, h5, h6 {
   /*text-transform: uppercase; 전부다 대문자로 바까줌.*/
   font-size: 0px;
   outline: none;
-   transition: all 1.0s;
+	transition: all 1.0s;
   
 }
 .anside-nav-menu a:hover {
-   color: #0f0; 
-   
-   text-transform: uppercase;
+	color: #0f0;
+	
+	text-transform: uppercase;
 }
 .anside-nav-menu > li {
   margin-top: 10px;
@@ -129,34 +129,33 @@ h1, h2, h3, h4, h5, h6 {
 #div-body {
 }
 #portfolioForm {
-   position : fixed;
-   margin: 15vh 0 0 35vh;
-   width:0%;
-   height:0%;
-   background : rgba(0, 0, 0, 0);
-   
-   transition: all 1.0s;
+	position : fixed;
+	margin: 15vh 0 0 35vh;
+	width:0%;
+	height:0%;
+	background : rgba(0, 0, 0, 0);
+	
+	transition: all 1.0s;
 }
 #portfolioForm #divSpec #profileimg {
-   width:35vh;
-   height:35vh;
-   display : inline-block;
-   transition: all 1.0s;
+	width:30vh;
+	height:30vh;
+	display : inline-block;
+	transition: all 1.0s;
 }
 #portfolioForm #divSpec h2{
-   display :inline-block;
+	display :inline-block;
 }
 
 #portfolioForm #portfolioDiv {
-   display :inline-block;
+	display :inline-block;
   color: #000;
-  padding: 0 0 0 3vh;
 }
 #profilecontents {
-   font-size : 0px;
+	font-size : 0px;
 }
 #profilecontents span {
-   font-size : 0px;
+	font-size : 0px;
 }
 /*--------------------------------------------------------------
 # Header
@@ -1431,3 +1430,4 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 15px;
   color: #ccc;
 }
+
