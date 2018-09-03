@@ -16,6 +16,10 @@
 		= #{messageId}
 	</select>
 	
+	<delete id="delete">
+		delete from tbl_message where messageId = #{messageId}
+	</delete>
+	
 	<select id="listall" resultType="com.java.domain.MessageVO">
 		select *
 		from tbl_message

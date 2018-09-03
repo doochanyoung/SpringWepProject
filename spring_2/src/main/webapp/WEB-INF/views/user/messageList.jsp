@@ -121,10 +121,10 @@
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
-							<th class="mobile" scope="col">id</th>
+							<th class="mobile" scope="col">아이디</th>
 							<th scope="col">제목</th>
-							<th class="mobile" scope="col">보낸자</th>
-							<th class="mobile" scope="col">보낸일</th>
+							<th class="mobile" scope="col">보낸사람</th>
+							<th class="mobile" scope="col">보낸시일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -135,7 +135,7 @@
 								      수정필요
 								    ============================-->
 								<td>
-									<a href='/user/messageRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&messageId=${messageVO.messageId}'>
+									<a href='/user/messageRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&messageSender=${messageVO.messageSender}'>
 										<c:if test="${messageVO.messageSendDate }"><i class="fab fa-replyd"></i></c:if>
 										${messageVO.messageOpendate } <strong>[${messageVO.messageContent}]</strong>
 									</a>
