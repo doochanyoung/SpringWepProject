@@ -1,13 +1,14 @@
 package com.java.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.java.domain.BoardVO;
 import com.java.domain.MessageVO;
 import com.java.domain.PageHandler;
 import com.java.domain.SearchPageHandler;
@@ -43,13 +44,22 @@ public class MessageDAOImpl implements MessageDAO {
 	}
     
     @Override
-	public List<MessageVO> listSearch(SearchPageHandler handler) throws Exception {
-		return sqlSession.selectList(namespace + ".listSearch", handler);
+	public List<MessageVO> listSearch(SearchPageHandler handler, String loginId) throws Exception {
+    	Map<String, Object> paramMap = new HashMap<String, Object>();
+    	paramMap.put("searchType", handler.getSearchType());
+    	paramMap.put("keyword", handler.getKeyword());
+    	paramMap.put("searchSort", handler.getSearchSort());
+    	paramMap.put("loginId", loginId);
+		return sqlSession.selectList(namespace + ".listSearch", paramMap);
 	}
     
     @Override
-	public List<MessageVO> listPageHandler(PageHandler handler) throws Exception {
-		return sqlSession.selectList(namespace + ".listPageHandler", handler);
+	public List<MessageVO> listPageHandler(PageHandler handler, String loginId) throws Exception {
+    	Map<String, Object> paramMap = new HashMap<String, Object>();
+    	paramMap.put("page", handler.getPage());
+    	paramMap.put("perPageNum", handler.getPerPageNum());
+    	paramMap.put("loginId", loginId);
+    	return sqlSession.selectList(namespace + ".listPageHandler", paramMap);
 	}
     
     @Override
@@ -58,7 +68,12 @@ public class MessageDAOImpl implements MessageDAO {
 	}
 
     @Override
-	public int listSearchCount(SearchPageHandler handler) throws Exception {
-		return sqlSession.selectOne(namespace + ".listSearchCount", handler);
+	public int listSearchCount(SearchPageHandler handler, String loginId) throws Exception {
+    	Map<String, Object> paramMap = new HashMap<String, Object>();
+    	paramMap.put("searchType", handler.getSearchType());
+    	paramMap.put("keyword", handler.getKeyword());
+    	paramMap.put("searchSort", handler.getSearchSort());
+    	paramMap.put("loginId", loginId);
+		return sqlSession.selectOne(namespace + ".countPaging", paramMap);
 	}
 }

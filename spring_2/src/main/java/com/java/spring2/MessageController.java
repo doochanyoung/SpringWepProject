@@ -1,6 +1,7 @@
 package com.java.spring2;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +20,11 @@ import com.java.domain.SearchPageHandler;
 import com.java.service.MessageService;
 
 @Controller
+@RequestMapping("/user/*")
 public class MessageController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     @Inject
     MessageService service;
-    // ResponseEntity    : HTTP상태코드 + 데이터  전달
-    // @RequestBody        : 클라이언트 => 서버 (json 데이터가 입력될 때)
-    // @ResponsetBody    : 서버 => 클라이언트 (json) RestController에서는 생략가능
     
     @RequestMapping(value="/addMessage", method=RequestMethod.POST)
     public ResponseEntity<String> addMessage(@RequestBody MessageVO vo){
@@ -43,13 +42,13 @@ public class MessageController {
     }
     
     @RequestMapping(value = "/messageList", method = RequestMethod.GET)
-	public void message(@ModelAttribute("pageHandler") SearchPageHandler pageHandler, Model model) throws Exception {
+	public void message(@ModelAttribute("pageHandler") SearchPageHandler pageHandler,HttpSession session, Model model) throws Exception {
 		logger.info("get : /messageList");
-		model.addAttribute("list", service.listSearchPageHandler(pageHandler));
+		model.addAttribute("list", service.listSearchPageHandler(pageHandler, (String)session.getAttribute("loginId")));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setPageHandler(pageHandler);
 		logger.info(pageHandler.toString());
-		pageMaker.setTotalCount(service.searchCountPaging(pageHandler));
+		pageMaker.setTotalCount(service.searchCountPaging(pageHandler, (String)session.getAttribute("loginId")));
 		logger.info(pageMaker.toString());
 		model.addAttribute("pageMaker", pageMaker);
 	}

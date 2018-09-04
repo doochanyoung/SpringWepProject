@@ -11,8 +11,8 @@ public interface MessageDAO {
 	 public MessageVO readMessage(int mid);
 	 public void updateMessage(int messageId);
 	 public List<MessageVO> listPage(int page) throws Exception;
-	 public List<MessageVO> listSearch(SearchPageHandler handler) throws Exception;
-	 public List<MessageVO> listPageHandler(PageHandler handler) throws Exception;
+	 public List<MessageVO> listSearch(SearchPageHandler handler, String loginId) throws Exception;
+	 public List<MessageVO> listPageHandler(PageHandler handler, String loginId) throws Exception;
 	 public int countPaging() throws Exception;
-	 public int listSearchCount(SearchPageHandler handler) throws Exception;
+	 public int listSearchCount(SearchPageHandler handler, String loginId) throws Exception;
 }

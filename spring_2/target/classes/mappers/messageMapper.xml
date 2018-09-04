@@ -5,8 +5,8 @@
 <mapper namespace="com.java.mapper.messageMapper">
 
     <insert id="create">
-        INSERT INTO tbl_message (messageId, messageContent, messageSender, messageReceiver) 
-        VALUES (message_seq.NEXTVAL, #{messageContent}, #{messageSender}, #{messageReceiver})
+        INSERT INTO tbl_message (messageId, messageContent, messageOpendate,messageSendDate,messageSender, messageReceiver) 
+        VALUES (message_seq.NEXTVAL, #{messageContent}, #{messageOpendate}, #{messageSendDate}, #{messageSender}, #{messageReceiver})
     </insert>
     
     <select id="read" resultType="com.java.domain.MessageVO">
@@ -25,6 +25,24 @@
 	</update>
 	
 	<select id="listSearch" resultType="com.java.domain.MessageVO">
-			select * from tbl_message where messageReceiver = #{messageReceiver}
+			select * from tbl_message where messageReceiver = #{loginId}
+	</select>
+	
+	
+
+	<select id="listPage" resultType="com.java.domain.MessageVO">
+		<![CDATA[
+			select * from tbl_message where boardId > 0 order by boardGroup desc, boardSequence limit #{page}, 30
+		]]>
+	</select>
+	<select id="listPageHandler" resultType="com.java.domain.MessageVO">
+		<![CDATA[
+			select * from tbl_message where messageReceiver = #{loginId} order by messageSendDate desc
+		]]>
+	</select>
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			select count(messageSendDate) from tbl_message where messageReceiver = #{loginId}
+		]]>
 	</select>
 </mapper>

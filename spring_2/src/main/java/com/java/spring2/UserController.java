@@ -42,11 +42,4 @@ public class UserController {
 		logger.info("userModify : GET");
 	}
 	
-	@RequestMapping(value = "/messageList", method = RequestMethod.GET)
-	public void messageListGET(Model model, HttpSession session) {
-		logger.info("userModify : GET");
-	}
-	
-	
-	
 }

@@ -23,7 +23,6 @@ public class MessageServiceImpl implements MessageService {
 	@Inject
     private MessageDAO dao;
 
-	
     @Override
     public void addMessage(MessageVO vo) {
         // 공통업무 - 로그 확인
@@ -40,17 +39,17 @@ public class MessageServiceImpl implements MessageService {
     }
     
     @Override
-	public List<MessageVO> listPageHandler(PageHandler handler) throws Exception {
-		return dao.listPageHandler(handler);
+	public List<MessageVO> listPageHandler(PageHandler handler, String loginId) throws Exception {
+		return dao.listPageHandler(handler, loginId);
 	}
     
     @Override
-	public List<MessageVO> listSearchPageHandler(SearchPageHandler handler) throws Exception {
-		return dao.listSearch(handler);
+	public List<MessageVO> listSearchPageHandler(SearchPageHandler handler, String loginId) throws Exception {
+		return dao.listSearch(handler, loginId);
 	}
     
     @Override
-	public int searchCountPaging(SearchPageHandler handler) throws Exception {
-		return dao.listSearchCount(handler);
+	public int searchCountPaging(SearchPageHandler handler, String loginId) throws Exception {
+		return dao.listSearchCount(handler, loginId);
 	}
 }

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -131,20 +131,8 @@
 					<tbody>
 						<c:forEach items="${list}" var="messageVO">
 							<tr>
-								<th class="mobile" scope="row">${messageVO.messageId }</th>
-								<!--==========================
-								      messageReceiver를 보내서 비교후 리스트 출력해야함
-								    ============================-->
-								<td>
-									<a href='/user/messageRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&messageId=${messageVO.messageId}'>
-										<c:if test="${messageVO.messageSendDate }">
-											<i class="fab fa-replyd"></i>
-										</c:if>
-										${messageVO.messageOpendate } <strong>[${messageVO.messageContent}]</strong>
-									</a>
-								</td>
-								<td class="mobile">${messageVO.messageId }</td>
-								<td class="mobile">${messageVO.messageContent }</td>
+								<th class="mobile" scope="row">${messageVO.messageId}</th>
+								<td><a href='/user/messageRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&messageId=${messageVO.messageId}'>${messageVO.messageContent}</a></td>
 								<td class="mobile">${messageVO.messageSender }</td>
 								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageSendDate }"/></td>
 								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageOpendate }"/></td>			
