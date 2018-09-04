@@ -131,27 +131,25 @@
 										<input type="hidden" name="keyword" id="keyword" value="${pageHandler.keyword }">
 									</form>
 									<div class="form-group">
-										<label for="title" class="text">Title</label>
-										<input type="text" class="form-control form-control-lg" name="boardTitle" id="boardTitle" placeholder="write Title" readonly="readonly" value="${boardVO.boardTitle }">
+										<label for="title" class="text">Sender</label>
+										<input type="text" class="form-control form-control-lg" name="messageSender" id="messageSender" placeholder="write Title" readonly="readonly" value="${messageVO.messageSender }">
 									</div>
 									<div class="form-group">
-										<label for="writer" class="text">Writer</label>
-										<input type="text" class="form-control form-control-lg" name="boardUserId" id="boardUserId" readonly="readonly" value="${boardVO.boardUserId }">
+										<label for="writer" class="text">Receiver</label>
+										<input type="text" class="form-control form-control-lg" name="messageReceiver" id="messageReceiver" readonly="readonly" value="${messageVO.messageReceiver }">
 									</div>
 									<div class="form-group">
 										<label for="content" class="text">Content</label>
 										<textarea class="form-control"
-											placeholder="write content please......" id="boardContent"
+											placeholder="write content please......" id="messageContent"
 											maxlength="40" name="messageContent" readonly="readonly">${messageVO.messageContent }</textarea>
 									</div>
 									<div class="row">
 										<div class="col-4">
-											<span><strong>보낸날짜</strong> : <fmt:formatDate
-													pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageSendDate }" /></span>
+											<span><strong>보낸날짜</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageSendDate }" /></span>
 										</div>
 										<div class="col-4">
-											<span><strong>확인날짜</strong> : <fmt:formatDate
-													pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageOpendate }" /></span>
+											<span><strong>확인날짜</strong> : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageOpendate }" /></span>
 										</div>
 									</div>
 									<hr>
@@ -161,10 +159,10 @@
 									<hr>
 									<div class="row">
 									<c:if test="${messageId == messageVO.messageId}">
-										<button class="btn btn-default btn-sm ml-3" id="boardRemove"
+										<button class="btn btn-default btn-sm ml-3" id="messageRemove"
 											type="button" style="background: #FF6C6C;">Remove</button>
 									</c:if>
-										<button class="btn btn-default btn-sm ml-3" id="boardList"
+										<button class="btn btn-default btn-sm ml-3" id="messageList"
 											type="button" style="background: #5AAEFF">List</button>
 										<c:if test="${not empty messageId }">
 										<button class="btn btn-default btn-sm ml-3"
@@ -185,46 +183,6 @@
 			<!--/row-->
 		</div>
 		<!--/container-->
-		<c:if test="${not empty loginId }">
-		<div class="container py-3">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-10 mx-auto">
-							<!-- form card login -->
-							<div class="card">
-								<div class="card-header">
-									<h3 class="title">comment</h3>
-								</div>
-								<div class="card-body">
-										<input type="hidden" class="form-control form-control-lg"
-											name="boardCommentUserId" id="boardCommentUserId"
-											value="${loginId }">
-									<div class="form-group">
-										<label for="content" class="text">Content</label>
-										<textarea class="form-control"
-											placeholder="write comment please......"
-											id="boardCommentContent" maxlength="1024"
-											name="boardCommentContent" rows="5"></textarea>
-									</div>
-									<hr>
-									<div class="row">
-										<button class="btn btn-default btn-sm ml-3" id="commentSubmit"
-											type="button">Submit</button>
-									</div>
-								</div>
-								<!--/card-block-->
-							</div>
-							<!-- /form card login -->
-						</div>
-					</div>
-					<!--/row-->
-				</div>
-				<!--/col-->
-			</div>
-			<!--/row-->
-		</div>
-		</c:if>
 		<!--/container-->
 		<!-- handlebars -->
 		<div id="commentlists">
@@ -344,13 +302,8 @@
 		});
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
-			var boardId = $('#boardId').val();
-			$("#boardModify").on("click", function() {
-				formObj.attr("action", "/board/boardModify");
-				formObj.attr("method", "get");
-				formObj.submit();
-			});
-			$("#boardRemove").on("click", function() {
+			var messageId = $('#messageId').val();
+			$("#messageRemove").on("click", function() {
 				var bool = confirm("정말 삭제 하시겠습니까?");
 				if (bool) {
 					var arr = [];
@@ -373,13 +326,8 @@
 					formObj.submit();
 				}
 			});
-			$("#boardList").on("click", function() {
-				formObj.attr("action", "/board/boardList");
-				formObj.attr("method", "get");
-				formObj.submit();
-			});
-			$("#boardReply").on("click", function() {
-				formObj.attr("action", "/board/boardReply");
+			$("#messageList").on("click", function() {
+				formObj.attr("action", "/user/messageList");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
@@ -432,224 +380,6 @@
  	 	</div>
 	</li>              
 	</script>
-
-	<script>
-		$.ajaxSetup({cache : false});
-		Handlebars.registerHelper("eqWriter", function(option) {
-            if (this.boardCommentUserId == '${loginId}') {
-                return option.fn(this);
-            } else {
-                return option.inverse(this); // 반대
-            }
-        });
-		Handlebars.registerHelper("fn_isIf", function(option) {
-            if (this.boardCommentIsReply == true) {
-                return option.fn(this);
-            } else {
-                return option.inverse(this); // 반대
-            }
-        });
-		Handlebars.registerHelper("fn_isIf2", function(option) {
-            if (this.boardCommentIsReply == false) {
-                return option.fn(this);
-            } else {
-                return option.inverse(this); // 반대
-            }
-        });
-		Handlebars.registerHelper("commentDate", function(timeValue) { //handlers의 commentDate 처리 함수
-			var dateObj = new Date(timeValue);
-			var year = dateObj.getFullYear();
-			var month = dateObj.getMonth() + 1;
-			var date = dateObj.getDate();
-			return year + "/" + month + "/" + date;
-		});
-		var printData = function(commentArr, target, templateObject) {
-			console.log(commentArr);
-			var template = Handlebars.compile(templateObject.html());
-			var html = template(commentArr);
-			$(".commentCard").remove();
-			target.after(html);
-		}
-		var boardId = ${boardVO.boardId};
-		var replyPage = 1;
-		function getPage(pageInfo) {
-			$.getJSON(pageInfo, function(data) {
-				printData(data.list, $("#commentlists"), $("#templateList"));
-				printPaging(data.pageMaker, $(".pagination"));
-				$("#modifyModal").modal('hide');
-				$("#replyModal").modal('hide');
-				$("#commentCnt").html("["+data.pageMaker.totalCount+"]");
-			});
-		}
-		var templateAttach = Handlebars.compile($("#templateAttach").html());
-		$.getJSON("/board/getAttach/"+boardId, function(list){
-			$(list).each(function(){
-				var fileInfo = getFileInfo(this);
-				var html = templateAttach(fileInfo);
-				$(".uploadedList").append(html);
-			});
-		});
-		var printPaging = function(pageMaker, target) {
-			var str = "";
-			if (pageMaker.prev) {
-				str += "<li class='page-item'><a class='page-link' href='"
-						+ (pageMaker.startPage - 1)
-						+ "' aria-label='Previous'>"
-						+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
-			}
-			for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-				var strClass = pageMaker.pageHandler.page == i ? 'active' : '';
-				str += "<li class = 'page-item "+ strClass +"'><a class='page-link' href='"+i+"'>"
-						+ i + "</a></li>";
-			}
-			if (pageMaker.next) {
-				str += "<li class='page-item'><a class='page-link' href='"
-						+ (pageMaker.endPage + 1)
-						+ "' aria-label='Previous'>"
-						+ "<span aria-hidden='true'>&laquo;</span><span class='sr-only'>Pr evious</span></a></li>";
-			}
-			target.html(str);
-		}
-		$("#boardViewComment").on("click", function() { //버튼 누르면 /replies를 호출하여 restcontroller에서 댓글 목록을 출력해준다
-			if ($(".commentCard .card").size() > 1) {
-				return;
-			}
-			getPage("/replies/" + boardId + "/1");
-		});
-		$('.pagination').on("click", "li a", function(event) {
-			event.preventDefault();
-			replyPage = $(this).attr("href");
-			getPage("/replies/" + boardId + "/" + replyPage);
-		});
-		$("#commentSubmit").on("click", function() {
-			var boardCommentUserIdObj = $("#boardCommentUserId");
-			var boardCommentContentObj = $("#boardCommentContent");
-			var boardCommentUserId = boardCommentUserIdObj.val();
-			var boardCommentContent = boardCommentContentObj.val();
-			$(".error").remove();
-			if (boardCommentContent.length < 1) {
-			    $('#boardCommentContent').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-			    return; 
-			}
-			$.ajax({
-				type : 'post',
-				url : '/replies/',
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "POST",
-				},
-				dataType : 'text',
-				data : JSON.stringify({
-					boardCommentBoardId : boardId,
-					boardCommentUserId : boardCommentUserId,
-					boardCommentContent : boardCommentContent
-				}),
-				success : function(result) {
-					console.log("result: " + result);
-					if (result == 'SUCCESS') {
-						alert('등록 되었습니다.');
-						replyPage = 1;
-						getPage("/replies/" + boardId + "/" + replyPage);
-						boardCommentContentObj.val("");
-					}
-				}
-			});
-		});
-		$("#replyModalSubmit").on("click", function() {
-			var replyModalUserIdObj = $("#replyModalUserId");
-			var replyModalTextObj = $("#replyModalText");
-			var replyModalTargetIdObj = $("#replyModalNum");
-			var replyModalUserId = replyModalUserIdObj.val();
-			var replyModalText = replyModalTextObj.val();
-			var replyModalTargetId = replyModalTargetIdObj.val();
-			$(".error").remove();
-			if (replyModalText.length < 1) {
-			    $('#replyModalText').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-			    return; 
-			}
-			$.ajax({
-				type : 'post',
-				url : '/replies/reply',
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "post",
-				},
-				dataType : 'text',
-				data : JSON.stringify({
-					boardCommentId : replyModalTargetId,
-					boardCommentContent : replyModalText,
-					boardCommentBoardId : boardId,
-					boardCommentUserId : replyModalUserId
-				}),
-				success : function(result) {
-					console.log("result: " + result);
-					if (result == 'SUCCESS') {
-						alert('답글이 등록 되었습니다.');
-						replyModalTextObj.val("");
-						getPage("/replies/" + boardId + "/" + replyPage);
-					}
-				}
-			});
-		});
-		$("#modifyModalModify").on("click", function() {
-			var commentId = $("#modifyModalNum").val();
-			var commentText = $("#modifyModalText").val();
-			$(".error").remove();
-			if (commentText.length < 1) {
-			    $('#modifyModalText').after('<span class="error" style="color:red;"><small>This field is required</small></span>');
-			    return; 
-			}
-			$.ajax({
-				type : 'put',
-				url : '/replies/'+commentId,
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "PUT",
-				},
-				dataType : 'text',
-				data : JSON.stringify({
-					boardCommentContent : commentText
-				}),
-				success : function(result) {
-					console.log("result: " + result);
-					if (result == 'SUCCESS') {
-						alert('수정 되었습니다.');
-						getPage("/replies/" + boardId + "/" + replyPage);
-					}
-				}
-			});
-		});
-		$("#modifyModalDelete").on("click", function() {
-			var commentId = $("#modifyModalNum").val();
-			var commentText = $("#modifyModalText").val();
-			var bool = confirm('정말 삭제하시겠습니까?');
-			if (!bool) return;
-			$.ajax({
-				type : 'delete',
-				url : '/replies/'+commentId,
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "delete",
-				},
-				dataType : 'text',
-				success : function(result) {
-					console.log("result: " + result);
-					if (result == 'SUCCESS') {
-						alert('삭제 되었습니다.');
-						getPage("/replies/" + boardId + "/" + replyPage);
-					}
-				}
-			});
-		});
-	</script>
 	
-	<script>
-		$(document).on("click", ".commentCard", function(){
-			var comm = $(this);
-			$("#modifyModalText").val(comm.find('.card-text').text());
-			$("#modifyModalNum").val(comm.find('#cardNum').val());
-			$("#replyModalNum").val(comm.find('#cardNum').val());
-		});
-	</script>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class MessageController {
     @RequestMapping(value="/addMessage", method=RequestMethod.POST)
     public ResponseEntity<String> addMessage(@RequestBody MessageVO vo){
         ResponseEntity<String> entity = null;
-        logger.info("messagerController");
+        logger.info("messageController");
         try {
             service.addMessage(vo);
             // new ResponseEntity<자료형>(리턴값, HTTP상태코드);

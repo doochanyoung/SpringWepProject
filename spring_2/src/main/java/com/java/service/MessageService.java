@@ -8,7 +8,7 @@ import com.java.domain.SearchPageHandler;
 
 public interface MessageService {
 	public void addMessage(MessageVO vo);
-	public MessageVO readMessage(String userid, int mid);
+	public MessageVO readMessage(int messageId);
 	public List<MessageVO> listPageHandler(PageHandler handler) throws Exception;
 	public List<MessageVO> listSearchPageHandler(SearchPageHandler handler) throws Exception;
 	public int searchCountPaging(SearchPageHandler handler) throws Exception;

@@ -35,9 +35,8 @@ public class MessageServiceImpl implements MessageService {
     }
     // 메시지 열람
     @Override
-    public MessageVO readMessage(String userid, int mid) {
-
-        return null;
+    public MessageVO readMessage(int messageId) {
+    	return dao.readMessage(messageId);
     }
     
     @Override

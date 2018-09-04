@@ -36,8 +36,8 @@
 		delete from tbl_board where boardId = #{boardId}
 	</delete>
 	<update id="update">
-		update tbl_board set boardTitle = #{title}, boardContent =
-		#{content}, boardUpdatedate = now() where boardId = #{boardId}
+		update tbl_board set boardTitle = #{title}, boardContent = #{content},
+		 boardUpdatedate = now() where boardId = #{boardId}
 	</update>
 	<select id="getGroup" resultType="int">
 		select boardGroup from tbl_board

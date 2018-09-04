@@ -26,13 +26,13 @@ public class MessageDAOImpl implements MessageDAO {
     }
     // 메시지 열람
     @Override
-    public List<MessageVO> readMessage(int mid){
-    	return sqlSession.selectList(namespace + ".listAll");
+    public MessageVO readMessage(int mid){
+    	return sqlSession.selectOne(namespace + ".read", mid);
     }
     // 메시지 열람시간 갱신
     @Override
-    public void updateMessage(int mid){
-
+    public void updateMessage(int messageId){
+    	sqlSession.update(namespace+".update", messageId);
     }
     
     @Override

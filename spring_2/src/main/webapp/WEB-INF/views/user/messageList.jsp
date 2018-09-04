@@ -121,10 +121,11 @@
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
-							<th class="mobile" scope="col">아이디</th>
-							<th scope="col">제목</th>
+							<th class="mobile" scope="col">메세지번호</th>
+							<th class="mobile" scope="col">내용</th>
 							<th class="mobile" scope="col">보낸사람</th>
-							<th class="mobile" scope="col">보낸시일</th>
+							<th class="mobile" scope="col">보낸날짜</th>
+							<th class="mobile" scope="col">읽은날짜</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -132,18 +133,21 @@
 							<tr>
 								<th class="mobile" scope="row">${messageVO.messageId }</th>
 								<!--==========================
-								      수정필요
+								      messageReceiver를 보내서 비교후 리스트 출력해야함
 								    ============================-->
 								<td>
-									<a href='/user/messageRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&messageSender=${messageVO.messageSender}'>
-										<c:if test="${messageVO.messageSendDate }"><i class="fab fa-replyd"></i></c:if>
+									<a href='/user/messageRead${pageMaker.makeSearch(pageMaker.pageHandler.page)}&messageId=${messageVO.messageId}'>
+										<c:if test="${messageVO.messageSendDate }">
+											<i class="fab fa-replyd"></i>
+										</c:if>
 										${messageVO.messageOpendate } <strong>[${messageVO.messageContent}]</strong>
 									</a>
 								</td>
 								<td class="mobile">${messageVO.messageId }</td>
-								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageSendDate }"/></td>
-								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageOpendate }"/></td>
 								<td class="mobile">${messageVO.messageContent }</td>
+								<td class="mobile">${messageVO.messageSender }</td>
+								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageSendDate }"/></td>
+								<td class="mobile"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.messageOpendate }"/></td>			
 							</tr>
 						</c:forEach>
 					</tbody>

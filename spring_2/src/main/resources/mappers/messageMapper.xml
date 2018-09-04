@@ -20,10 +20,11 @@
 		delete from tbl_message where messageId = #{messageId}
 	</delete>
 	
-	<select id="listall" resultType="com.java.domain.MessageVO">
-		select *
-		from tbl_message
-		where receiverId
-		= #{receiverId}
+	<update id="update">
+		update from tbl_message set messageOpendate = #{now()} where messageId = #{messageId}
+	</update>
+	
+	<select id="listSearch" resultType="com.java.domain.MessageVO">
+			select * from tbl_message where messageReceiver = #{messageReceiver}
 	</select>
 </mapper>
